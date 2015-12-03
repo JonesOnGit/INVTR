@@ -9,7 +9,7 @@ describe InvitesController do
     # end
     it "renders the :new view" do
       get :new
-      response.should render_template :new
+      expect(response).to render_template :new
     end
   end
 
@@ -17,13 +17,13 @@ describe InvitesController do
     it "assigns a new Invite to @invite" do
       invite = FactoryGirl.create(:invite)
       get :show, id: invite
-    	assigns(:invite).should eq(invite)
+    	expect(assigns(:invite)).to eq(invite)
     end
 
     it "renders the :show view" do
       invite = FactoryGirl.create(:invite)
       get :show, id: invite.id
-      response.should render_template :show
+      expect(response).to render_template :show
     end
   end
 
@@ -31,13 +31,13 @@ describe InvitesController do
     it "renders an existing Invite to @invite" do 
       invite = FactoryGirl.create(:invite)
       get :edit, id: invite
-      assigns(:invite).should eq(invite)
+      expect(assigns(:invite)).to eq(invite)
     end 
 
     it "renders the :edit view" do 
       invite = FactoryGirl.create(:invite)
       get :edit, id: invite.id
-      response.should render_template :edit
+      expect(response).to render_template :edit
     end 
   end
 
@@ -53,14 +53,14 @@ describe InvitesController do
     it "locates the correct invite" do
       invite = FactoryGirl.create(:invite)
       put :update, id: invite.id, invite: FactoryGirl.attributes_for(:invite)
-      assigns(:invite).should eq(invite)  
+      expect(assigns(:invite)).to eq(invite)  
     end
 
     it "changes the invite's attributes" do
       invite = FactoryGirl.create(:invite)
       put :update, id: invite.id, invite: FactoryGirl.attributes_for(:invite, name: "My Invite Name")
       invite.reload
-      invite.name.should eq("My Invite Name")
+      expect(invite.name).to eq("My Invite Name")
     end
   end
 
