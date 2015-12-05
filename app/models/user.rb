@@ -23,6 +23,26 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+  # ======== Added Fields for INVTR ========#
+  # I decided to make this 'fullname' instead of name to avoid confusion with :name in Invite model #
+  field :fullname, type: String 
+  field :role, type: String 
+  field :city, type: String 
+  field :state_or_region, type: String 
+  field :country, type: String 
+  field :latitude, type: Float
+  field :longitude, type: Float
+
+  validates :fullname, length: { maximum: 200 }
+  validates :role, length: { maximum: 30 }
+  validates :city, length: { maximum: 100 }
+  validates :state_or_region, length: { maximum: 100 }
+  validates :country, length: { maximum: 100 }
+
+  # Only validating presence of role as other attributes 'not required'
+  validates_presence_of :role 
+
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time
