@@ -32,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'mongoid', '~> 5.0.0'
 gem 'bson_ext'
-
+gem 'devise'
 gem 'pry-rails'
 
 

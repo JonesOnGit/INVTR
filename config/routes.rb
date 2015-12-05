@@ -1,14 +1,30 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :invites
 end
 
-# ==Routes==
-#   Prefix Verb   URI Pattern                 Controller#Action
-#     invites GET    /invites(.:format)          invites#index
-#             POST   /invites(.:format)          invites#create
-#  new_invite GET    /invites/new(.:format)      invites#new
-# edit_invite GET    /invites/:id/edit(.:format) invites#edit
-#      invite GET    /invites/:id(.:format)      invites#show
-#             PATCH  /invites/:id(.:format)      invites#update
-#             PUT    /invites/:id(.:format)      invites#update
-#             DELETE /invites/:id(.:format)      invites#destroy
+# ================================= Routes, Raked ======================================== #
+#                   Prefix Verb   URI Pattern                    Controller#Action
+#         new_user_session GET    /users/sign_in(.:format)       devise/sessions#new
+#             user_session POST   /users/sign_in(.:format)       devise/sessions#create
+#     destroy_user_session DELETE /users/sign_out(.:format)      devise/sessions#destroy
+#            user_password POST   /users/password(.:format)      devise/passwords#create
+#        new_user_password GET    /users/password/new(.:format)  devise/passwords#new
+#       edit_user_password GET    /users/password/edit(.:format) devise/passwords#edit
+#                          PATCH  /users/password(.:format)      devise/passwords#update
+#                          PUT    /users/password(.:format)      devise/passwords#update
+# cancel_user_registration GET    /users/cancel(.:format)        devise/registrations#cancel
+#        user_registration POST   /users(.:format)               devise/registrations#create
+#    new_user_registration GET    /users/sign_up(.:format)       devise/registrations#new
+#   edit_user_registration GET    /users/edit(.:format)          devise/registrations#edit
+#                          PATCH  /users(.:format)               devise/registrations#update
+#                          PUT    /users(.:format)               devise/registrations#update
+#                          DELETE /users(.:format)               devise/registrations#destroy
+#                  invites GET    /invites(.:format)             invites#index
+#                          POST   /invites(.:format)             invites#create
+#               new_invite GET    /invites/new(.:format)         invites#new
+#              edit_invite GET    /invites/:id/edit(.:format)    invites#edit
+#                   invite GET    /invites/:id(.:format)         invites#show
+#                          PATCH  /invites/:id(.:format)         invites#update
+#                          PUT    /invites/:id(.:format)         invites#update
+#                          DELETE /invites/:id(.:format)         invites#destroy
