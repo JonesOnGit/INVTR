@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
   resources :invites
   devise_for :users
+  resources :users
 
 end
 
 # ================================= Routes, Raked ======================================== #
 #                   Prefix Verb   URI Pattern                    Controller#Action
+#                  invites GET    /invites(.:format)             invites#index
+#                          POST   /invites(.:format)             invites#create
+#               new_invite GET    /invites/new(.:format)         invites#new
+#              edit_invite GET    /invites/:id/edit(.:format)    invites#edit
+#                   invite GET    /invites/:id(.:format)         invites#show
+#                          PATCH  /invites/:id(.:format)         invites#update
+#                          PUT    /invites/:id(.:format)         invites#update
+#                          DELETE /invites/:id(.:format)         invites#destroy
 #         new_user_session GET    /users/sign_in(.:format)       devise/sessions#new
 #             user_session POST   /users/sign_in(.:format)       devise/sessions#create
 #     destroy_user_session DELETE /users/sign_out(.:format)      devise/sessions#destroy
@@ -21,11 +30,11 @@ end
 #                          PATCH  /users(.:format)               devise/registrations#update
 #                          PUT    /users(.:format)               devise/registrations#update
 #                          DELETE /users(.:format)               devise/registrations#destroy
-#                  invites GET    /invites(.:format)             invites#index
-#                          POST   /invites(.:format)             invites#create
-#               new_invite GET    /invites/new(.:format)         invites#new
-#              edit_invite GET    /invites/:id/edit(.:format)    invites#edit
-#                   invite GET    /invites/:id(.:format)         invites#show
-#                          PATCH  /invites/:id(.:format)         invites#update
-#                          PUT    /invites/:id(.:format)         invites#update
-#                          DELETE /invites/:id(.:format)         invites#destroy
+#                    users GET    /users(.:format)               users#index
+#                          POST   /users(.:format)               users#create
+#                 new_user GET    /users/new(.:format)           users#new
+#                edit_user GET    /users/:id/edit(.:format)      users#edit
+#                     user GET    /users/:id(.:format)           users#show
+#                          PATCH  /users/:id(.:format)           users#update
+#                          PUT    /users/:id(.:format)           users#update
+#                          DELETE /users/:id(.:format)           users#destroy
