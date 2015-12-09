@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
 
+  root 'invites#new'
+
 end
 
 # ================================= Routes, Raked ======================================== #
