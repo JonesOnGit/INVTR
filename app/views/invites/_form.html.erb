@@ -1,8 +1,37 @@
-<%= simple_form_for @invite do |f| %>
-  <%= f.input :name %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.input :description %>
-  
-  <%= f.button :submit %>
+<%= simple_form_for invite, url: url do |f| %>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :name %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :start_date %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :end_date %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :description %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :allow_others, as: :boolean %>
+   </div>
+ </div>
+
+ <div class="row">
+   <div class="large-12 columns">
+     <%= f.button :submit %>
+   </div>
+ </div>
 <% end %>
