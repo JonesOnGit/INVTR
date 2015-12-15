@@ -15,6 +15,7 @@ class InvitesController < ApplicationController
 	def create
 		@invite = Invite.new(parse_params) 
 		if @invite.save
+			Log.add_log("Invite", "save", @invite.to_json)
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else
@@ -26,6 +27,7 @@ class InvitesController < ApplicationController
 	def update
 		@invite = Invite.find(params[:id])
 		if  @invite.update_attributes(parse_params)
+			Log.add_log("Invite", "update", @invite.to_json)
 		    flash[:notice] = "Invite #{@invite.name} successfully updated."
 		    redirect_to invite_path(@invite)
 		else
@@ -50,8 +52,9 @@ class InvitesController < ApplicationController
 	    end
 
 	    def parse_params
-	    	ip = invite_params
+	    	return invite_params if invite_params.has_key? "start_date"
 
+	    	ip = invite_params
 	    	start_date = ip["start_date(1i)"] + "-" + ip["start_date(2i)"] + "-" + ip["start_date(3i)"] + "-" + ip["start_date(4i)"] + "-" + ip["start_date(5i)"]
 	    	end_date = ip["end_date(1i)"] + "-" + ip["end_date(2i)"] + "-" + ip["end_date(3i)"] + "-" + ip["end_date(4i)"] + "-" + ip["end_date(5i)"]
 
