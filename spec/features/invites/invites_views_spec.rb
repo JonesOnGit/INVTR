@@ -18,8 +18,8 @@ feature "Invites views" do
 		    within("#new_invite") do
             fill_in "Name", :with => "Invite Name"
             fill_in "Description", :with => "Description text"
-            fill_in "Start date", :with => "12-11-15"
-            fill_in "End date", :with => "12-12-15"
+            # fill_in "Start date", :with => "12-11-15"
+            # fill_in "End date", :with => "12-12-15"
             click_button "Create Invite"
         end
         expect(page).to have_content "Invite Name"
@@ -31,8 +31,8 @@ feature "Invites views" do
 		    within(".edit_invite") do
             fill_in "Name", :with => "Invite Name"
             fill_in "Description", :with => "Description text"
-            fill_in "Start date", :with => "12-11-15"
-            fill_in "End date", :with => "12-12-15"
+            # fill_in "Start date", :with => "12-11-15"
+            # fill_in "End date", :with => "12-12-15"
             click_button "Update Invite"
         end
         expect(page).to have_content "Invite Name"
