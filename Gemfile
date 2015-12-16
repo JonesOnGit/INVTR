@@ -42,6 +42,10 @@ gem 'foundation-rails'
 # CircleCI test metadata formatters
 gem 'rspec_junit_formatter', '0.2.2'
 
+group :development do
+  gem "letter_opener"
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
