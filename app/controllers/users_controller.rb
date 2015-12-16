@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!
 
 	def new
 		@user = User.new  
@@ -9,16 +10,16 @@ class UsersController < ApplicationController
 	end 
 
 	def edit 
-			@user = User.find(params[:id])
+		@user = User.find(params[:id])
 	end 
 
 	def create
 		@user = User.new(user_params) 
 		if @user.save
-		    flash[:notice] = "User #{@user.fullname} saved."
+		    flash[:notice] = "User #{@user.name} saved."
 		 	redirect_to user_path(@user)
 		else
-		    flash[:alert] = "User #{@user.fullname} not saved."
+		    flash[:alert] = "User #{@user.name} not saved."
 		    render :new
 		end
 	end
@@ -26,10 +27,10 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if  @user.update_attributes(user_params)
-		    flash[:notice] = "User #{@user.fullname} successfully updated."
-		    redirect_to user_path(@user)
+		    flash[:notice] = "User #{@user.name} successfully updated."
+		    redirect_to edit_user_path(@user)
 		else
-		    flash[:alert] = "User #{@user.fullname} not updated."
+		    flash[:alert] = "User #{@user.name} not updated."
 		    redirect_to new_user_path(@user)
 		end
 	end
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
 private 
 	
 	def user_params
-		params.require(:user).permit(:email, :password, :encrypted_password, :fullname, :role, :city, :state_or_region, :country, :latitude, :longitude)
+		params.require(:user).permit(:email, :password, :encrypted_password, :name, :role, :city, :state_or_region, :country, :latitude, :longitude)
 	end 
 
 

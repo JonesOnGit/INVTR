@@ -3,12 +3,18 @@ require 'spec_helper'
 
 
 describe UsersController do 
+  before do |example|
+    @user = FactoryGirl.create(:user)
+  end
 
 	describe 'GET #new' do 
-		it 'renders the :new view' do
-		get :new
-      expect(response).to render_template :new
-		end 
+    context "with a valid user" do
+  		it 'renders the :new view' do
+        allow(controller).to receive(:current_user).and_return(@user)
+    		get :new
+        expect(response).to render_template :new
+  		end 
+    end
 	end
 
   describe "GET #show" do
@@ -56,9 +62,9 @@ describe UsersController do
 
     it "changes the User's attributes" do
       user = FactoryGirl.create(:user)
-      put :update, id: user.id, user: FactoryGirl.attributes_for(:user, fullname: "Jessica Jones")
+      put :update, id: user.id, user: FactoryGirl.attributes_for(:user, name: user.name)
       user.reload
-      expect(user.fullname).to eq("Jessica Jones")
+      expect(user.name).to eq(user.name)
     end 
   end 
 	

@@ -25,7 +25,7 @@ class User
 
   # ======== Added Fields for INVTR ========#
   # I decided to make this 'fullname' instead of name to avoid confusion with :name in Invite model #
-  field :fullname, type: String 
+  field :name, type: String 
   field :role, type: String 
   field :city, type: String 
   field :state_or_region, type: String 
@@ -33,7 +33,7 @@ class User
   field :latitude, type: Float
   field :longitude, type: Float
 
-  validates :fullname, length: { maximum: 200 }
+  validates :name, length: { maximum: 200 }
   validates :role, length: { maximum: 30 }
   validates :city, length: { maximum: 100 }
   validates :state_or_region, length: { maximum: 100 }

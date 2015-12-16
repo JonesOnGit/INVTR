@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  root 'invites#new'
+
   resources :invites
   devise_for :users
   resources :users
 
-  root 'invites#new'
+  namespace :admin do
+    root 'admin#index'
+  end
+
 
 end
 
