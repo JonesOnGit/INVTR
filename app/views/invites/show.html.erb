@@ -1,8 +1,4 @@
 <!-- <h1>Show Invite</h1> -->
 
 
-<h1> Event Name: <%= @invite.name %> </h1>
-	<p> Starting: <%= @invite.start_date %> </p>
-	<p> Ending: <%= @invite.end_date %> </p>
-	<p> Details: <%= @invite.description %> </p>
-	<p> Allow others: <%= @invite.allow_others %> </p>
+<%= render 'details', invite: @invite %>

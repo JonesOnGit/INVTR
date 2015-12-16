@@ -14,9 +14,12 @@ class InvitesController < ApplicationController
 
 	def create
 		@invite = Invite.new(parse_params) 
+
+		@invite.invited = ["andy.n.gimma@gmail.com", "1@1.com", "2@2.com"]
+
 		if @invite.save
 			Log.add_log("Invite", "save", @invite.to_json)
-			InviteNotifier.send_invite_email(@invite).deliver
+			@invite.send_invites
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else
@@ -47,7 +50,38 @@ class InvitesController < ApplicationController
         # redirect_to root_path
 	end
 
+	def accept
+		@email = params[:email]
+		@invite = Invite.find(params[:id])
+		@invite.accept(@email)
+		Log.add_log("Invite", "accept", {id: @invite.id})
+	end
+
+	def decline
+		@email = params[:email]
+		@invite = Invite.find(params[:id])
+		@invite.decline(@email)
+		Log.add_log("Invite", "decline", {id: @invite.id})
+
+	end
+
+	def report
+		@invite = Invite.find(params[:id])
+		@invite.add_report_count
+		Log.add_log("Invite", "report", {id: @invite.id})
+	end
+
+	def create_report
+		@invite = Invite.find(params[:id])
+		@invite.add_report_text(report_params[:reports])
+		Log.add_log("Invite", "create_report", {id: @invite.id, report_text: report_params[:reports]})
+	end
+
     private
+    	def report_params
+    		params.require(:invite).permit(:reports)
+    	end
+
 	    def invite_params
 	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others)
 	    end
