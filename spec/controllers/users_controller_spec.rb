@@ -3,9 +3,7 @@ require 'spec_helper'
 
 
 describe UsersController do 
-  before do |example|
-    @user = FactoryGirl.create(:user)
-  end
+  login_user
 
 	describe 'GET #new' do 
     context "with a valid user" do
