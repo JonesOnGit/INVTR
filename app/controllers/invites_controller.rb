@@ -16,6 +16,7 @@ class InvitesController < ApplicationController
 		@invite = Invite.new(parse_params) 
 		if @invite.save
 			Log.add_log("Invite", "save", @invite.to_json)
+			InviteNotifier.send_invite_email(@invite).deliver
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else
