@@ -15,7 +15,7 @@ class InvitesController < ApplicationController
 	def create
 		@invite = Invite.new(parse_params) 
 
-		@invite.invited = ["andy.n.gimma@gmail.com", "1@1.com", "2@2.com"]
+		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 
 		if @invite.save
 			Log.add_log("Invite", "save", @invite.to_json)
