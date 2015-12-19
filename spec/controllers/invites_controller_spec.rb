@@ -75,4 +75,18 @@ describe InvitesController do
     # it "redirects to the home page" do
     # end
   end
+
+  describe "GET #accept" do 
+    # it "locates the correct invite" do
+    #   get :accept, email: "test@test.com"
+    #   expect(response).to render_template :accept
+    # end
+
+    # it "changes the invite's attributes" do
+    #   invite = FactoryGirl.create(:invite)
+    #   put :update, email: "test@test.com", invite: FactoryGirl.attributes_for(:invite, name: "My Invite Name")
+    #   invite.reload
+    #   expect(invite.name).to eq("My Invite Name")
+    # end
+  end
 end 

@@ -23,7 +23,7 @@ class InvitesController < ApplicationController
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 
 		if @invite.save
-			Log.add_log("Invite", "save", @invite.to_json)
+			Log.create(type: "Invite", action: "save", data: @invite.to_json)
 			@invite.send_invites(request.base_url)
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
@@ -36,7 +36,8 @@ class InvitesController < ApplicationController
 	def update
 		@invite = Invite.find(params[:id])
 		if  @invite.update_attributes(parse_params)
-			Log.add_log("Invite", "update", @invite.to_json)
+			Log.create(type: "Invite", action: "update", data: @invite.to_json)
+
 		    flash[:notice] = "Invite #{@invite.name} successfully updated."
 		    redirect_to invite_path(@invite)
 		else
@@ -59,15 +60,14 @@ class InvitesController < ApplicationController
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
 		@invite.accept(@email)
-		Log.add_log("Invite", "accept", {id: @invite.id})
+		Log.create(type: "Invite", action: "accept", data: {id: @invite.id})
 	end
 
 	def decline
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
 		@invite.decline(@email)
-		Log.add_log("Invite", "decline", {id: @invite.id})
-
+		Log.create(type: "Invite", action: "decline", data: {id: @invite.id})
 	end
 
 	def report
@@ -79,7 +79,7 @@ class InvitesController < ApplicationController
 	def create_report
 		@invite = Invite.find(params[:id])
 		@invite.add_report_text(report_params[:reports])
-		Log.add_log("Invite", "create_report", {id: @invite.id, report_text: report_params[:reports]})
+		Log.create(type: "Invite", action: "create_report", data: {id: @invite.id, report_text: report_params[:reports]})
 	end
 
 	def deactivate
@@ -88,7 +88,6 @@ class InvitesController < ApplicationController
 		@invite.save
 		flash[:alert] = "Invite #{@invite.name} deactivated"
 		redirect_to "/admin"
-
 	end
 
     private
