@@ -1,4 +1,5 @@
 class InvitesController < ApplicationController
+	before_action :authenticate_user!, only: [:deactivate]
 
 	def new
 		@invite = Invite.new
@@ -6,6 +7,10 @@ class InvitesController < ApplicationController
 
 	def show
 		@invite = Invite.find(params[:id])
+		unless @invite and @invite.active == true
+			flash[:notice] = "That invite does not exist or has been deactivated"
+			redirect_to root_path
+		end
 	end
 
 	def edit
@@ -19,7 +24,7 @@ class InvitesController < ApplicationController
 
 		if @invite.save
 			Log.add_log("Invite", "save", @invite.to_json)
-			@invite.send_invites
+			@invite.send_invites(request.base_url)
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else
@@ -75,6 +80,15 @@ class InvitesController < ApplicationController
 		@invite = Invite.find(params[:id])
 		@invite.add_report_text(report_params[:reports])
 		Log.add_log("Invite", "create_report", {id: @invite.id, report_text: report_params[:reports]})
+	end
+
+	def deactivate
+		@invite = Invite.find(params[:id])
+		@invite.active = false
+		@invite.save
+		flash[:alert] = "Invite #{@invite.name} deactivated"
+		redirect_to "/admin"
+
 	end
 
     private

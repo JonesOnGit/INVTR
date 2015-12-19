@@ -1,6 +1,5 @@
 <h1>Admin Index</h1>
-<%= link_to "Logout", destroy_user_session_path, :method => :delete %>
-
-<%= link_to "Edit Profile", edit_user_path(@user) %>
 
 <%= render 'reports_table_count', invite_count: @invite_count, accepted_count: @accepted_count, rejected_count: @rejected_count, report_count: @report_count, written_report_count: @written_report_count  %>
+
+<%= render 'reports_table', sorted_reports: @sorted_reports %>

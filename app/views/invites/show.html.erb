@@ -1,4 +1,30 @@
 <!-- <h1>Show Invite</h1> -->
 
+<div class="margin-top row">
+  <div class="medium-12 columns">
+    <%= render 'details', invite: @invite %>
 
-<%= render 'details', invite: @invite %>
+    <% if current_user %>
+      <p>Total reports: <%= @invite.report_count %></p>
+      <% if @invite.reports %>
+        <table>
+          <thead>
+            <tr>
+              <th>Reports</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @invite.reports.each do |report| %>
+            <tr>
+              <td><%= report %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+    <%= link_to "Deactivate This Invite", "/invites/#{@invite.id}/deactivate", 
+      :class => "button alert", :method => :patch %>
+    <% end %>
+  </div>
+</div>

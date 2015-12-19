@@ -12,15 +12,16 @@ class Invite
 	field :declined, type: Array
 	field :reports, type: Array
 	field :report_count, type: Integer, default: 0
+	field :active, type: Boolean, default: true
 
 	validates :name, length: { maximum: 150 }
 	validates :description, length: { maximum: 1000 }
 
 	validates_presence_of :name, :start_date, :end_date, :description, :allow_others
 
-	def send_invites
+	def send_invites(url)
 		self.invited.each do |invite_email|
-			InviteNotifier.send_invite_email(invite_email, self).deliver
+			InviteNotifier.send_invite_email(url, invite_email, self).deliver
 		end
 	end
 

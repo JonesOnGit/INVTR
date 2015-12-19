@@ -1,14 +1,15 @@
 module Admin
 	class AdminController < ApplicationController
 		before_action :authenticate_user!
+		layout 'layouts/admin'
 		def index
 			@user = current_user
 			@invite_count = Invite.count
-			@accepted_count = Log.where(type: "accept").count
-			@rejected_count = Log.where(type: "decline").count
-			@report_count = Log.where(type: "report").count
-			@written_report_count = Log.where(type: "create_report").count
-			# @sorted_reports = Invite.where(:report_count.gt => 0).order_by(report_count: "desc")
+			@accepted_count = Log.where(action: "accept").count
+			@rejected_count = Log.where(action: "decline").count
+			@report_count = Log.where(action: "report").count
+			@written_report_count = Log.where(action: "create_report").count
+			@sorted_reports = Invite.where(:report_count.gt => 0).where(active: true).order_by(report_count: "desc")
 		end
 	end
 end

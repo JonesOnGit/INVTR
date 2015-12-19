@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/invites/:id/decline" => "invites#decline", as: :decline_invite_path
   get "/invites/:id/report" => "invites#report", as: :report_invite_path
   patch "/invites/:id/report" => "invites#create_report", as: :create_report_invite_path
+  patch "/invites/:id/deactivate" => "invites#deactivate", as: :deactivate_invite_path
 
 end
 
