@@ -23,7 +23,7 @@ class InvitesController < ApplicationController
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 
 		if @invite.save
-			Log.create(type: "Invite", action: "save", data: @invite.to_json)
+			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip)
 			@invite.send_invites(request.base_url)
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
@@ -36,7 +36,7 @@ class InvitesController < ApplicationController
 	def update
 		@invite = Invite.find(params[:id])
 		if  @invite.update_attributes(parse_params)
-			Log.create(type: "Invite", action: "update", data: @invite.to_json)
+			Log.create(type: "Invite", action: "update", data: @invite.to_json, ip: request.ip)
 
 		    flash[:notice] = "Invite #{@invite.name} successfully updated."
 		    redirect_to invite_path(@invite)
@@ -60,26 +60,26 @@ class InvitesController < ApplicationController
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
 		@invite.accept(@email)
-		Log.create(type: "Invite", action: "accept", data: {id: @invite.id})
+		Log.create(type: "Invite", action: "accept", data: {id: @invite.id}, ip: request.ip)
 	end
 
 	def decline
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
 		@invite.decline(@email)
-		Log.create(type: "Invite", action: "decline", data: {id: @invite.id})
+		Log.create(type: "Invite", action: "decline", data: {id: @invite.id}, ip: request.ip)
 	end
 
 	def report
 		@invite = Invite.find(params[:id])
 		@invite.add_report_count
-		Log.add_log("Invite", "report", {id: @invite.id})
+		Log.create(type: "Invite", action: "report", data: {id: @invite.id}, ip: request.ip)
 	end
 
 	def create_report
 		@invite = Invite.find(params[:id])
 		@invite.add_report_text(report_params[:reports])
-		Log.create(type: "Invite", action: "create_report", data: {id: @invite.id, report_text: report_params[:reports]})
+		Log.create(type: "Invite", action: "create_report", data: {id: @invite.id, report_text: report_params[:reports]}, ip: request.ip)
 	end
 
 	def deactivate
@@ -96,7 +96,7 @@ class InvitesController < ApplicationController
     	end
 
 	    def invite_params
-	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others)
+	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address)
 	    end
 
 	    def parse_params

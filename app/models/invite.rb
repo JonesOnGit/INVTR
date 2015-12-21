@@ -1,8 +1,13 @@
 class Invite
 	include Mongoid::Document
 	include Mongoid::Timestamps
+	include Geocoder::Model::Mongoid
+	geocoded_by :address
+	after_validation :geocode
 
 	field :name, type: String
+	field :address, type: String
+	field :coordinates, :type => Array
 	field :start_date, type: DateTime
 	field :end_date, type: DateTime
 	field :description, type: String
@@ -17,7 +22,7 @@ class Invite
 	validates :name, length: { maximum: 150 }
 	validates :description, length: { maximum: 1000 }
 
-	validates_presence_of :name, :start_date, :end_date, :description, :allow_others
+	validates_presence_of :name, :start_date, :end_date, :description, :allow_others, :address
 
 	def send_invites(url)
 		self.invited.each do |invite_email|

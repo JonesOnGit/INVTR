@@ -44,6 +44,8 @@ gem 'rspec_junit_formatter', '0.2.2'
 
 gem 'rails_12factor', group: :production
 
+gem 'geocoder'
+
 group :development do
   gem "letter_opener"
 end
