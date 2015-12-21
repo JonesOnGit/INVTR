@@ -7,9 +7,11 @@ class InvitesController < ApplicationController
 
 	def show
 		@invite = Invite.find(params[:id])
-		unless @invite and @invite.active == true
-			flash[:notice] = "That invite does not exist or has been deactivated"
-			redirect_to root_path
+		if not current_user
+			unless @invite and @invite.active == true
+				flash[:notice] = "That invite does not exist or has been deactivated"
+				redirect_to root_path
+			end
 		end
 	end
 
@@ -85,6 +87,7 @@ class InvitesController < ApplicationController
 	def deactivate
 		@invite = Invite.find(params[:id])
 		@invite.active = false
+		@invite.deactivation_reason = params[:invite][:deactivation_reason]
 		@invite.save
 		flash[:alert] = "Invite #{@invite.name} deactivated"
 		redirect_to "/admin"

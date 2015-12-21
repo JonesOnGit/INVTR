@@ -23,8 +23,18 @@
         </table>
       <% end %>
 
-    <%= link_to "Deactivate This Invite", "/invites/#{@invite.id}/deactivate", 
-      :class => "button alert", :method => :patch %>
+      <%= simple_form_for @invite, url: "/invites/#{@invite.id}/deactivate" do |f| %>
+       <div class="margin-top row">
+         <div class="medium-12 columns">
+           <%= f.input :deactivation_reason %>
+         </div>
+       </div>
+       <div class="row">
+         <div class="large-12 columns">
+           <%= f.button :submit %>
+         </div>
+       </div>
+      <% end %>
     <% end %>
   </div>
 </div>

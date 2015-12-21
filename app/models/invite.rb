@@ -18,6 +18,8 @@ class Invite
 	field :reports, type: Array
 	field :report_count, type: Integer, default: 0
 	field :active, type: Boolean, default: true
+	field :deactivation_reason, type: String
+
 
 	validates :name, length: { maximum: 150 }
 	validates :description, length: { maximum: 1000 }
