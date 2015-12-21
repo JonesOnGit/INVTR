@@ -1,4 +1,63 @@
 <!-- NEW INVITE VIEW -->
 
 
+    <style>
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+    </style>
+
+
+    <script>
+function initMap() {
+
+  var input = /** @type {!HTMLInputElement} */(
+      document.getElementById('invite_address'));
+
+  var types = document.getElementById('type-selector');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+ 
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    alert(place);
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
+        async defer></script>
+
+
 <%= render 'form', invite: @invite, url: invites_path %>
