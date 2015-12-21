@@ -23,7 +23,6 @@ class InvitesController < ApplicationController
 		@invite = Invite.new(parse_params) 
 
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
-
 		if @invite.save
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip)
 			@invite.send_invites(request.base_url)

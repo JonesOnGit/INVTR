@@ -46,6 +46,10 @@ gem 'rails_12factor', group: :production
 
 gem 'geocoder'
 
+gem 'timezone'
+
+gem "httpclient"
+
 group :development do
   gem "letter_opener"
 end

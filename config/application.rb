@@ -16,6 +16,11 @@ Bundler.require(*Rails.groups)
 
 module Invtr
   class Application < Rails::Application
+    Timezone::Configure.begin do |c|
+      c.username = 'AIzaSyAtf-llE-00s6Be8-gktRA373C4lBEYcmU'
+      c.google_api_key = 'AIzaSyAtf-llE-00s6Be8-gktRA373C4lBEYcmU'
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

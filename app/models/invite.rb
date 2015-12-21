@@ -4,10 +4,12 @@ class Invite
 	include Geocoder::Model::Mongoid
 	geocoded_by :address
 	after_validation :geocode
+	before_save :get_timezone
 
 	field :name, type: String
 	field :address, type: String
 	field :coordinates, :type => Array
+	field :timezone, type: String
 	field :start_date, type: DateTime
 	field :end_date, type: DateTime
 	field :description, type: String
@@ -62,5 +64,14 @@ class Invite
 
 		self.report_count += 1
 		self.save
+	end
+
+	def get_timezone
+		proxy = ENV['HTTP_PROXY']
+		client = HTTPClient.new(proxy)
+		target = "https://maps.googleapis.com/maps/api/timezone/json?location=#{self.coordinates[1]},#{self.coordinates[0]}&timestamp=1"
+		result = client.get_content(target)
+		parsed = JSON.parse(result)
+		self.timezone = parsed["timeZoneId"]
 	end
 end
