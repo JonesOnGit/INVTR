@@ -23,6 +23,7 @@ class InvitesController < ApplicationController
 		@invite = Invite.new(parse_params) 
 
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
+		binding.pry
 		if @invite.save
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip)
 			@invite.send_invites(request.base_url)
@@ -105,8 +106,8 @@ class InvitesController < ApplicationController
 	    	return invite_params if invite_params.has_key? "start_date"
 
 	    	ip = invite_params
-	    	start_date = ip["start_date(1i)"] + "-" + ip["start_date(2i)"] + "-" + ip["start_date(3i)"] + "-" + ip["start_date(4i)"] + "-" + ip["start_date(5i)"]
-	    	end_date = ip["end_date(1i)"] + "-" + ip["end_date(2i)"] + "-" + ip["end_date(3i)"] + "-" + ip["end_date(4i)"] + "-" + ip["end_date(5i)"]
+	    	start_date = ip["start_date(1i)"] + "-" + ip["start_date(2i)"] + "-" + ip["start_date(3i)"] + " " + ip["start_date(4i)"] + ":" + ip["start_date(5i)"]
+	    	end_date = ip["end_date(1i)"] + "-" + ip["end_date(2i)"] + "-" + ip["end_date(3i)"] + " " + ip["end_date(4i)"] + ":" + ip["end_date(5i)"]
 
 	    	ip = delete_params ip
 	    	
