@@ -21,6 +21,7 @@ class Invite
 	field :report_count, type: Integer, default: 0
 	field :active, type: Boolean, default: true
 	field :deactivation_reason, type: String
+	field :owner, type: String
 
 
 	validates :name, length: { maximum: 150 }
@@ -32,6 +33,10 @@ class Invite
 		self.invited.each do |invite_email|
 			InviteNotifier.send_invite_email(url, invite_email, self).deliver
 		end
+	end
+
+	def send_owner_invite(url)
+		InviteNotifier.send_owner_invite(url, self.owner, self).deliver
 	end
 
 	def accept(email)

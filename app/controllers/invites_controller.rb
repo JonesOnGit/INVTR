@@ -21,12 +21,12 @@ class InvitesController < ApplicationController
 
 	def create
 		@invite = Invite.new(parse_params) 
-
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
-		binding.pry
+		@invite.owner = cookies["ownerEmail"];
 		if @invite.save
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip)
 			@invite.send_invites(request.base_url)
+			@invite.send_owner_invite(request.base_url)
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else

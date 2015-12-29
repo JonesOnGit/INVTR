@@ -61,6 +61,14 @@ function initMap() {
         <script src="https://apis.google.com/js/client.js"></script>
 
 <script>
+console.log(document.cookie);
+String.prototype.toProperCase = function(){
+    return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
+        function($1){
+            return $1.toUpperCase();
+        }
+    );
+};
 function auth() {
   var config = {
     'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
@@ -90,10 +98,11 @@ function fetch(token) {
         var img = obj["link"][0]["href"];
         arr.push(email);
         if (name != "") {
-          nameArr.push(name);
+          nameArr.push(name.toProperCase());
+          nameObj[name] = email;
+          nameObj[email] = img;
         }
-        nameObj[name] = email;
-        nameObj[email] = img;
+        
       } catch(err) {
 
       }
@@ -102,18 +111,34 @@ function fetch(token) {
     nameArr.sort()
     for (var i in arr) {
       // console.log();
-      var imageUrl = nameObj[nameObj[nameArr[i]]];
-      $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
 
-      $("#myModal").append("  " + nameArr[i] + "  ");
+      // if name !== undefined
+      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
 
-      $("#myModal").append(nameObj[nameArr[i]]);
-      $("#myModal").append("<br>");
+        var imageUrl = nameObj[nameObj[nameArr[i]]];
+        $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
 
+        $("#myModal").append("  " + nameArr[i] + "  ");
+
+        $("#myModal").append(nameObj[nameArr[i]]);
+        $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
+        $("#myModal").append("<br>");
+      }
+ 
     }
-    console.log(nameObj[nameObj["Christian Ledermann"]]);
+    console.log(data)
+    document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
+    console.log(document.cookie)
   });
 }
+
+      $(document).on('page:change', function () {
+
+        $("emailCheckbox").click(function() {
+          alert( "Handler for .click() called." );
+        });
+      }); 
+
 </script>
 
 <%= render 'form', invite: @invite, url: invites_path %>
