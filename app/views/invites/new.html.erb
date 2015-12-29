@@ -58,6 +58,62 @@ function initMap() {
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
         async defer></script>
+        <script src="https://apis.google.com/js/client.js"></script>
 
+<script>
+function auth() {
+  var config = {
+    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
+    'scope': 'https://www.google.com/m8/feeds'
+  };
+  gapi.auth.authorize(config, function() {
+    fetch(gapi.auth.getToken());
+  });
+}
+function fetch(token) {
+  $.ajax({
+    url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
+    dataType: 'jsonp',
+    data: token
+  }).done(function(data) {
+    var arr = new Array();
+    var nameArr = new Array();
+    var nameObj = {};
+    console.log(data);
+
+    var d = data["feed"]["entry"];
+    $.each(d, function(i, obj) {
+
+      try {
+        var email = obj["gd$email"][0]["address"].toLowerCase();
+        var name = obj["title"]["$t"];
+        var img = obj["link"][0]["href"];
+        arr.push(email);
+        if (name != "") {
+          nameArr.push(name);
+        }
+        nameObj[name] = email;
+        nameObj[email] = img;
+      } catch(err) {
+
+      }
+    });
+    arr.sort();
+    nameArr.sort()
+    for (var i in arr) {
+      // console.log();
+      var imageUrl = nameObj[nameObj[nameArr[i]]];
+      $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
+
+      $("#myModal").append("  " + nameArr[i] + "  ");
+
+      $("#myModal").append(nameObj[nameArr[i]]);
+      $("#myModal").append("<br>");
+
+    }
+    console.log(nameObj[nameObj["Christian Ledermann"]]);
+  });
+}
+</script>
 
 <%= render 'form', invite: @invite, url: invites_path %>

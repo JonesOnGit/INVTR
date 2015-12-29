@@ -34,8 +34,17 @@
 
  <div class="row">
    <div class="large-12 columns">
+     <button onclick="auth();" data-reveal-id="myModal">Add Guests From Gmail Account</button>
+     <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+     </div>
+   </div>
+ </div>   
+
+ <div class="row">
+   <div class="large-12 columns">
      <%= f.button :submit %>
    </div>
  </div>
+
 <% end %>
 
