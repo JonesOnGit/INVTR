@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   patch "/invites/:id/report" => "invites#create_report", as: :create_report_invite_path
   patch "/invites/:id/deactivate" => "invites#deactivate", as: :deactivate_invite_path
 
+  get "/terms-of-service" => "static_pages#terms_of_service", as: "terms_of_service" 
+  get "/privacy-policy" => "static_pages#privacy_policy", as: "privacy_policy" 
 end
 
 # ================================= Routes, Raked ======================================== #
