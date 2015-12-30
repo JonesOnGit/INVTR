@@ -61,7 +61,9 @@ function initMap() {
         <script src="https://apis.google.com/js/client.js"></script>
 
 <script>
-console.log(document.cookie);
+document.cookie = "ownerEmail=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
+document.cookie = "invited=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
+
 String.prototype.toProperCase = function(){
     return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
         function($1){
@@ -116,7 +118,7 @@ function fetch(token) {
       if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
 
         var imageUrl = nameObj[nameObj[nameArr[i]]];
-        $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
+        // $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
 
         $("#myModal").append("  " + nameArr[i] + "  ");
 
@@ -124,20 +126,36 @@ function fetch(token) {
         $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
         $("#myModal").append("<br>");
       }
+
+
  
     }
+    $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
+
     console.log(data)
     document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
     console.log(document.cookie)
   });
 }
 
-      $(document).on('page:change', function () {
+var invited = [];
 
-        $("emailCheckbox").click(function() {
-          alert( "Handler for .click() called." );
-        });
-      }); 
+$('body').delegate('#continue-button', 'click', function() {
+    $('a.close-reveal-modal').trigger('click');
+    var invitedString = invited.toString().replace(",", " ");
+    var newCookie = 'invited=' + invitedString + ';'
+    console.log(newCookie);
+    document.cookie = newCookie;
+});
+
+$('body').delegate('.emailCheckbox', 'click', function() {
+    // add to cookie
+    if (invited.indexOf(this.name) == -1) {
+      invited.push(this.name)
+    }
+    console.log(invited);
+});
+
 
 </script>
 

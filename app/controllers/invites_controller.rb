@@ -21,7 +21,9 @@ class InvitesController < ApplicationController
 
 	def create
 		@invite = Invite.new(parse_params) 
+		binding.pry
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
+		# @invite.invited = cookies["invited"].split(/ /)
 		@invite.owner = cookies["ownerEmail"];
 		if @invite.save
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip)
