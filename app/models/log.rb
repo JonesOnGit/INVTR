@@ -11,6 +11,7 @@ class Log
 	field :action, type: String
 	field :data, type: String
 	field :ip, type: String
+	field :invite_id, type: String
 
 	validates_presence_of :type, :action, :data
 

@@ -21,7 +21,10 @@ function initialize() {
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
   var markers = [];
   <% @logs.each do |log| %>
-	  var myLatLng = {lat:<%= log.coordinates[1] %>, lng: <%= log.coordinates[0] %>};
+      var lat = <%= log.coordinates[1] %> + (Math.random() / 1000);
+      var lng = <%= log.coordinates[0] %> + (Math.random() / 1000);
+
+	  var myLatLng = {lat: lat, lng: lng};
 	  var icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 	  if ("<%= log.action %>" == "save") {
 	  	icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
@@ -42,7 +45,13 @@ function initialize() {
 	    icon: icon,
 	    title: 'Hello World!'
 	  });
-	  marker.setPosition(myLatLng)
+	  marker.setPosition(myLatLng);
+	  var infowindow = new google.maps.InfoWindow({
+	      content: '<p>Type: <%= log.action %></p><p>View: <a href="/invites/<%= log.invite_id %>">Click here</a> '
+	    });
+	  google.maps.event.addListener(marker, 'click', function() {
+	      infowindow.open(map, this);
+	    });
 	  markers.push(marker);
 
   <% end %>
