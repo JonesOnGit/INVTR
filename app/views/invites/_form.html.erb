@@ -1,3 +1,5 @@
+
+
 <%= simple_form_for invite, url: url do |f| %>
  <div class="margin-top row">
    <div class="medium-12 columns">
@@ -7,10 +9,10 @@
 
  <div class="margin-top row">
    <div class="medium-2 columns">
-     <%= f.input :start_date, as: :datetime %>
+     <%= f.input :start_date, as: :datetime, ampm: true %>
    </div>
    <div class="medium-2 columns">
-     <%= f.input :end_date, as: :datetime %>
+     <%= f.input :end_date, as: :datetime, ampm: true %>
    </div>
  </div>
 
@@ -55,3 +57,12 @@
 
 <% end %>
 
+<script>
+// var myOpts = document.getElementById('invite_start_date_4i').options;
+// console.log(myOpts[0]);
+var options = $('#invite_start_date_4i option');
+
+var values = $.map(options ,function(option) {
+    console.log(option);
+});
+</script>
