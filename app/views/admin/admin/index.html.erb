@@ -3,3 +3,54 @@
 <%= render 'reports_table_count', invite_count: @invite_count, accepted_count: @accepted_count, rejected_count: @rejected_count, report_count: @report_count, written_report_count: @written_report_count, deactivated_count: @deactivated_count  %>
 
 <%= render 'reports_table', sorted_reports: @sorted_reports %>
+
+ <script src="http://maps.googleapis.com/maps/api/js"></script>
+
+
+ <div id="googleMap" style="width:500px;height:380px;"></div>
+
+<script>
+function initialize() {
+
+
+  var mapProp = {
+    center:new google.maps.LatLng(0,0),
+    zoom:1,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+  <% @logs.each do |log| %>
+	  var myLatLng = {lat:<%= log.coordinates[1] %>, lng: <%= log.coordinates[0] %>};
+	  var icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+	  if ("<%= log.action %>" == "save") {
+	  	icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+	  }
+	  if ("<%= log.action %>" == "accept") {
+	  	icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+	  }
+
+	  if ("<%= log.action %>" == "decline") {
+	  	icon = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+	  }
+
+	  if ("<%= log.action %>" == "report") {
+	  	icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+	  }
+	  var marker = new google.maps.Marker({
+	    position: myLatLng,
+	    map: map,
+	    icon: icon,
+	    title: 'Hello World!'
+	  });
+  <% end %>
+  // var marker = new google.maps.Marker({
+  //   position: myLatLng,
+  //   map: map,
+  //   icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
+  //   title: 'Hello World!'
+  // });
+
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
