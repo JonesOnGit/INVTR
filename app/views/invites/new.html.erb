@@ -77,7 +77,10 @@ function auth() {
     'scope': 'https://www.google.com/m8/feeds'
   };
   gapi.auth.authorize(config, function() {
-    fetch(gapi.auth.getToken());
+    var token = gapi.auth.getToken();
+    console.log(token)
+    token['g-oauth-window'] = null;
+    fetch(token);
   });
 }
 function fetch(token) {
@@ -89,7 +92,7 @@ function fetch(token) {
     var arr = new Array();
     var nameArr = new Array();
     var nameObj = {};
-    console.log(data);
+    // console.log(data);
 
     var d = data["feed"]["entry"];
     $.each(d, function(i, obj) {
@@ -118,7 +121,8 @@ function fetch(token) {
       if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
 
         var imageUrl = nameObj[nameObj[nameArr[i]]];
-        // $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
+        console.log(imageUrl);
+        $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
 
         $("#myModal").append("  " + nameArr[i] + "  ");
 
