@@ -21,7 +21,7 @@ function initialize() {
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
   var markers = [];
   <% @logs.each do |log| %>
-	  var myLatLng = {lat:<%= log.coordinates[0] %>, lng: <%= log.coordinates[1] %>};
+	  var myLatLng = {lat:<%= log.coordinates[1] %>, lng: <%= log.coordinates[0] %>};
 	  var icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 	  if ("<%= log.action %>" == "save") {
 	  	icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
