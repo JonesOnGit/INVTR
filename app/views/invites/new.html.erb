@@ -78,12 +78,12 @@ function auth() {
   };
   gapi.auth.authorize(config, function() {
     var token = gapi.auth.getToken();
-    console.log(token)
+    // console.log(token)
     token['g-oauth-window'] = null;
-    fetch(token);
+    fetchGoogleContacts(token);
   });
 }
-function fetch(token) {
+function fetchGoogleContacts(token) {
   $.ajax({
     url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
     dataType: 'jsonp',
@@ -92,7 +92,6 @@ function fetch(token) {
     var arr = new Array();
     var nameArr = new Array();
     var nameObj = {};
-    // console.log(data);
 
     var d = data["feed"]["entry"];
     $.each(d, function(i, obj) {
@@ -104,6 +103,9 @@ function fetch(token) {
         arr.push(email);
         if (name != "") {
           nameArr.push(name.toProperCase());
+          if (email == "titus@visionlink.org") {
+            console.log(obj);
+          }
           nameObj[name] = email;
           nameObj[email] = img;
         }
@@ -114,21 +116,33 @@ function fetch(token) {
     });
     arr.sort();
     nameArr.sort()
+    var count = 0;
     for (var i in arr) {
-      // console.log();
+      count++
+      if (count < 20) {
+        // console.log();
 
-      // if name !== undefined
-      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
+        // if name !== undefined
+        if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
 
-        var imageUrl = nameObj[nameObj[nameArr[i]]];
-        console.log(imageUrl);
-        $("#myModal").append("<img src='" + imageUrl + "?access_token=" + token["access_token"] + "' height='50px' width='50px'>");
+          var imageUrl = nameObj[nameObj[nameArr[i]]];
+          var src = imageUrl + "?access_token=" + token["access_token"]
 
-        $("#myModal").append("  " + nameArr[i] + "  ");
+          // console.log(token);
+          var uri = '/assets/blank-avatar.gif';
+          $("#myModal").append("<img onerror='if (this.src !=\"" + uri + "\") this.src = \"" + uri + "\"' id='" + i + "' alt='' src='" + src + "' height='50px' width='50px'>");
+          var elem = "#" + i
+          // $(elem).error(function() {
+          //   $("#myModal").append('<%= image_tag("blank-avatar", size: "50x50", alt: "blank-avatar.gif") %>')
+          // })
+          
 
-        $("#myModal").append(nameObj[nameArr[i]]);
-        $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
-        $("#myModal").append("<br>");
+          $("#myModal").append("  " + nameArr[i] + "  ");
+
+          $("#myModal").append(nameObj[nameArr[i]]);
+          $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
+          $("#myModal").append("<br>");
+        }
       }
 
 
@@ -136,9 +150,9 @@ function fetch(token) {
     }
     $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
 
-    console.log(data)
+    // console.log(data)
     document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
-    console.log(document.cookie)
+    // console.log(document.cookie)
   });
 }
 
@@ -148,7 +162,7 @@ $('body').delegate('#continue-button', 'click', function() {
     $('a.close-reveal-modal').trigger('click');
     var invitedString = invited.toString().replace(",", " ");
     var newCookie = 'invited=' + invitedString + ';'
-    console.log(newCookie);
+    // console.log(newCookie);
     document.cookie = newCookie;
 });
 
@@ -157,7 +171,7 @@ $('body').delegate('.emailCheckbox', 'click', function() {
     if (invited.indexOf(this.name) == -1) {
       invited.push(this.name)
     }
-    console.log(invited);
+    // console.log(invited);
 });
 
 
