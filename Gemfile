@@ -39,6 +39,9 @@ gem 'selenium-webdriver'
 gem 'simple_form'
 gem 'foundation-rails'
 
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'aws-sdk', '~> 1.3.4'
+
 # CircleCI test metadata formatters
 gem 'rspec_junit_formatter', '0.2.2'
 

@@ -59,7 +59,6 @@ function initMap() {
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
         async defer></script>
         <script src="https://apis.google.com/js/client.js"></script>
-
 <script>
 document.cookie = "ownerEmail=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
 document.cookie = "invited=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
@@ -174,6 +173,10 @@ $('body').delegate('.emailCheckbox', 'click', function() {
     // console.log(invited);
 });
 
+$.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8c55-475d-b23b-e3c79c4cdef0", "scope": "https://outlook.office.com/Contacts.Read"}, function( data ) {
+  console.log("get");
+  console.log(data);
+});
 
 </script>
 

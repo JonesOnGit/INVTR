@@ -100,7 +100,7 @@ class InvitesController < ApplicationController
     	end
 
 	    def invite_params
-	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address)
+	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address,:avatar)
 	    end
 
 	    def parse_params

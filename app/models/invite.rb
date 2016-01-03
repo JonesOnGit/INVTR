@@ -2,6 +2,10 @@ class Invite
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	include Geocoder::Model::Mongoid
+	include Mongoid::Paperclip
+
+	has_mongoid_attached_file :avatar
+	
 	geocoded_by :address
 	after_validation :geocode
 	before_save :get_timezone
@@ -29,6 +33,7 @@ class Invite
 
 	validates_presence_of :name, :start_date, :end_date, :description, :allow_others, :address
 
+	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	def send_invites(url)
 		self.invited.each do |invite_email|
 			InviteNotifier.send_invite_email(url, invite_email, self).deliver
