@@ -5,8 +5,11 @@ class InvitesController < ApplicationController
 	def new
 		@invite = Invite.new
 		@login_url = login_url
-		@contacts = AddressCache.find_by(session_id: session.id)
-		@contacts = @contacts.contacts if @contacts
+		@contacts = nil
+		if session.id
+			@contacts = AddressCache.find_by(session_id: session.id)
+			@contacts = @contacts.contacts if @contacts
+		end
 		# @contacts = nil
 		# binding.pry
 	end 
