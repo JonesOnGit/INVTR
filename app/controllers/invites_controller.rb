@@ -5,11 +5,16 @@ class InvitesController < ApplicationController
 	def new
 		@invite = Invite.new
 		@login_url = login_url
-		@contacts = session[:contacts]
+		@contacts = AddressCache.find_by(session_id: session.id)
+		@contacts = @contacts.contacts if @contacts
+		# @contacts = nil
+		# binding.pry
 	end 
 
 	def show
 		@invite = Invite.find(params[:id])
+		@email = session[:user_email]
+		# binding.pry
 		if not current_user
 			unless @invite and @invite.active == true
 				flash[:notice] = "That invite does not exist or has been deactivated"
@@ -27,8 +32,9 @@ class InvitesController < ApplicationController
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 		@invite.oauth_provider = session[:oauth_provider]
 		# @invite.invited = cookies["invited"].split(/ /)
-		@invite.owner = cookies["ownerEmail"];
+		@invite.owner = session[:user_email];
 		if @invite.save
+			AddressCache.find_by(session_id: session.id).destroy
 			session[:contacts] = nil
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 			@invite.send_invites(request.base_url)

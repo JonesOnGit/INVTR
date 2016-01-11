@@ -28,6 +28,7 @@ class AuthController < ApplicationController
 	       end
 	       @contacts = JSON.parse(response.body)['value']
 	       # session[:contacts] = @contacts
+	       AddressCache.create(session_id: session.id, contacts: @contacts)
 	       session[:oauth_provider] = "hotmail"
 	     else
 	       # If no token, redirect to the root url so user
