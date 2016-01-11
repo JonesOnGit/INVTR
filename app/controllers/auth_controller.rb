@@ -36,7 +36,7 @@ class AuthController < ApplicationController
 	       redirect_to root_url
 	     end
 
-	  redirect_to root_path
+	  redirect_to root_path show_modal: true
 	end
 end
 

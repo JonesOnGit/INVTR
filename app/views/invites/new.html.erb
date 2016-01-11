@@ -190,6 +190,13 @@ console.log("hh");
 <% if @contacts %>
 sdfdsfsdfsdfdsf
 <script>
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+}
+
+if (getURLParameter("show_modal") != null) {
+  console.log(getURLParameter("show_modal"))
+
 console.log("here");
   <% @contacts.each do |contact| %>
     $("#myModal").append('<%=contact["EmailAddresses"][0]["Name"] %>  ');
@@ -201,6 +208,6 @@ console.log("here");
   console.log("2");
   $('#myModal').foundation('reveal','open');
   $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
-
+}
   </script> 
 <% end %>
