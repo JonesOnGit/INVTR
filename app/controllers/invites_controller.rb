@@ -31,6 +31,10 @@ class InvitesController < ApplicationController
 
 	def edit
 		@invite = Invite.find(params[:id])
+		unless @invite.owner == session[:user_email]
+			flash[:notice] = "You do not have permission to edit this Invitation."
+			redirect_to root_path
+		end
 	end
 
 	def create
@@ -55,6 +59,10 @@ class InvitesController < ApplicationController
 
 	def update
 		@invite = Invite.find(params[:id])
+		unless @invite.owner == session[:user_email]
+			flash[:notice] = "You do not have permission to edit this Invitation."
+			redirect_to root_path
+		end
 		if  @invite.update_attributes(parse_params)
 			Log.create(type: "Invite", action: "update", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 
