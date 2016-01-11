@@ -113,18 +113,44 @@ $("#new_invite").submit(function() {
  $("#invite_name").val(getCookie("invite_name"));
  $("#invite_address").val(getCookie("invite_address"));
  $("#invite_description").val(getCookie("invite_description"));
+ console.log("ewr");
+ console.log(getCookie("invite_start_date_1i") == "");
+ if(getCookie("invite_start_date_1i") != "") {
+  $("#invite_start_date_1i").val(getCookie("invite_start_date_1i"));
+ }
 
- $("#invite_start_date_1i").val(getCookie("invite_start_date_1i"));
- $("#invite_start_date_2i").val(getCookie("invite_start_date_2i"));
- $("#invite_start_date_3i").val(getCookie("invite_start_date_3i"));
- $("#invite_start_date_4i").val(getCookie("invite_start_date_4i"));
- $("#invite_start_date_5i").val(getCookie("invite_start_date_5i"));
+ if(getCookie("invite_start_date_2i") != "") {
+  $("#invite_start_date_2i").val(getCookie("invite_start_date_2i"));
+ }
+ if(getCookie("invite_start_date_3i") != "") {
+  $("#invite_start_date_3i").val(getCookie("invite_start_date_3i"));
+ }
+ if(getCookie("invite_start_date_4i") != "") {
+  $("#invite_start_date_4i").val(getCookie("invite_start_date_4i"));
+ }
+ if(getCookie("invite_start_date_5i") != "") {
+  $("#invite_start_date_5i").val(getCookie("invite_start_date_5i"));
+ }
 
- $("#invite_end_date_1i").val(getCookie("invite_end_date_1i"));
- $("#invite_end_date_2i").val(getCookie("invite_end_date_2i"));
- $("#invite_end_date_3i").val(getCookie("invite_end_date_3i"));
- $("#invite_end_date_4i").val(getCookie("invite_end_date_4i"));
- $("#invite_end_date_5i").val(getCookie("invite_end_date_5i"));
+ if(getCookie("invite_end_date_1i") != "") {
+  $("#invite_start_end_1i").val(getCookie("invite_start_end_1i"));
+ }
+ if(getCookie("invite_end_date_2i") != "") {
+  $("#invite_start_end_2i").val(getCookie("invite_start_end_2i"));
+ }
+
+ if(getCookie("invite_end_date_3i") != "") {
+  $("#invite_start_end_3i").val(getCookie("invite_start_end_3i"));
+ }
+
+ if(getCookie("invite_end_date_4i") != "") {
+  $("#invite_start_end_4i").val(getCookie("invite_start_end_4i"));
+ }
+
+ if(getCookie("invite_end_date_5i") != "") {
+  $("#invite_start_end_5i").val(getCookie("invite_start_end_5i"));
+ }
+
 
 
  function getCookie(cname) {
