@@ -65,7 +65,7 @@ document.cookie = "invited=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
 
 String.prototype.toProperCase = function(){
     return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
-        function($1){
+         function($1){
             return $1.toUpperCase();
         }
     );
@@ -180,4 +180,27 @@ $.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8
 
 </script>
 
+<script>
+$('#myModal').foundation('reveal','open');
+console.log("hh");
+</script> 
+
 <%= render 'form', invite: @invite, url: invites_path %>
+
+<% if @contacts %>
+sdfdsfsdfsdfdsf
+<script>
+console.log("here");
+  <% @contacts.each do |contact| %>
+    $("#myModal").append('<%=contact["EmailAddresses"][0]["Name"] %>  ');
+
+    $("#myModal").append('<%= contact["EmailAddresses"][0]["Address"] %>');
+    $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + '<%=contact["EmailAddresses"][0]["Name"] %>' + "'>");
+    $("#myModal").append("<br>");
+  <% end %>
+  console.log("2");
+  $('#myModal').foundation('reveal','open');
+  $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
+
+  </script> 
+<% end %>

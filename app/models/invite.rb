@@ -26,6 +26,7 @@ class Invite
 	field :active, type: Boolean, default: true
 	field :deactivation_reason, type: String
 	field :owner, type: String
+	field :oauth_provider, type: String
 
 
 	validates :name, length: { maximum: 150 }
@@ -41,7 +42,9 @@ class Invite
 	end
 
 	def send_owner_invite(url)
-		InviteNotifier.send_owner_invite(url, self.owner, self).deliver
+		if self.owner
+			InviteNotifier.send_owner_invite(url, self.owner, self).deliver
+		end
 	end
 
 	def accept(email)

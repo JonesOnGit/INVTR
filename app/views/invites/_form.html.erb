@@ -34,6 +34,8 @@
 
  <div class="row">
    <div class="large-12 columns">
+     <a href="<%= @login_url %>" id="hotmailLogin">Sign in to outlook</a>
+
      <button onclick="auth();" data-reveal-id="myModal">Add Guests From Gmail Account</button>
      <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
@@ -58,6 +60,83 @@
    </div>
  </div>
 
+ <script>
+ $("#hotmailLogin").click(function() {
 
+   addCookie("invite_name", $("#invite_name").val())
+   addCookie("invite_address", $("#invite_address").val())
+   addCookie("invite_description", $("#invite_description").val())
+
+   addCookie("invite_start_date_1i", $("#invite_start_date_1i").val())
+   addCookie("invite_start_date_2i", $("#invite_start_date_2i").val())
+   addCookie("invite_start_date_3i", $("#invite_start_date_3i").val())
+   addCookie("invite_start_date_4i", $("#invite_start_date_4i").val())
+   addCookie("invite_start_date_5i", $("#invite_start_date_5i").val())
+
+   addCookie("invite_end_date_1i", $("#invite_end_date_1i").val())
+   addCookie("invite_end_date_2i", $("#invite_end_date_2i").val())
+   addCookie("invite_end_date_3i", $("#invite_end_date_3i").val())
+   addCookie("invite_end_date_4i", $("#invite_end_date_4i").val())
+   addCookie("invite_end_date_5i", $("#invite_end_date_5i").val())
+ });
+
+ function addCookie(cname, value) {
+  document.cookie= cname + "=" + value;
+
+ }
+ </script>
+<script>
+function delete_cookie( name ) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+$("#new_invite").submit(function() {
+  delete_cookie("invite_name");
+  delete_cookie("invite_address");
+  delete_cookie("invite_description");
+
+  delete_cookie("invite_start_date_1i");
+  delete_cookie("invite_start_date_2i");
+  delete_cookie("invite_start_date_3i");
+  delete_cookie("invite_start_date_4i");
+  delete_cookie("invite_start_date_5i");
+
+  delete_cookie("invite_end_date_1i");
+  delete_cookie("invite_end_date_2i");
+  delete_cookie("invite_end_date_3i");
+  delete_cookie("invite_end_date_4i");
+  delete_cookie("invite_end_date_5i");
+});
+
+</script>
+ <script>
+ $("#invite_name").val(getCookie("invite_name"));
+ $("#invite_address").val(getCookie("invite_address"));
+ $("#invite_description").val(getCookie("invite_description"));
+
+ $("#invite_start_date_1i").val(getCookie("invite_start_date_1i"));
+ $("#invite_start_date_2i").val(getCookie("invite_start_date_2i"));
+ $("#invite_start_date_3i").val(getCookie("invite_start_date_3i"));
+ $("#invite_start_date_4i").val(getCookie("invite_start_date_4i"));
+ $("#invite_start_date_5i").val(getCookie("invite_start_date_5i"));
+
+ $("#invite_end_date_1i").val(getCookie("invite_end_date_1i"));
+ $("#invite_end_date_2i").val(getCookie("invite_end_date_2i"));
+ $("#invite_end_date_3i").val(getCookie("invite_end_date_3i"));
+ $("#invite_end_date_4i").val(getCookie("invite_end_date_4i"));
+ $("#invite_end_date_5i").val(getCookie("invite_end_date_5i"));
+
+
+ function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+} 
+ </script>
 <% end %>
 
