@@ -17,8 +17,8 @@ module AuthHelper
 	                              :site => 'https://login.microsoftonline.com',
 	                              :authorize_url => '/common/oauth2/v2.0/authorize',
 	                              :token_url => '/common/oauth2/v2.0/token')
-	  u = "https://invtr-staging.herokuapp.com"
-	  login_url = client.auth_code.authorize_url(:redirect_uri => u, :scope => SCOPES.join(' '))
+	                              
+	  login_url = client.auth_code.authorize_url(:redirect_uri => authorize_url, :scope => SCOPES.join(' ')).gsub("herokuapp.com", "herokuapp.com%2Fauthorize")
 	end
 
 	def get_token_from_code(auth_code)
