@@ -39,14 +39,18 @@ class InvitesController < ApplicationController
 
 	def create
 		@invite = Invite.new(parse_params) 
+
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
-		@invite.oauth_provider = session[:oauth_provider]
+		@invite.oauth_provider = cookies[:oauth_provider]
 		# @invite.invited = cookies["invited"].split(/ /)
-		@invite.owner = session[:user_email] || cookie[:ownerEmail]
+		@invite.owner = session[:user_email] || cookies[:ownerEmail]
 		# binding.pry
 
 		if @invite.save
-			AddressCache.find_by(session_id: session.id).destroy
+			begin
+				AddressCache.find_by(session_id: session.id).destroy
+			rescue
+			end
 			session[:contacts] = nil
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 			@invite.send_invites(request.base_url)

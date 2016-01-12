@@ -71,6 +71,7 @@
       var emailsString = $("#emails").val();
       var emails = emailsString.replace(/,/g, '');
       document.cookie = "invited=" + emails;
+      document.cookie = "oauth_provider=none"
       document.cookie = "ownerEmail=" + $("#my-email").val();
       $('#myModal').foundation('reveal', 'close');
     });
@@ -82,6 +83,10 @@
 
  <script>
  $("#hotmailLogin").click(function() {
+   document.cookie = "oauth_provider=google";
+   });
+ $("#hotmailLogin").click(function() {
+   document.cookie = "oauth_provider=hotmail"
 
    addCookie("invite_name", $("#invite_name").val())
    addCookie("invite_address", $("#invite_address").val())

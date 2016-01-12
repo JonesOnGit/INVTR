@@ -8,6 +8,9 @@
       <p>Stats go here</p>
       <a href="<%= edit_invite_path(@invite) %>" class="button">Edit Button</a>
 
+    <% else %>
+      <p>Click here to see stats</p>
+      <a href="<%= edit_invite_path(@invite) %>" class="button">Edit Button</a>
     <% end %>
 
     <% if current_user %>
