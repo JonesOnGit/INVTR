@@ -1,4 +1,5 @@
 class InvitesController < ApplicationController
+	require 'digest' 
 	include AuthHelper
 	before_action :authenticate_user!, only: [:deactivate]
 
@@ -41,11 +42,13 @@ class InvitesController < ApplicationController
 		@invite = Invite.new(parse_params) 
 
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
-		@invite.oauth_provider = cookies[:oauth_provider]
+		@invite.oauth_provider = session[:oauth_provider] || cookies[:oauth_provider]
+		if cookies[:oauth_provider] == "none"
+			@invite.noauth_password = Digest::SHA1.hexdigest(@invite.to_s)[0..5]
+		end
 		# @invite.invited = cookies["invited"].split(/ /)
 		@invite.owner = session[:user_email] || cookies[:ownerEmail]
-		# binding.pry
-
+		binding.pry
 		if @invite.save
 			begin
 				AddressCache.find_by(session_id: session.id).destroy

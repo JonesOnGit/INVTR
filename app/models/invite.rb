@@ -27,6 +27,7 @@ class Invite
 	field :deactivation_reason, type: String
 	field :owner, type: String
 	field :oauth_provider, type: String
+	field :noauth_password, type: String
 
 
 	validates :name, length: { maximum: 150 }

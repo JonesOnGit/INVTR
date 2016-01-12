@@ -36,8 +36,10 @@
    <div class="large-12 columns">
      <a href="<%= @login_url %>" id="hotmailLogin">Sign in to outlook</a>
 
-      <a href="<%= @google_login %>" id="googleLogin">Sign in to google</a>
-
+     <button onclick="auth();" data-reveal-id="myModal2">Add Guests From Gmail Account</button>
+     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+     </div>
       <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
       <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
         <h2 id="modalTitle">INVTR</h2>
@@ -82,12 +84,13 @@
  </script>
 
  <script>
- $("#hotmailLogin").click(function() {
+ document.cookie = "oauth_provider=hotmail";
+
+ $("#myModal2").click(function() {
    document.cookie = "oauth_provider=google";
    });
  $("#hotmailLogin").click(function() {
-   document.cookie = "oauth_provider=hotmail"
-
+   document.cookie = "oauth_provider=hotmail";
    addCookie("invite_name", $("#invite_name").val())
    addCookie("invite_address", $("#invite_address").val())
    addCookie("invite_description", $("#invite_description").val())

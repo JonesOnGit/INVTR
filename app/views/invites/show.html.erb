@@ -9,8 +9,15 @@
       <a href="<%= edit_invite_path(@invite) %>" class="button">Edit Button</a>
 
     <% else %>
-      <p>Click here to see stats</p>
-      <a href="<%= edit_invite_path(@invite) %>" class="button">Edit Button</a>
+      <% if @invite.oauth_provider == "none" %>
+        None2
+      <% end %>
+      <% if @invite.oauth_provider == "google" %>
+        Google
+      <% end %>
+      <% if @invite.oauth_provider == "hotmail" %>
+        Hotmail
+      <% end %>
     <% end %>
 
     <% if current_user %>

@@ -12,6 +12,7 @@ class InviteNotifier < ActionMailer::Base
 		@current_url = current_url
 		@invite = invite
 		@email = email
+		@noauth_password = invite.noauth_password
 		mail( :to => @email,
 		:subject => @invite.name )
 	end

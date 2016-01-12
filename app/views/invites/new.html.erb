@@ -118,7 +118,7 @@ function fetchGoogleContacts(token) {
     var count = 0;
     for (var i in arr) {
       count++
-      if (count < 20) {
+      if (count > -1) {
         // console.log();
 
         // if name !== undefined
@@ -129,25 +129,25 @@ function fetchGoogleContacts(token) {
 
           // console.log(token);
           var uri = '/assets/blank-avatar.gif';
-          $("#myModal").append("<img onerror='if (this.src !=\"" + uri + "\") this.src = \"" + uri + "\"' id='" + i + "' alt='' src='" + src + "' height='50px' width='50px'>");
+          $("#myModal2").append("<img onerror='if (this.src !=\"" + uri + "\") this.src = \"" + uri + "\"' id='" + i + "' alt='' src='" + src + "' height='50px' width='50px'>");
           var elem = "#" + i
           // $(elem).error(function() {
           //   $("#myModal").append('<%= image_tag("blank-avatar", size: "50x50", alt: "blank-avatar.gif") %>')
           // })
           
 
-          $("#myModal").append("  " + nameArr[i] + "  ");
+          $("#myModal2").append("  " + nameArr[i] + "  ");
 
-          $("#myModal").append(nameObj[nameArr[i]]);
-          $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
-          $("#myModal").append("<br>");
+          $("#myModal2").append(nameObj[nameArr[i]]);
+          $("#myModal2").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
+          $("#myModal2").append("<br>");
         }
       }
 
 
  
     }
-    $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
+    $("#myModal2").append("<a class='button' id='continue-button'>Continue</a>");
 
     // console.log(data)
     document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
