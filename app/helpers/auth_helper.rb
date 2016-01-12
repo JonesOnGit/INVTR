@@ -21,7 +21,7 @@ module AuthHelper
 		  :client_id => '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
 		  :client_secret => 'qgYA7byhHjubHF4gkc7movGm',
 		  :scope => 'https://www.google.com/m8/feeds',
-		  :redirect_uri => 'http://localhost:8000/google_authorize'
+		  :redirect_uri => 'http://invtr-staging.herokuapp.com/google_authorize'
 		)
 		google_logins = client.authorization_uri
 	end
