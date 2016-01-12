@@ -25,9 +25,12 @@ body {
 }
 
 form {
-	margin-top: 5%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border-radius: 10px;
+	margin-top: 4%;
 	width: 40%;
-	background: gray;
+	background: #f2f2f2;
 }
 
 .medium-12.columns select {
