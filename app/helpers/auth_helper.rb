@@ -37,6 +37,16 @@ module AuthHelper
 	  login_url = client.auth_code.authorize_url(:redirect_uri => authorize_url, :scope => SCOPES.join(' '))
 	end
 
+	def session_url
+	  client = OAuth2::Client.new(CLIENT_ID,
+	                              CLIENT_SECRET,
+	                              :site => 'https://login.microsoftonline.com',
+	                              :authorize_url => '/common/oauth2/v2.0/authorize',
+	                              :token_url => '/common/oauth2/v2.0/token')
+	                              
+	  login_url = client.auth_code.authorize_url(:redirect_uri => authorize_url + "_session", :scope => SCOPES.join(' '))
+	end
+
 	def get_token_from_code(auth_code)
 	  client = OAuth2::Client.new(CLIENT_ID,
 	                              CLIENT_SECRET,
@@ -46,6 +56,18 @@ module AuthHelper
 
 	  token = client.auth_code.get_token(auth_code,
 	                                     :redirect_uri => authorize_url,
+	                                     :scope => SCOPES.join(' '))
+	end
+
+	def get_token_from_session_code(auth_code)
+	  client = OAuth2::Client.new(CLIENT_ID,
+	                              CLIENT_SECRET,
+	                              :site => 'https://login.microsoftonline.com',
+	                              :authorize_url => '/common/oauth2/v2.0/authorize',
+	                              :token_url => '/common/oauth2/v2.0/token')
+
+	  token = client.auth_code.get_token(auth_code,
+	                                     :redirect_uri => authorize_url + "_session",
 	                                     :scope => SCOPES.join(' '))
 	end
 

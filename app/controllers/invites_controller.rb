@@ -19,9 +19,9 @@ class InvitesController < ApplicationController
 	end 
 
 	def show
+		@session_url = session_url
 		@invite = Invite.find(params[:id])
 		@email = session[:user_email]
-		# binding.pry
 		if not current_user
 			unless @invite and @invite.active == true
 				flash[:notice] = "That invite does not exist or has been deactivated"
@@ -48,7 +48,7 @@ class InvitesController < ApplicationController
 		end
 		# @invite.invited = cookies["invited"].split(/ /)
 		@invite.owner = session[:user_email] || cookies[:ownerEmail]
-		binding.pry
+		# binding.pry
 		if @invite.save
 			begin
 				AddressCache.find_by(session_id: session.id).destroy

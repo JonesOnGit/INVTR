@@ -1,8 +1,30 @@
 class AuthController < ApplicationController
+	protect_from_forgery except: :noauth_session
 	include AuthHelper
 
 	def google_authorize
 		binding.pry
+	end
+
+	def google_session
+		@invite = Invite.find(params[:invite_id])
+		if @invite.owner = params[:email]
+			session[:user_email] = @invite.owner
+			render json: {}, status: 200
+		else
+			render json: {}, status: 401
+		end
+	end
+
+	def noauth_session
+		@invite = Invite.find(params[:invite_id])
+		if params[:password] == @invite.noauth_password
+			session[:user_email] = @invite.owner
+			redirect_to invite_path(@invite)
+		else
+			flash[:notice] = "Incorrect password"
+			redirect_to invite_path(@invite)
+		end
 	end
 
 	def gettoken
@@ -41,6 +63,16 @@ class AuthController < ApplicationController
 	     end
 
 	  redirect_to root_path show_modal: true
+	end
+
+	def getsession
+	  token = get_token_from_session_code params[:code]
+	  email = get_email_from_id_token token.params['id_token']
+	  session[:azure_access_token] = token.token
+	  bearer_token = session[:azure_access_token]
+	  session[:user_email] = email
+	  @invite = Invite.find_by(owner: email)
+	  redirect_to invite_path(@invite)
 	end
 end
 

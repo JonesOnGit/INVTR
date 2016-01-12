@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :users
 
   get 'authorize' => 'auth#gettoken'
+  get 'authorize_session' => 'auth#getsession'
+
   get 'google_authorize' => 'auth#google_authorize'
+  post 'authorize_noauth' => 'auth#noauth_session'
+  post 'authorize_google' => 'auth#google_session'
 
 
   namespace :admin do

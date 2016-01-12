@@ -10,13 +10,25 @@
 
     <% else %>
       <% if @invite.oauth_provider == "none" %>
-        None2
+        <a href="#" data-reveal-id="myModal">Click to enter Invite password</a>
+
+        <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Log into <%= @invite.name %></h2>
+           <form action="/authorize_noauth" method="post">
+            password:<br>
+            <input type="text" name="password"><br>
+            <input type="hidden" name="invite_id" value="<%= @invite.id %>">
+            <input type="submit" value="Submit">
+          </form> 
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
       <% end %>
       <% if @invite.oauth_provider == "google" %>
-        Google
+        <button onclick="auth();">Login With Gmail Account</button>
       <% end %>
       <% if @invite.oauth_provider == "hotmail" %>
-        Hotmail
+       <a href="<%= @session_url %>" id="hotmailLogin">Sign in to outlook</a>
+
       <% end %>
     <% end %>
 
@@ -54,3 +66,48 @@
     <% end %>
   </div>
 </div>
+<script src="https://apis.google.com/js/client.js"></script>
+
+<script>
+function auth() {
+  var config = {
+    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
+    'scope': 'https://www.google.com/m8/feeds'
+  };
+  gapi.auth.authorize(config, function() {
+    var token = gapi.auth.getToken();
+    // console.log(token)
+    token['g-oauth-window'] = null;
+    fetchGoogleContacts(token);
+  });
+}
+
+function fetchGoogleContacts(token) {
+  $.ajax({
+    url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
+    dataType: 'jsonp',
+    data: token
+  }).done(function(data) {
+    
+    console.log("here");
+    data["feed"]["id"]["$t"];
+    // run a post call here
+    $.post("/authorize_google",
+        {
+            email: data["feed"]["id"]["$t"],
+            invite_id: "<%= @invite.id %>"
+        }
+        ,
+        function(data, status){
+            console.log(status);
+            if (status == "success") {
+              location.reload();
+            } else {
+
+            }
+        })
+
+
+  });
+}
+</script>
