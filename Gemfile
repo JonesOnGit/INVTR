@@ -28,6 +28,8 @@ gem 'oauth2'
 
 gem 'faraday'
 
+gem 'signet'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

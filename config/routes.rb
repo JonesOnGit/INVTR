@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :users
 
   get 'authorize' => 'auth#gettoken'
+  get 'google_authorize' => 'auth#google_authorize'
+
 
   namespace :admin do
     root 'admin#index'

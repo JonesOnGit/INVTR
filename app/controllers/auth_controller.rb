@@ -1,6 +1,10 @@
 class AuthController < ApplicationController
 	include AuthHelper
 
+	def google_authorize
+		binding.pry
+	end
+
 	def gettoken
 	  token = get_token_from_code params[:code]
 	  email = get_email_from_id_token token.params['id_token']
