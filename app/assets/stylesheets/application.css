@@ -28,3 +28,8 @@ form {
 	width: 40%;
 	background: gray;
 }
+
+.medium-12.columns select {
+    display: inline-block;
+    width:12%;
+  }
