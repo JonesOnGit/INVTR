@@ -21,6 +21,9 @@ class InvitesController < ApplicationController
 	def show
 		@session_url = session_url
 		@invite = Invite.find(params[:id])
+		unless session[:user_email] == @invite.owner
+			session.clear
+		end
 		@email = session[:user_email]
 		if not current_user
 			unless @invite and @invite.active == true
