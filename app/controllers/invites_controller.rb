@@ -42,7 +42,9 @@ class InvitesController < ApplicationController
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 		@invite.oauth_provider = session[:oauth_provider]
 		# @invite.invited = cookies["invited"].split(/ /)
-		@invite.owner = session[:user_email];
+		@invite.owner = session[:user_email] || cookie[:ownerEmail]
+		# binding.pry
+
 		if @invite.save
 			AddressCache.find_by(session_id: session.id).destroy
 			session[:contacts] = nil

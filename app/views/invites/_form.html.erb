@@ -38,6 +38,14 @@
 
       <a href="<%= @google_login %>" id="googleLogin">Sign in to google</a>
 
+      <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
+      <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">INVTR</h2>
+        Emails: <input type="text" name="emails" id="emails"><br>
+        My Email: <input type="text" name="myEmail" id="my-email"><br>
+        <a class='button' id='send-emails-button'>Finish</a>
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+      </div>
    </div>
  </div>   
 
@@ -57,6 +65,20 @@
      By clicking "Submit" you are agreeing to our <a href="/terms-of-service">terms of service</a> and our <a href="/privacy-policy">privacy policy</a>.
    </div>
  </div>
+
+ <script>
+    $("#send-emails-button").click(function() {
+      var emailsString = $("#emails").val();
+      var emails = emailsString.replace(/,/g, '');
+      document.cookie = "invited=" + emails;
+      document.cookie = "ownerEmail=" + $("#my-email").val();
+      $('#myModal').foundation('reveal', 'close');
+    });
+ </script>
+
+ <script>
+
+ </script>
 
  <script>
  $("#hotmailLogin").click(function() {
