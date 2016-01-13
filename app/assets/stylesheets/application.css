@@ -102,9 +102,15 @@ moz-border-radius:100%
 #emails {
     height: 120px;
     width: 96%;
+    border-radius:10px;
+    moz-border-radius:10px;
+    border: solid;
 }
 
 #my-email {
+    border-radius:10px;
+    moz-border-radius:10px;
     width: 25%;
     margin-left: 2%;
+ 
 }
