@@ -1,4 +1,8 @@
 <%= simple_form_for invite, url: url do |f| %>
+<div class="medium-12 columns">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>  
+</div>
  <div class="margin-top row">
    <div class="medium-12 columns">
      <%= f.input :name, label: "", placeholder: "Event name" %>
