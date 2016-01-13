@@ -73,9 +73,27 @@ form {
 #myModal2-table {
     border: none !important;
 }
+input[type=checkbox] {
+display:none;
+}
+input[type=checkbox] + label
+{
+background: #999;
+height: 40px;
+width: 40px;
+display:inline-block;
+padding: 0 0 0 0px;
+border-radius:100%;
+moz-border-radius:100% 
+}
+input[type=checkbox]:checked + label
+{
+background: #0080FF;
+height: 40px;
+width: 40px;
+display:inline-block;
+padding: 0 0 0 0px;
+border-radius: 100%;
+moz-border-radius:100%;
 
-input[type="checkbox"] {
-    width: 20px !important;
-    height: 20px !important;
-    border-radius: 100% !important;
 }
