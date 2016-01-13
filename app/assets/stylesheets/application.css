@@ -52,3 +52,6 @@ form {
       position : fixed;
   }
 
+.invite-image {
+    max-height: 200px;
+}
