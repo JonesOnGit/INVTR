@@ -39,15 +39,14 @@
      <button onclick="auth();" data-reveal-id="myModal2">Add Guests From Gmail Account</button>
      <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+     <table id="myModal2-table">
+
+       <tbody id="myModal2-table-body">
+
+       </tbody>
+     </table>
      </div>
-      <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
-      <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">INVTR</h2>
-        Emails: <input type="text" name="emails" id="emails"><br>
-        My Email: <input type="text" name="myEmail" id="my-email"><br>
-        <a class='button' id='send-emails-button'>Finish</a>
-        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-      </div>
+
    </div>
  </div>   
 
@@ -196,3 +195,17 @@ $("#new_invite").submit(function() {
 </script>
 <% end %>
 
+<a href="#" class="button" id="choose-contacts-button" data-reveal-id="myModal">Choose Contacts</a>
+<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">INVTR</h2>
+      <a href="<%= @login_url %>" id="hotmailLogin">Sign in to outlook</a>
+
+      <button onclick="auth();" data-reveal-id="myModal2">Add Guests From Gmail Account</button>
+
+
+  <br>
+  Emails: <input type="text" name="emails" id="emails"><br>
+  My Email: <input type="text" name="myEmail" id="my-email"><br>
+  <a class='button' id='send-emails-button'>Finish</a>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>

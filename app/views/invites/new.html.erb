@@ -134,13 +134,23 @@ function fetchGoogleContacts(token) {
           // $(elem).error(function() {
           //   $("#myModal").append('<%= image_tag("blank-avatar", size: "50x50", alt: "blank-avatar.gif") %>')
           // })
-          
+$("#myModal2-table-body").append("<tr>");
 
-          $("#myModal2").append("  " + nameArr[i] + "  ");
+          $("#myModal2-table-body").append("<td>");
 
-          $("#myModal2").append(nameObj[nameArr[i]]);
-          $("#myModal2").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
-          $("#myModal2").append("<br>");
+$("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'>");
+$("#myModal2-table-body").append("</td>");
+$("#myModal2-table-body").append("<td>");
+
+          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<td>");
+
+          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+        
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<tr>");
+
         }
       }
 
@@ -198,11 +208,13 @@ if (getURLParameter("show_modal") != null) {
 
 console.log("here");
   <% @contacts.each do |contact| %>
+  $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + '<%=contact["EmailAddresses"][0]["Name"] %>' + "'>");
     $("#myModal").append('<%=contact["EmailAddresses"][0]["Name"] %>  ');
 
     $("#myModal").append('<%= contact["EmailAddresses"][0]["Address"] %>');
-    $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + '<%=contact["EmailAddresses"][0]["Name"] %>' + "'>");
+    
     $("#myModal").append("<br>");
+
   <% end %>
   console.log("2");
   $('#myModal').foundation('reveal','open');
