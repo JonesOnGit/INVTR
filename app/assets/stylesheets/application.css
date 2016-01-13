@@ -48,9 +48,12 @@ form {
     width:12%;
   }
 
-  .reveal-modal{
-      position : fixed;
-  }
+.reveal-modal {
+    overflow-y: auto;
+    max-height: 600px;
+    border-radius: 10px;
+}
+
 
 .invite-image {
     max-height: 200px;
