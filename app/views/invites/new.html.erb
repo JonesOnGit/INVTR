@@ -134,17 +134,19 @@ function fetchGoogleContacts(token) {
           // $(elem).error(function() {
           //   $("#myModal").append('<%= image_tag("blank-avatar", size: "50x50", alt: "blank-avatar.gif") %>')
           // })
-$("#myModal2-table-body").append("<tr>");
+// first tr
+// nothihng, name
+// second tr, checkbox, email
+          $("#myModal2-table-body").append("<tr>");
 
           $("#myModal2-table-body").append("<td>");
 
-$("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
-$("#myModal2-table-body").append("</td>");
-$("#myModal2-table-body").append("<td>");
-
-          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
           $("#myModal2-table-body").append("</td>");
           $("#myModal2-table-body").append("<td>");
+
+          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+          $("#myModal2-table-body").append("<br/>");
 
           $("#myModal2-table-body").append(nameObj[nameArr[i]]);
         
