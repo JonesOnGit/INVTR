@@ -28,19 +28,34 @@
 
 
  <div class="row">
-   <div class="large-12 columns">
-
      <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-     <table id="myModal2-table">
+     <div id="no-overflow">
+         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+          <div class="large-4 columns">
+            Gmail <%= image_tag("gmail", size: "120x120") %>
+          </div>
 
-       <tbody id="myModal2-table-body">
+          <div class="large-8 columns">
+            <input type="text" name="autocorrect" id="autocorrect" placeholder="Search"><br>
+          </div>
 
-       </tbody>
-     </table>
-     </div>
+          <div class="large-12 columns" id="contacts-table">
+           <table id="myModal2-table">
+             <tbody id="myModal2-table-body">
+             </tbody>
+           </table>
+          </div>
+      </div>
+        <div class="large-9 columns">
+          <p>We believe in privacy. We won't spam your contacts.</p>
+        </div>
 
-   </div>
+        <div class="large-3 columns">
+          <a class='button' id='continue-button'>Continue</a>
+        </div>
+
+    </div>
+
  </div>   
 
  <div class="margin-top row">
@@ -195,7 +210,6 @@ $("#new_invite").submit(function() {
 
       <a onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %>
 </a>
-
 
   <br><br>
   Or type each one in individually<br> 

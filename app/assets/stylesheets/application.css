@@ -49,8 +49,7 @@ form {
   }
 
 .reveal-modal {
-    overflow-y: auto;
-    max-height: 600px;
+    overflow-y: none;
     border-radius: 10px;
 }
 
@@ -67,8 +66,9 @@ form {
 }
 
 #myModal2, .center {
-    text-align: center;
+    width: 50%;
 }
+
 
 #myModal2-table {
     border: none !important;
@@ -139,4 +139,22 @@ abbr {
 
 label.file_optional {
     display: none;
+}
+
+.inline {
+    display:inline;
+}
+
+#autocorrect {
+    margin-top: 10%;
+}
+
+#contacts-table {
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+#no-overflow {
+    overflow-y: none!important; 
+    overflow-x: none!important;
 }

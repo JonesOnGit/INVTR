@@ -119,24 +119,15 @@ function fetchGoogleContacts(token) {
     for (var i in arr) {
       count++
       if (count > -1) {
-        // console.log();
-
-        // if name !== undefined
         if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
 
           var imageUrl = nameObj[nameObj[nameArr[i]]];
           var src = imageUrl + "?access_token=" + token["access_token"]
 
-          // console.log(token);
           var uri = '/assets/blank-avatar.gif';
-          // $("#myModal2").append("<img onerror='if (this.src !=\"" + uri + "\") this.src = \"" + uri + "\"' id='" + i + "' alt='' src='" + src + "' height='50px' width='50px'>");
+ 
           var elem = "#" + i
-          // $(elem).error(function() {
-          //   $("#myModal").append('<%= image_tag("blank-avatar", size: "50x50", alt: "blank-avatar.gif") %>')
-          // })
-// first tr
-// nothihng, name
-// second tr, checkbox, email
+
           $("#myModal2-table-body").append("<tr>");
 
           $("#myModal2-table-body").append("<td>");
@@ -159,13 +150,12 @@ function fetchGoogleContacts(token) {
 
  
     }
-    $("#myModal2").append("<a class='button' id='continue-button'>Continue</a>");
 
     // console.log(data)
     document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
     // console.log(document.cookie)
 
-    
+
   });
 }
 
