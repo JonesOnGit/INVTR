@@ -64,12 +64,8 @@
 
  <div class="margin-top row">
    <div class="medium-12 columns">
-       <!-- <label>Avatar</label> -->
-       <p class="file-upload">            
-           <input type="file" class="file-input">Select Event Image
-       </p>
 
-     <!-- <%= f.input :avatar, as: :file %> -->
+     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
    </div>
  </div>
 
@@ -231,4 +227,6 @@ $("#new_invite").submit(function() {
       document.cookie = "ownerEmail=" + $("#my-email").val();
       $('#myModal').foundation('reveal', 'close');
     });
+
+    $("#invite_avatar").hide();
  </script>

@@ -193,3 +193,7 @@ label.file_optional {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+#invite_avatar {
+    diplay:none;
+}
