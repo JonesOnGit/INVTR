@@ -75,16 +75,7 @@
    </div>
  </div>
 
- <script>
-    $("#send-emails-button").click(function() {
-      var emailsString = $("#emails").val();
-      var emails = emailsString.replace(/,/g, '');
-      document.cookie = "invited=" + emails;
-      document.cookie = "oauth_provider=none"
-      document.cookie = "ownerEmail=" + $("#my-email").val();
-      $('#myModal').foundation('reveal', 'close');
-    });
- </script>
+
 
  <script>
 
@@ -220,3 +211,15 @@ $("#new_invite").submit(function() {
   <p>We believe in privacy. We won't spam your contacts.</p>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
+
+ <script>
+    $("#send-emails-button").click(function() {
+      
+      var emailsString = $("#emails").val();
+      var emails = emailsString.replace(/,/g, '');
+      document.cookie = "invited=" + emails;
+      document.cookie = "oauth_provider=none"
+      document.cookie = "ownerEmail=" + $("#my-email").val();
+      $('#myModal').foundation('reveal', 'close');
+    });
+ </script>
