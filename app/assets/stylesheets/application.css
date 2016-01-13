@@ -33,7 +33,22 @@ form {
 	background: #f2f2f2;
 }
 
+.invite_details {
+   margin-left: -15%;
+   padding-top: 1%;
+   padding-bottom: 1%;
+   border-radius: 10px;
+   margin-top: 4%;
+   width: 40%;
+   background: #f2f2f2; 
+}
+
 .medium-12.columns select {
     display: inline-block;
     width:12%;
   }
+
+  .reveal-modal{
+      position : fixed;
+  }
+
