@@ -107,10 +107,36 @@ moz-border-radius:100%
     border: solid;
 }
 
+#invite_description {
+    height: 120px !important;
+    width: 96%;
+    border-radius:10px;
+    moz-border-radius:10px;
+}
+
+#invite_address, #invite_name{
+   width: 96%;
+   border-radius:10px;
+   moz-border-radius:10px; 
+}
+
+
 #my-email {
     border-radius:10px;
     moz-border-radius:10px;
     width: 25%;
     margin-left: 2%;
- 
+}
+
+select {
+   border-radius:10px;
+   moz-border-radius:10px; 
+}
+
+abbr {
+    display: none;
+}
+
+label.file_optional {
+    display: none;
 }
