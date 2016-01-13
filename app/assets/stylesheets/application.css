@@ -169,7 +169,7 @@ label.file_optional {
 .file-upload {
     position: relative;
     overflow: hidden;
-    margin: 0;
+    margin: 15px 0 25px 3px!Important;
     background: transparent;
     color: #aaa;
     text-decoration: underline;
