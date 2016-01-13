@@ -190,15 +190,19 @@ $("#new_invite").submit(function() {
 
 <a href="#" class="button" id="choose-contacts-button" data-reveal-id="myModal">Choose Contacts</a>
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">INVTR</h2>
-      <a href="<%= @login_url %>" id="hotmailLogin">Sign in to outlook</a>
+  <p>Choose your service provider (easiest)</p>
+      <a href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
 
-      <button onclick="auth();" data-reveal-id="myModal2">Add Guests From Gmail Account</button>
+      <a onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %>
+</a>
 
 
-  <br>
-  Emails: <input type="text" name="emails" id="emails"><br>
-  My Email: <input type="text" name="myEmail" id="my-email"><br>
+  <br><br>
+  Or type each one in individually<br> 
+  <div class="center"><input type="textarea" name="emails" id="emails"></div>
+  What email should I send your notification to?<br>
+   <div class="center"><input type="text" name="myEmail" id="my-email"></div>
   <a class='button' id='send-emails-button'>Finish</a>
+  <p>We believe in privacy. We won't spam your contacts.</p>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

@@ -141,7 +141,7 @@ function fetchGoogleContacts(token) {
 
           $("#myModal2-table-body").append("<td>");
 
-          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
           $("#myModal2-table-body").append("</td>");
           $("#myModal2-table-body").append("<td>");
 
@@ -164,6 +164,20 @@ function fetchGoogleContacts(token) {
     // console.log(data)
     document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
     // console.log(document.cookie)
+
+    var container = $('#myModal2-table-body'),
+        scrollTo = $('#Bitovi').parent();
+        console.log(scrollTo)
+        setTimeout(
+          function() 
+          {
+            //do something special
+            $('#myModal2').animate({scrollTop: scrollTo.offset().top});
+            // window.scrollTo(0, $("#Bitovi").offset().top);
+            console.log("Done");
+          }, 2000);
+
+    console.log("scroll");
   });
 }
 
