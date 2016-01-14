@@ -5,8 +5,7 @@
     <%= render 'details', invite: @invite %>
 
     <% if @invite.owner == @email %>
-      <p>Stats go here</p>
-
+      <a class="button" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
     <% else %>
       <% if @invite.oauth_provider == "none" %>
         <a href="#" data-reveal-id="myModal">Click to enter Invite password</a>
@@ -65,6 +64,37 @@
     <% end %>
   </div>
 </div>
+
+<div class="row">
+    <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+    <div id="no-overflow">
+         <div class="large-3 columns">
+           Gmail <%= image_tag("gmail", size: "60x60") %>
+         </div>
+
+         <div class="large-9 columns">
+           <input type="text" name="autocorrect" id="autocorrect" placeholder="Search"><br>
+         </div>
+
+         <div class="large-12 columns" id="contacts-table">
+          <table id="myModal2-table">
+            <tbody id="myModal2-table-body">
+            </tbody>
+          </table>
+         </div>
+     </div>
+
+       <div class="large-9 columns">
+         <p>We believe in privacy. We won't spam your contacts.</p>
+       </div>
+
+       <div class="large-3 columns">
+         <a class='button' id='continue-button'>Done</a>
+       </div>
+   </div>
+</div>
+
 <script src="https://apis.google.com/js/client.js"></script>
 
 <script>
@@ -106,5 +136,36 @@ function fetchGoogleContacts(token) {
             }
         })
   });
+}
+</script>
+
+<script>
+function loadContacts() {
+  console.log('<%= @invite.invited %>'); 
+  var invited = JSON.parse('<%= @invite.invited.to_json %>'.replace(/&quot;/g,'"'));
+  var accepted = JSON.parse('<%= @invite.accepted.to_json %>'.replace(/&quot;/g,'"'));
+  for (var i = 0; i < invited.length; i++) {
+    console.log(invited[i]);
+    $("#myModal2-table-body").append("<tr>");
+
+    $("#myModal2-table-body").append("<td>");
+
+    if ($.inArray(invited[i], accepted)) {
+      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + invited[i] + "'' id='" + invited[i] + "' disabled /><label for='" + invited[i] + "'></label>");
+    } else {
+      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + invited[i] + "'' id='" + invited[i] + "' disabled checked/><label for='" + invited[i] + "'></label>");
+    }
+    
+    $("#myModal2-table-body").append("</td>");
+    $("#myModal2-table-body").append("<td>");
+
+    $("#myModal2-table-body").append("  <b>" + invited[i] + "<b>  ");
+    $("#myModal2-table-body").append("<br/>");
+
+    $("#myModal2-table-body").append(invited[i]);
+    
+    $("#myModal2-table-body").append("</td>");
+    $("#myModal2-table-body").append("<tr>");
+  }
 }
 </script>

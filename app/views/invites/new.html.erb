@@ -169,12 +169,26 @@ $('body').delegate('#continue-button', 'click', function() {
     document.cookie = newCookie;
 });
 
+var count = 0;
 $('body').delegate('.emailCheckbox', 'click', function() {
     // add to cookie
     if (invited.indexOf(this.name) == -1) {
       invited.push(this.name)
     }
-    // console.log(invited);
+    var checked = $('.emailCheckbox:checked').length
+    console.log(checked==1);
+    if (checked == 1) {
+      console.log("singular")
+      $("#continue-button").text("Send to 1 invite");
+    } else if (checked == 0) {
+      console.log("none")
+
+      $("#continue-button").text("Send");
+    } else {
+      console.log("plural")
+
+      $("#continue-button").text("Send to " + checked + " invites");
+    }     
 });
 
 $.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8c55-475d-b23b-e3c79c4cdef0", "scope": "https://outlook.office.com/Contacts.Read"}, function( data ) {
