@@ -205,6 +205,10 @@ label.file_optional {
     .invite_details {
         margin-left: 0%;
     }
+    #myModal2 {
+        width: 100%;
+    }
+
 
     .medium-12.columns select {
     font-size: 10px;
