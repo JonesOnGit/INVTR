@@ -97,7 +97,7 @@ input[type=checkbox]:checked + label {
     padding: 0 0 0 0px;
     border-radius: 100%;
     moz-border-radius: 100%;
-    background: url('/assets/circle-blue-small.png'); left top no-repeat;
+    background: url('/assets/circle-blue-small.png') left top no-repeat;
 
 }
 
