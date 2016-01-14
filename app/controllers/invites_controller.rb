@@ -54,6 +54,7 @@ class InvitesController < ApplicationController
 		# binding.pry
 		# binding.pry
 		if @invite.save
+			session[:user_email] = @invite.owner
 			begin
 				AddressCache.find_by(session_id: session.id).destroy
 			rescue

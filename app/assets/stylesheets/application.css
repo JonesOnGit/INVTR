@@ -64,7 +64,7 @@ form {
 }
 
 #choose-contacts-button {
-    margin-left: 25%;
+    margin-left: 20%;
 }
 
 #myModal2,
@@ -91,13 +91,14 @@ input[type=checkbox] + label {
 }
 
 input[type=checkbox]:checked + label {
-    background: #0080FF;
-    height: 16px;
-    width: 16px;
+    height: 200px;
+    width: 200px;
     display: inline-block;
     padding: 0 0 0 0px;
     border-radius: 100%;
-    moz-border-radius: 100%
+    moz-border-radius: 100%;
+    background: url('/assets/circle-blue.png'); left top no-repeat;
+
 }
 
 #emails {
