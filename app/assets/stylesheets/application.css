@@ -206,7 +206,7 @@ label.file_optional {
     .medium-12.columns select {
     font-size: 10px;
     }
-    #invite_start_date_2i, .#invite_end_date_2i {
+    #invite_start_date_2i, #invite_end_date_2i {
         width: 20%!important;
     }
     .date-range {
