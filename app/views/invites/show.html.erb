@@ -6,6 +6,8 @@
 
     <% if @invite.owner == @email %>
       <a class="button" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
+      <%= link_to 'Edit', edit_invite_path(@invite) %>
+
     <% else %>
       <% if @invite.oauth_provider == "none" %>
         <a href="#" data-reveal-id="myModal">Click to enter Invite password</a>
