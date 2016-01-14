@@ -52,7 +52,7 @@ class InvitesController < ApplicationController
 		# @invite.invited = cookies["invited"].split(/ /)
 		@invite.owner = session[:user_email] || cookies[:ownerEmail]
 		# binding.pry
-		binding.pry
+		# binding.pry
 		if @invite.save
 			begin
 				AddressCache.find_by(session_id: session.id).destroy
