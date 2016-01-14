@@ -91,8 +91,8 @@ input[type=checkbox] + label {
 }
 
 input[type=checkbox]:checked + label {
-    height: 200px;
-    width: 200px;
+    height: 16;
+    width: 16;
     display: inline-block;
     padding: 0 0 0 0px;
     border-radius: 100%;
