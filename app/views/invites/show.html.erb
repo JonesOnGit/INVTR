@@ -67,15 +67,15 @@
 
 <div class="row">
     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <ul class="tabs" data-tab>
+      <li class="tab-title active" id="accepted-tab"><a href="#panel1">Going</a></li>
+      <li class="tab-title" id="declined-tab"><a href="#panel2">Can't Go</a></li>
+      <li class="tab-title" id="invited-tab"><a href="#panel3">Invited</a></li>
+    </ul>
+    <br>
+
 
     <div id="no-overflow">
-         <div class="large-3 columns">
-           Gmail <%= image_tag("gmail", size: "60x60") %>
-         </div>
-
-         <div class="large-9 columns">
-           <input type="text" name="autocorrect" id="autocorrect" placeholder="Search"><br>
-         </div>
 
          <div class="large-12 columns" id="contacts-table">
           <table id="myModal2-table">
@@ -85,12 +85,9 @@
          </div>
      </div>
 
-       <div class="large-9 columns">
-         <p>We believe in privacy. We won't spam your contacts.</p>
-       </div>
 
-       <div class="large-3 columns">
-         <a class='button' id='continue-button'>Done</a>
+       <div class="large-12 columns">
+         <a class='button' id='continue-button'>Message Guests</a>
        </div>
    </div>
 </div>
@@ -140,32 +137,56 @@ function fetchGoogleContacts(token) {
 </script>
 
 <script>
-function loadContacts() {
+$(function() {
+
+loadContacts("accepted-tab");
+$(".tab-title").click(function() {
+  loadContacts(this.id);
+});
+
+function loadContacts(tab) {
+
   console.log('<%= @invite.invited %>'); 
   var invited = JSON.parse('<%= @invite.invited.to_json %>'.replace(/&quot;/g,'"'));
   var accepted = JSON.parse('<%= @invite.accepted.to_json %>'.replace(/&quot;/g,'"'));
-  for (var i = 0; i < invited.length; i++) {
-    console.log(invited[i]);
+  var declined = JSON.parse('<%= @invite.declined.to_json %>'.replace(/&quot;/g,'"'));
+  var guests = [];
+  if (tab == "invited-tab") {
+    guests = invited;
+  } else if (tab == "accepted-tab") {
+    guests = accepted;
+  } else if (tab == "declined-tab") {
+    guests = declined;
+  }
+
+  if (guests === null) {
+    guests = [];
+  }
+  $("#myModal2-table-body").empty();
+  
+  for (var i = 0; i < guests.length; i++) {
+
     $("#myModal2-table-body").append("<tr>");
 
     $("#myModal2-table-body").append("<td>");
 
-    if ($.inArray(invited[i], accepted)) {
-      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + invited[i] + "'' id='" + invited[i] + "' disabled /><label for='" + invited[i] + "'></label>");
+    if ($.inArray(guests[i], accepted)) {
+      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + guests[i] + "'' id='" + guests[i] + "' disabled /><label for='" + guests[i] + "'></label>");
     } else {
-      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + invited[i] + "'' id='" + invited[i] + "' disabled checked/><label for='" + invited[i] + "'></label>");
+      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + guests[i] + "'' id='" + guests[i] + "' disabled checked/><label for='" + guests[i] + "'></label>");
     }
     
     $("#myModal2-table-body").append("</td>");
     $("#myModal2-table-body").append("<td>");
 
-    $("#myModal2-table-body").append("  <b>" + invited[i] + "<b>  ");
+    $("#myModal2-table-body").append("  <b>" + guests[i] + "<b>  ");
     $("#myModal2-table-body").append("<br/>");
 
-    $("#myModal2-table-body").append(invited[i]);
+    $("#myModal2-table-body").append(guests[i]);
     
     $("#myModal2-table-body").append("</td>");
     $("#myModal2-table-body").append("<tr>");
   }
 }
+});
 </script>
