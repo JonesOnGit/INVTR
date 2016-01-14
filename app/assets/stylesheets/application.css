@@ -75,7 +75,7 @@ form {
     border: none !important;
 }
 
-input[type=checkbox] {
+input[type=checkbox].emailCheckbox {
     display: none;
 }
 

@@ -33,7 +33,7 @@ class Invite
 	validates :name, length: { maximum: 150 }
 	validates :description, length: { maximum: 1000 }
 
-	validates_presence_of :name, :start_date, :end_date, :description, :address
+	validates_presence_of :name, :start_date, :end_date, :description, :address, :allow_others
 
 	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	def send_invites(url)
