@@ -199,9 +199,10 @@ label.file_optional {
 }
 
 @media only screen and (max-width:500px) {
-    form {
+    form, .invite_details {
         width: 100%;
     }
+
     .medium-12.columns select {
     font-size: 10px;
     }
