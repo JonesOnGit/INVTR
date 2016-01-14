@@ -16,4 +16,11 @@ class InviteNotifier < ActionMailer::Base
 		mail( :to => @email,
 		:subject => @invite.name )
 	end
+
+	def send_message(to, message, invite)
+		@invite = invite
+		@message = message
+		mail(:to => to,
+			:subject => @invite.name)
+	end
 end

@@ -73,18 +73,24 @@ class InvitesController < ApplicationController
 
 	def update
 		@invite = Invite.find(params[:id])
-		unless @invite.owner == session[:user_email]
-			flash[:notice] = "You do not have permission to edit this Invitation."
-			redirect_to root_path
-		end
-		if  @invite.update_attributes(parse_params)
-			Log.create(type: "Invite", action: "update", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 
-		    flash[:notice] = "Invite #{@invite.name} successfully updated."
-		    redirect_to invite_path(@invite)
-		else
-		    flash[:alert] = "Invite #{@invite.name} not updated."
-		    redirect_to new_invite_path(@invite)
+		if params[:invite][:messages]
+			@invite.send_message(params[:message_group], params[:invite][:messages], @invite)
+			render json: {message: params[:invite][:messages], to: params['message_group']}, status: 200
+		else 
+			unless @invite.owner == session[:user_email]
+				flash[:notice] = "You do not have permission to edit this Invitation."
+				redirect_to root_path
+			end
+			if  @invite.update_attributes(parse_params)
+				Log.create(type: "Invite", action: "update", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
+
+			    flash[:notice] = "Invite #{@invite.name} successfully updated."
+			    redirect_to invite_path(@invite)
+			else
+			    flash[:alert] = "Invite #{@invite.name} not updated."
+			    redirect_to new_invite_path(@invite)
+			end
 		end
 	end
 
@@ -139,7 +145,7 @@ class InvitesController < ApplicationController
     	end
 
 	    def invite_params
-	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address,:avatar)
+	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address,:avatar,:messages)
 	    end
 
 	    def parse_params

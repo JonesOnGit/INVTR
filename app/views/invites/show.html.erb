@@ -87,11 +87,15 @@
 
 
        <div class="large-12 columns">
-         <a class='button' id='continue-button'>Message Guests</a>
+         <a class='button' id='continue-button' data-reveal-id="messages-modal">Message Guests</a>
        </div>
    </div>
 </div>
 
+ <div id="messages-modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <%= render 'message_form', invite: @invite, url: @invite.id.present? ? invite_path(@invite.id) : invites_path %>
+
+</div>
 <script src="https://apis.google.com/js/client.js"></script>
 
 <script>

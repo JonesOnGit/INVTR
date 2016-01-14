@@ -1,0 +1,40 @@
+<%= simple_form_for invite, url: url do |f| %>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :messages, label: "", placeholder: "Write message here" %>
+   </div>
+ </div>
+
+ <input type="radio" name="message_group" value="attending">only attending guests
+ <input type="radio" name="message_group" value="no-reply">those who haven't replied
+ <input type="radio" name="message_group" value="all">all
+
+ <div class="row">
+   <div class="large-12 columns">
+     <%= f.button :submit, value: "Submit" %>
+   </div>
+ </div>
+ <% end %>
+
+<script>
+
+$( "form" ).submit(function( event ) {
+  event.preventDefault();
+  console.log($('.edit_invite').serialize())
+  var formData = $('.edit_invite').serialize()
+  console.log(this);
+  $.ajax({
+    type: "PATCH",
+    url: this.action,
+    data: formData,
+    success: success,
+    dataType: "json"
+  });
+});
+
+function success(data) {
+	console.log(data);
+}
+
+
+</script>

@@ -28,6 +28,7 @@ class Invite
 	field :owner, type: String
 	field :oauth_provider, type: String
 	field :noauth_password, type: String
+	field :messages, type: String
 
 
 	validates :name, length: { maximum: 150 }
@@ -45,6 +46,23 @@ class Invite
 	def send_owner_invite(url)
 		if self.owner
 			InviteNotifier.send_owner_invite(url, self.owner, self).deliver
+		end
+	end
+
+
+	def send_message(to, message, invite)
+		guests = nil
+		if to == "attending"
+			guests = invite.accepted
+		end
+		if to == "no-reply"
+			guests = invite.invited - invite.accepted - invite.declined
+		end
+		if to == "all"
+			guests = invite.invited
+		end
+		guests.each do |guest|
+			InviteNotifier.send_message(guest, message, invite).deliver
 		end
 	end
 
