@@ -26,7 +26,6 @@ body {
 }
 
 form {
-    padding-top: 4%;
     padding-bottom: 1%;
     border-radius: 10px;
     margin-top: 2%;
@@ -213,4 +212,9 @@ label.file_optional {
         padding-left: .25rem;
         padding-right: .25rem;
     }
+}
+
+#image-section {
+    background:   #bfbfbf;
+    height: 250px;
 }

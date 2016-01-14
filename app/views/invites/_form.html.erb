@@ -1,4 +1,10 @@
 <%= simple_form_for invite, url: url do |f| %>
+
+ <div class="row">
+   <div class="large-12 columns" id="image-section">
+
+   </div>
+ </div>
 <div class="medium-12 columns">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>  
@@ -68,19 +74,17 @@
      <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
    </div>
  </div>
-
-
- <div class="row">
+<!-- <div class="row">
    <div class="large-12 columns">
-     By clicking "Submit" you are agreeing to our <a href="/terms-of-service">terms of service</a> and our <a href="/privacy-policy">privacy policy</a>.
+     <small>By clicking "Submit" you are agreeing to our <a href="/terms-of-service">terms of service</a> and our <a href="/privacy-policy">privacy policy</a>.</small>
    </div>
  </div>
 
  <div class="row">
    <div class="large-12 columns">
-     <%= f.button :submit, value: "Submit" %>
+     <#%= f.button :submit, value: "Submit" %>
    </div>
- </div>
+ </div> -->
 
 
 
