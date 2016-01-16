@@ -1,42 +1,5 @@
 <!-- NEW INVITE VIEW -->
 
-
-    <style>
-
-#pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 300px;
-}
-
-#pac-input:focus {
-  border-color: #4d90fe;
-}
-
-.pac-container {
-  font-family: Roboto;
-}
-
-#type-selector {
-  color: #fff;
-  background-color: #4d90fe;
-  padding: 5px 11px 0px 11px;
-}
-
-#type-selector label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-    </style>
-
-
     <script>
 function initMap() {
 
@@ -138,7 +101,7 @@ function populateContacts(data) {
 
         $("#myModal2-table-body").append("<td>");
 
-        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
         $("#myModal2-table-body").append("</td>");
         $("#myModal2-table-body").append("<td>");
 
@@ -204,7 +167,7 @@ function populateSearch(d, guests) {
 
         $("#myModal2-table-body").append("<td>");
 
-        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+         $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
         $("#myModal2-table-body").append("</td>");
         $("#myModal2-table-body").append("<td>");
 
@@ -263,14 +226,29 @@ $('body').delegate('.form_submit', 'click', function() {
 
 });
 
+
 var count = 0;
+
+var checked = 0;
 $('body').delegate('.emailCheckbox', 'click', function() {
     // add to cookie
-    if (invited.indexOf(this.name) == -1) {
-      invited.push(this.name)
+    if(this.checked == true) {
+      console.log("add");
+      checked += 1;
+      if (invited.indexOf(this.name) == -1) {
+        invited.push(this.name)
+      }
+
+    } else {
+      console.log("subtract");
+      checked += -1;
+      if (invited.indexOf(this.name) != -1) {
+        invited.pop(this.name)
+      }
+
     }
-    var checked = $('.emailCheckbox:checked').length
-    console.log(checked==1);
+    
+
     if (checked == 1) {
       console.log("singular")
       $("#choose-contacts-button").text("Send to 1 invite");
