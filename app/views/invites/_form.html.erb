@@ -203,7 +203,7 @@ $("#new_invite").submit(function() {
 </script>
 <% end %>
 
-<a href="#" class="button" id="choose-contacts-button" data-reveal-id="myModal">Choose Contacts</a>
+<a href="#" class="button" id="choose-contacts-button" data-reveal-id="myModal">CHOOSE CONTACTS</a>
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <p>Choose your service provider (easiest)</p>
       <a href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
@@ -216,7 +216,7 @@ $("#new_invite").submit(function() {
   <div class="center"><input type="textarea" name="emails" id="emails"></div>
   What email should I send your notification to?<br>
    <div class="center"><input type="text" name="myEmail" id="my-email"></div>
-  <a class='button' id='send-emails-button'>Finish</a>
+  <a class='button' id='send-emails-button'>Send Security Code</a>
   <p>We believe in privacy. We won't spam your contacts.</p>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

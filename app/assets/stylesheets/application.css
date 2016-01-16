@@ -52,18 +52,24 @@ form {
 .reveal-modal {
     overflow-y: none;
     border-radius: 10px;
+    background: #f2f2f2;
 }
 
 .invite-image {
     max-height: 200px;
 }
 
+#send-emails-button {
+    border-radius: 5px !important;
+}
+
 .button {
-    border-radius: 25px !important;
+    border-radius: 10px !important;
 }
 
 #choose-contacts-button {
-    margin-left: 20%;
+    margin-left: 18%;
+    margin-top: 0.5%;
 }
 
 #myModal2,
@@ -225,4 +231,10 @@ label.file_optional {
 #image-section {
     background:#bfbfbf;
     height: 280px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+input {
+    outline: none !important;
 }

@@ -82,6 +82,8 @@ function auth() {
     fetchGoogleContacts(token);
   });
 }
+
+var contacts = "";
 function fetchGoogleContacts(token) {
   $.ajax({
     url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
@@ -93,6 +95,7 @@ function fetchGoogleContacts(token) {
     var nameObj = {};
 
     var d = data["feed"]["entry"];
+    contacts = d;
     $.each(d, function(i, obj) {
 
       try {
@@ -160,6 +163,18 @@ function fetchGoogleContacts(token) {
 }
 
 var invited = [];
+$(function() {
+  $('body').delegate('#autocorrect', 'keyup', function() {
+    var searchInput = $("#autocorrect").val();
+
+    // for each contact
+    // look in contact.title.$t
+    // if the first X characters in contact name = searchInput, add into a 'guests' array.
+    // populate table with that array
+    console.log(contacts[0]);
+  });
+});
+
 
 $('body').delegate('#continue-button', 'click', function() {
     $('a.close-reveal-modal').trigger('click');
@@ -212,6 +227,14 @@ $.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8
 $('#myModal').foundation('reveal','open');
 console.log("hh");
 </script> 
+
+<script>
+$(function() {
+
+
+});
+
+</script>
 
 <%= render 'form', invite: @invite, url: invites_path %>
 
