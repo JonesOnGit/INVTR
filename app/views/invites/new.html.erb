@@ -90,88 +90,161 @@ function fetchGoogleContacts(token) {
     dataType: 'jsonp',
     data: token
   }).done(function(data) {
-    var arr = new Array();
-    var nameArr = new Array();
-    var nameObj = {};
 
-    var d = data["feed"]["entry"];
-    contacts = d;
-    $.each(d, function(i, obj) {
-
-      try {
-        var email = obj["gd$email"][0]["address"].toLowerCase();
-        var name = obj["title"]["$t"];
-        var img = obj["link"][0]["href"];
-        arr.push(email);
-        if (name != "") {
-          nameArr.push(name.toProperCase());
-          if (email == "titus@visionlink.org") {
-            console.log(obj);
-          }
-          nameObj[name] = email;
-          nameObj[email] = img;
-        }
-        
-      } catch(err) {
-
-      }
-    });
-    arr.sort();
-    nameArr.sort()
-    var count = 0;
-    for (var i in arr) {
-      count++
-      if (count > -1) {
-        if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
-
-          var imageUrl = nameObj[nameObj[nameArr[i]]];
-          var src = imageUrl + "?access_token=" + token["access_token"]
-
-          var uri = '/assets/blank-avatar.gif';
- 
-          var elem = "#" + i
-
-          $("#myModal2-table-body").append("<tr>");
-
-          $("#myModal2-table-body").append("<td>");
-
-          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
-          $("#myModal2-table-body").append("</td>");
-          $("#myModal2-table-body").append("<td>");
-
-          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
-          $("#myModal2-table-body").append("<br/>");
-
-          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
-        
-          $("#myModal2-table-body").append("</td>");
-          $("#myModal2-table-body").append("<tr>");
-
-        }
-      }
-
-
- 
-    }
-
-    // console.log(data)
-    document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
-    // console.log(document.cookie)
-
-
+    populateContacts(data);
   });
 }
 
+function populateContacts(data) {
+  var arr = new Array();
+  var nameArr = new Array();
+  var nameObj = {};
+
+  var d = data["feed"]["entry"];
+  contacts = d;
+  $.each(d, function(i, obj) {
+
+    try {
+      var email = obj["gd$email"][0]["address"].toLowerCase();
+      var name = obj["title"]["$t"];
+      var img = obj["link"][0]["href"];
+
+      arr.push(email);
+      if (name != "") {
+        nameArr.push(name.toProperCase());
+        nameObj[name] = email;
+        nameObj[email] = img;
+      }
+      
+    } catch(err) {
+
+    }
+  });
+
+  arr.sort();
+  nameArr.sort()
+  var count = 0;
+  for (var i in arr) {
+    count++
+    if (count > -1) {
+      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
+        var imageUrl = nameObj[nameObj[nameArr[i]]];
+
+        var uri = '/assets/blank-avatar.gif';
+  
+        var elem = "#" + i
+
+        $("#myModal2-table-body").append("<tr>");
+
+        $("#myModal2-table-body").append("<td>");
+
+        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<td>");
+
+        $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+        $("#myModal2-table-body").append("<br/>");
+
+        $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+      
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<tr>");
+
+      }
+    }
+
+
+  
+  }
+}
+
+function populateSearch(d, guests) {
+  var arr = new Array();
+  var nameArr = new Array();
+  var nameObj = {};
+  var d = contacts;
+  count = 0;
+  $.each(d, function(i, obj) {
+
+    try {
+      var email = obj["gd$email"][0]["address"].toLowerCase();
+      var name = obj["title"]["$t"];
+      var img = obj["link"][0]["href"];
+      if (guests.indexOf(name) != -1){
+        count += 1;
+        arr.push(email);
+        if (name != "") {
+          nameArr.push(name.toProperCase());
+          nameObj[name] = email;
+          nameObj[email] = img;
+        }
+      }
+      
+    } catch(err) {
+
+    }
+  });
+  console.log(count);
+  nameArr.sort()
+  $("#myModal2-table-body").empty();
+
+  var count = 0;
+  for (var i in arr) {
+    count++
+    if (count > -1) {
+      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
+
+        var imageUrl = nameObj[nameObj[nameArr[i]]];
+
+        var uri = '/assets/blank-avatar.gif';
+  
+        var elem = "#" + i
+
+        $("#myModal2-table-body").append("<tr>");
+
+        $("#myModal2-table-body").append("<td>");
+
+        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<td>");
+
+        $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+        $("#myModal2-table-body").append("<br/>");
+
+        $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+      
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<tr>");
+
+      }
+    }
+
+
+  
+  }
+
+
+}
+
+
 var invited = [];
 $(function() {
-  $('body').delegate('#autocorrect', 'keyup', function() {
-    var searchInput = $("#autocorrect").val();
+  $('body').delegate('#search-autocomplete', 'keyup', function() {
+    var searchInput = $("#search-autocomplete").val();
 
     // for each contact
     // look in contact.title.$t
     // if the first X characters in contact name = searchInput, add into a 'guests' array.
     // populate table with that array
-    console.log(contacts[0]);
+    // console.log(contacts[10]["title"]["$t"]);
+    guests = [];
+    for (var i = 0; i < contacts.length; i++) {
+      if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
+        guests.push(contacts[i]["title"]["$t"]);
+      }
+    }
+    console.log(guests);
+    populateSearch(contacts, guests);
   });
 });
 
