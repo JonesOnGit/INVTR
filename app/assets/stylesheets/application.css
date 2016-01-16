@@ -59,6 +59,9 @@ form {
     max-height: 200px;
 }
 
+#inviter {
+    margin-left: 3%;
+}
 #send-emails-button {
     border-radius: 5px !important;
 }
@@ -68,7 +71,7 @@ form {
 }
 
 #choose-contacts-button {
-    margin-left: 18%;
+    margin-left: 21%;
     margin-top: 0.5%;
 }
 
@@ -81,14 +84,17 @@ form {
     border: none !important;
 }
 
+.emailCheckbox {
+    padding-top: 10%;
+}
 input[type=checkbox].emailCheckbox {
     display: none;
 }
 
 input[type=checkbox] + label {
     background: #999;
-    height: 16px;
-    width: 16px;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     padding: 0 0 0 0px;
     border-radius: 100%;
@@ -96,13 +102,13 @@ input[type=checkbox] + label {
 }
 
 input[type=checkbox]:checked + label {
-    height: 16;
-    width: 16;
+    height: 32;
+    width: 32;
     display: inline-block;
     padding: 0 0 0 0px;
     border-radius: 100%;
     moz-border-radius: 100%;
-    background: url('/assets/circle-blue-small.png') left top no-repeat;
+    background: url('/assets/blue-circle32.png') left top no-repeat;
 
 }
 
@@ -235,6 +241,10 @@ label.file_optional {
     border-top-right-radius: 10px;
 }
 
-input {
+#invite_description {
     outline: none !important;
+}
+
+.emailTableElement {
+    border-bottom-width: 10px;
 }
