@@ -30,7 +30,7 @@ form {
     border-radius: 10px;
     margin-top: 1%;
     width: 500px;
-    background: #f2f2f2;
+    background: white;
 }
 
 .invite_details {
@@ -87,6 +87,23 @@ form {
 
 .emailCheckbox {
     padding-top: 10%;
+}
+
+input[type=text] {
+    border: none;
+}
+#invite_name {
+    height: 50px !important;
+    font-size: 25px;
+}
+
+#invite_name {
+    font-size: 200%
+    height: 200px;
+}
+
+input[type=textarea] {
+    border: none;
 }
 input[type=checkbox].emailCheckbox {
     display: none;
@@ -236,7 +253,7 @@ label.file_optional {
 }
 
 #image-section {
-    background:#bfbfbf;
+    background:#f2f2f2;
     height: 280px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
