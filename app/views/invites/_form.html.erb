@@ -20,16 +20,24 @@
  <div class="row">
    <div class="medium-6 columns date-range">
 
-     <!-- <p><input type="text" id="datepicker" placeholder="Date"></p> -->
+     <p><input type="text" id="datepicker" placeholder="Start date"></p>
 
    </div>
 </div>
 
- <div class="margin-top row">
-   <div class="medium-12 columns date-range">
-     <%= f.input :end_date, as: :datetime, ampm: true, label: "" %>
+ <div class="row">
+   <div class="medium-6 columns date-range">
+
+     <p><input type="text" id="datepicker" placeholder="End date"></p>
+
    </div>
- </div>
+</div>
+
+ <div class="row">
+  <div class="medium-12 columns">
+    <%= f.input :address, html: { id: "pac-input" }, label: "", placeholder: "Location" %>
+  </div>
+</div>
 
   <div class="row">
    <div class="medium-12 columns">
@@ -37,11 +45,7 @@
    </div>
  </div>
 
-  <div class="row">
-   <div class="medium-12 columns">
-     <%= f.input :address, html: { id: "pac-input" }, label: "" %>
-   </div>
- </div>
+
 
 
  <div class="row">
@@ -90,7 +94,7 @@
  -->
   <div class="row">
    <div class="medium-12 columns">
-     <%= f.input :allow_others, label: "Guests can invite others", as: :boolean %>
+     <%= f.input :allow_others, label: "Guests can invite friends", as: :boolean %>
    </div>
  </div>
  </div>
