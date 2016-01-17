@@ -254,6 +254,9 @@ label.file_optional {
     padding-right: 100px;
 }
 
+#image-section img {width: auto;}
+
+
 .hidden {
    display: none;; 
 }
@@ -262,8 +265,9 @@ label.file_optional {
     max-width: 10px !important;
 }
 
-.center-cropped {
-  background-position: center center;
-  background-repeat: no-repeat;
-  overflow: hidden;
+#test {
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative;
 }
