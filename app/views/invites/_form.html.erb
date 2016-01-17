@@ -1,3 +1,4 @@
+<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
 <div id="inviter">
 
 <%= simple_form_for invite, url: url do |f| %>
@@ -16,10 +17,15 @@
    </div>
  </div>
 
- <div class="margin-top row">
-   <div class="medium-12 columns date-range">
-     <%= f.input :start_date, as: :datetime, ampm: true, label: "" %>
+ <div class="row">
+   <div class="medium-6 columns date-range">
+
+     <p><input type="text" id="datepicker" placeholder="Date"></p>
+
    </div>
+</div>
+
+ <div class="margin-top row">
    <div class="medium-12 columns date-range">
      <%= f.input :end_date, as: :datetime, ampm: true, label: "" %>
    </div>
@@ -277,3 +283,8 @@ $("#new_invite").submit(function() {
     });
  });
  </script>
+<script>
+$("#datepicker").click(function() {
+  $("#datepicker").fdatepicker('show')
+});
+</script>
