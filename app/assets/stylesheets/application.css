@@ -82,6 +82,7 @@ form {
 
 #myModal2-table {
     border: none !important;
+    width: 100%;
 }
 
 .emailCheckbox {
@@ -250,5 +251,13 @@ label.file_optional {
 }
 
 #myModal2-table-body {
-    width: 100%;
+    padding-right: 100px;
+}
+
+.hidden {
+   display: none;; 
+}
+
+.full-width {
+    max-width: 10px !important;
 }

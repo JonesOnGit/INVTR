@@ -122,6 +122,7 @@ function populateContacts(data) {
 }
 
 function populateSearch(d, guests) {
+  console.log("POPULATE SEARCH");
   var arr = new Array();
   var nameArr = new Array();
   var nameObj = {};
@@ -169,7 +170,7 @@ function populateSearch(d, guests) {
 
          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
         $("#myModal2-table-body").append("</td>");
-        $("#myModal2-table-body").append("<td>");
+        $("#myModal2-table-body").append("<td class='full-width'>");
 
         $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
         $("#myModal2-table-body").append("<br/>");
