@@ -18,19 +18,59 @@
  </div>
 
  <div class="row">
-   <div class="medium-6 columns date-range">
+   <div class="medium-5 columns date-range">
 
-     <p><input type="text" id="datepicker" placeholder="Start date"></p>
+     <p><input type="text" id="datepicker" name="invite[invite_start_date]" placeholder="Start date"></p>
 
    </div>
+   <div class="medium-2 columns date-range">
+
+     <p><input type="text" name="invite[invite_start_hour]" placeholder="Hour"></p>
+
+   </div>
+   <div class="medium-2 columns date-range">
+
+     <p><input type="text" name="invite[invite_start_minute]" placeholder="Min"></p>
+
+   </div>
+   <div class="medium-2 columns">
+
+   <select id="title" name="invite[invite_start_am_pm]">
+    <option value="am">am</option>
+    <option value="pm">pm</option>
+   </select>
+   </div>
+   <div class="medium-1 columns">
+   </div>
+
 </div>
 
  <div class="row">
-   <div class="medium-6 columns date-range">
+   <div class="medium-5 columns date-range">
 
-     <p><input type="text" id="datepicker" placeholder="End date"></p>
+     <p><input type="text" id="end_datepicker" name="invite[invite_end_date]" placeholder="End date"></p>
 
    </div>
+   <div class="medium-2 columns date-range">
+
+     <p><input type="text" name="invite[invite_end_hour]" placeholder="Hour"></p>
+
+   </div>
+   <div class="medium-2 columns date-range">
+
+     <p><input type="text" name="invite[invite_end_minute]" placeholder="Min"></p>
+
+   </div>
+   <div class="medium-2 columns">
+
+   <select id="title" name="invite[invite_end_am_pm]">
+    <option value="am">am</option>
+    <option value="pm">pm</option>
+   </select>
+   </div>
+   <div class="medium-1 columns">
+   </div>
+
 </div>
 
  <div class="row">
@@ -289,5 +329,9 @@ $("#new_invite").submit(function() {
 <script>
 $("#datepicker").click(function() {
   $("#datepicker").fdatepicker('show')
+});
+
+$("#end_datepicker").click(function() {
+  $("#end_datepicker").fdatepicker('show')
 });
 </script>

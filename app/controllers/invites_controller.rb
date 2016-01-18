@@ -42,6 +42,7 @@ class InvitesController < ApplicationController
 	end
 
 	def create
+		# binding.pry
 		@invite = Invite.new(parse_params) 
 
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
@@ -145,15 +146,25 @@ class InvitesController < ApplicationController
     	end
 
 	    def invite_params
-	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address,:avatar,:messages)
+	        params.require(:invite).permit(:name,:start_date,:end_date,:description,:allow_others,:address,:avatar,:messages,:invite_start_date,:invite_start_hour,:invite_start_minute,:invite_start_am_pm,:invite_end_date,:invite_end_hour,:invite_end_minute,:invite_end_am_pm)
 	    end
 
 	    def parse_params
 	    	return invite_params if invite_params.has_key? "start_date"
 
 	    	ip = invite_params
-	    	start_date = ip["start_date(1i)"] + "-" + ip["start_date(2i)"] + "-" + ip["start_date(3i)"] + " " + ip["start_date(4i)"] + ":" + ip["start_date(5i)"]
-	    	end_date = ip["end_date(1i)"] + "-" + ip["end_date(2i)"] + "-" + ip["end_date(3i)"] + " " + ip["end_date(4i)"] + ":" + ip["end_date(5i)"]
+	    	year = ip["invite_start_date"][6..9]
+	    	year = year + "/" + ip["invite_start_date"]
+	    	year.slice!(ip["invite_start_date"][5..9])
+	    	year = year.gsub("/", "-")
+
+	    	endyear = ip["invite_end_date"][6..9]
+	    	endyear = endyear + "/" + ip["invite_end_date"]
+	    	endyear.slice!(ip["invite_end_date"][5..9])
+	    	endyear = endyear.gsub("/", "-")
+
+	    	start_date = year + " " + ip["invite_start_hour"] + ":" + ip["invite_start_minute"]
+	    	end_date = endyear + " " + ip["invite_end_hour"] + ":" + ip["invite_end_minute"]
 
 	    	ip = delete_params ip
 	    	
@@ -164,16 +175,14 @@ class InvitesController < ApplicationController
 	    end
 
 	    def delete_params ip
-	    	ip.delete("start_date(1i)")
-	    	ip.delete("start_date(2i)")
-	    	ip.delete("start_date(3i)")
-	    	ip.delete("start_date(4i)")
-	    	ip.delete("start_date(5i)")
-	    	ip.delete("end_date(1i)")
-	    	ip.delete("end_date(2i)")
-	    	ip.delete("end_date(3i)")
-	    	ip.delete("end_date(4i)")
-	    	ip.delete("end_date(5i)")
+	    	ip.delete("invite_start_date")
+	    	ip.delete("invite_start_minute")
+	    	ip.delete("invite_start_hour")
+	    	ip.delete("invite_start_am_pm")
+	    	ip.delete("invite_end_date")
+	    	ip.delete("invite_end_minute")
+	    	ip.delete("invite_end_hour")
+	    	ip.delete("invite_end_am_pm")
 	    	return ip
 	    end
 
