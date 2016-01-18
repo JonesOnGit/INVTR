@@ -76,6 +76,10 @@ body {
     float: right;
 }
 
+.inviter_button {
+    width: 48%;
+}
+
 .button {
     border-radius: 10px !important;
 }
@@ -281,6 +285,7 @@ label.file_optional {
 #myModal2-table-body {
     padding-right: 100px;
 }
+
 
 #image-section img {width: auto;}
 

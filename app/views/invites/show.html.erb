@@ -10,7 +10,7 @@
 
 <% else %>
   <% if @invite.oauth_provider == "none" %>
-    <a href="#" data-reveal-id="myModal" id="right_button" class="button">Enter Password</a>
+    <a href="#" data-reveal-id="myModal" id="right_button" class="button inviter_button">Enter Password</a>
 
     <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
       <h2 id="modalTitle">Log into <%= @invite.name %></h2>
