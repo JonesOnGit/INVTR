@@ -1,71 +1,71 @@
 <!-- <h1>Show Invite</h1> -->
 
-<div class="margin-top row">
-  <div class="medium-12 columns invite_details">
-    <%= render 'details', invite: @invite %>
-
-    <% if @invite.owner == @email %>
-      <a class="button" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
-      <%= link_to 'Edit', edit_invite_path(@invite) %>
-
-    <% else %>
-      <% if @invite.oauth_provider == "none" %>
-        <a href="#" data-reveal-id="myModal">Click to enter Invite password</a>
-
-        <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-          <h2 id="modalTitle">Log into <%= @invite.name %></h2>
-           <form action="/authorize_noauth" method="post">
-            password:<br>
-            <input type="text" name="password"><br>
-            <input type="hidden" name="invite_id" value="<%= @invite.id %>">
-            <input type="submit" value="Submit">
-          </form> 
-          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-        </div>
-      <% end %>
-      <% if @invite.oauth_provider == "google" %>
-        <button onclick="auth();">Login With Gmail Account</button>
-      <% end %>
-      <% if @invite.oauth_provider == "hotmail" %>
-       <a href="<%= @session_url %>" id="hotmailLogin">Sign in to outlook</a>
-
-      <% end %>
-    <% end %>
-
-    <% if current_user %>
-      <p>Total reports: <%= @invite.report_count %></p>
-      <% if @invite.reports %>
-        <table>
-          <thead>
-            <tr>
-              <th>Reports</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @invite.reports.each do |report| %>
-            <tr>
-              <td><%= report %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      <% end %>
-
-      <%= simple_form_for @invite, url: "/invites/#{@invite.id}/deactivate" do |f| %>
-       <div class="margin-top row">
-         <div class="medium-12 columns">
-           <%= f.input :deactivation_reason %>
-         </div>
-       </div>
-       <div class="row">
-         <div class="large-12 columns">
-           <%= f.button :submit %>
-         </div>
-       </div>
-      <% end %>
-    <% end %>
-  </div>
+<div class="margin-top row" id="inviter">
+  <%= render 'details', invite: @invite %>
 </div>
+<div id="buttons">
+<% if @invite.owner == @email %>
+  <a class="button" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
+  <%= link_to 'Edit', edit_invite_path(@invite), class: "button", id: "right_button" %>
+
+<% else %>
+  <% if @invite.oauth_provider == "none" %>
+    <a href="#" data-reveal-id="myModal" id="right_button" class="button">Enter Password</a>
+
+    <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h2 id="modalTitle">Log into <%= @invite.name %></h2>
+       <form action="/authorize_noauth" method="post">
+        password:<br>
+        <input type="text" name="password"><br>
+        <input type="hidden" name="invite_id" value="<%= @invite.id %>">
+        <input type="submit" value="Submit">
+      </form> 
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+  <% end %>
+  <% if @invite.oauth_provider == "google" %>
+    <button onclick="auth();">Login With Gmail Account</button>
+  <% end %>
+  <% if @invite.oauth_provider == "hotmail" %>
+   <a href="<%= @session_url %>" id="hotmailLogin">Sign in to outlook</a>
+
+  <% end %>
+<% end %>
+
+<% if current_user %>
+  <p>Total reports: <%= @invite.report_count %></p>
+  <% if @invite.reports %>
+    <table>
+      <thead>
+        <tr>
+          <th>Reports</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invite.reports.each do |report| %>
+        <tr>
+          <td><%= report %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <%= simple_form_for @invite, url: "/invites/#{@invite.id}/deactivate" do |f| %>
+   <div class="margin-top row">
+     <div class="medium-12 columns">
+       <%= f.input :deactivation_reason %>
+     </div>
+   </div>
+   <div class="row">
+     <div class="large-12 columns">
+       <%= f.button :submit %>
+     </div>
+   </div>
+  <% end %>
+<% end %>
+</div>
+
 
 <div class="row">
     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">

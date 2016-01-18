@@ -125,13 +125,14 @@
      <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
    </div>
  </div>
-<!-- <div class="row">
+<div class="row">
    <div class="large-12 columns">
      <small>By clicking "Submit" you are agreeing to our <a href="/terms-of-service">terms of service</a> and our <a href="/privacy-policy">privacy policy</a>.</small>
+     <%= f.button :submit %>
    </div>
  </div>
 
- -->
+
   <div class="row">
    <div class="medium-12 columns">
      <%= f.input :allow_others, label: "Guests can invite friends", as: :boolean %>
@@ -255,8 +256,11 @@ $("#new_invite").submit(function() {
 
 </script>
 <% end %>
+<div id="buttons">
+  <a href="#" class="button" id="submit_button" data-reveal-id="myModal">SEND TO 2 INVITES</a>
 
-<a href="#" class="button" id="choose-contacts-button" data-reveal-id="myModal">CHOOSE CONTACTS</a>
+  <a href="#" class="button" id="right_button" data-reveal-id="myModal">CHOOSE CONTACTS</a>
+</div>
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <p>Choose your service provider (easiest)</p>
       <a href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>

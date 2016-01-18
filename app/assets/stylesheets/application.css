@@ -25,7 +25,7 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-form {
+#inviter {
     padding-bottom: 0.5%;
     border-radius: 10px;
     margin-top: 1%;
@@ -66,14 +66,20 @@ form {
     border-radius: 5px !important;
 }
 
+#buttons {
+    width: 500px;
+    margin-left: 2%;
+    margin-top: 0.5%;
+}
+
+#right_button {
+    float: right;
+}
+
 .button {
     border-radius: 10px !important;
 }
 
-#choose-contacts-button {
-    margin-left: 18%;
-    margin-top: 0.5%;
-}
 
 #myModal2,
 .center {
@@ -234,7 +240,7 @@ label.file_optional {
 }
 
 @media only screen and (max-width:500px) {
-    form, .invite_details {
+    #inviter, .invite_details {
         width: 100%;
     }
     .invite_details {

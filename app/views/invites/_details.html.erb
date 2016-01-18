@@ -2,7 +2,9 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>  
 </div>
-<%= image_tag invite.avatar, class: "invite-image" %>
+<div id="image-section">
+	<%= image_tag invite.avatar, class: "invite-image" %>
+</div>
 <h1> Event Name: <%= invite.name %> </h1>
 <p> Starting: <%= invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
 <p> Ending: <%= invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
@@ -13,4 +15,3 @@
 <% else %>
 	<p> Invite-only event </p>
 <% end %>
-
