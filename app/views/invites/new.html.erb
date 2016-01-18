@@ -19,7 +19,7 @@ function initMap() {
 }
 
     </script>
-    
+
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
         async defer></script>
         <script src="https://apis.google.com/js/client.js"></script>
@@ -217,7 +217,8 @@ $(function() {
 
 $('body').delegate('#continue-button', 'click', function() {
     $('a.close-reveal-modal').trigger('click');
-    var invitedString = invited.toString().replace(",", " ");
+    var invitedString = invited.toString().replace(/,/g, " ");
+    console.log(invitedString);
     var newCookie = 'invited=' + invitedString + ';'
     // console.log(newCookie);
     document.cookie = newCookie;
