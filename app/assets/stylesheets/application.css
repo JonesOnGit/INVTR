@@ -72,9 +72,11 @@ body {
     margin-top: 0.5%;
 }
 
-#right_button {
+#right_button, #choose_contacts_button {
     float: right;
 }
+
+
 
 .inviter_button {
     width: 48%;

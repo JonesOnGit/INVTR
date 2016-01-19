@@ -255,18 +255,17 @@ $('body').delegate('.emailCheckbox', 'click', function() {
 
     if (checked == 1) {
       console.log("singular")
-      $("#choose-contacts-button").text("Send to 1 invite");
+      $("#submit_button").text("Send to 1 invite");
     } else if (checked == 0) {
       console.log("none")
 
-      $("#choose-contacts-button").text("Send");
+      $("#submit_button").text("Send");
     } else {
       console.log("plural")
 
       // $("#continue-button").text("Send to " + checked + " invites");
-      $("#choose-contacts-button").text("Send to " + checked + " invites");
-      $("#choose-contacts-button").addClass("form_submit");
-      $("#choose-contacts-button").removeAttr("data-reveal-id");
+      $("#submit_button").text("Send to " + checked + " invites");
+      $("#submit_button").addClass("form_submit");
 
     }     
 });
