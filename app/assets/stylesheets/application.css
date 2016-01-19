@@ -78,6 +78,10 @@ body {
     float: right;
 }
 
+.scroll {
+    height: 120px;
+    overflow: auto;
+}
 
 
 .inviter_button {
@@ -117,6 +121,10 @@ textarea {
 #invite_name {
     height: 40px !important;
     font-size: 20px !important;
+}
+
+.title {
+    font-size: 20px;
 }
 
 #invite_allow_others {
