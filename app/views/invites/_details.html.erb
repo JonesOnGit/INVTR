@@ -10,8 +10,10 @@
 	<p> Starting: <%= invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
 	<p> Ending: <%= invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
 	<p> Address: <%= invite.address %> </p>
-	<div class="scroll">
-		<p> Details: <%= invite.description %> </p>
+	<div class="hide_scrollbar">
+		<div class="scroll">
+			<p> Details: <%= invite.description %> </p>
+		</div>
 	</div>
 	<% if invite.allow_others %>
 		<p> Guests may allow others </p>

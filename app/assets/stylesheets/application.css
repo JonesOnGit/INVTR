@@ -78,9 +78,14 @@ body {
     float: right;
 }
 
+.hide_scrollbar {
+    overflow: hidden;
+}
+
 .scroll {
     height: 120px;
     overflow: auto;
+    width: 101.5%;
 }
 
 
