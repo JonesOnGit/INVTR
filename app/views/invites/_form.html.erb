@@ -176,20 +176,49 @@ function delete_cookie( name ) {
   <a href="#" class="button inviter_button" id="choose_contacts_button" data-reveal-id="myModal">CHOOSE CONTACTS</a>
 </div>
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <p>Choose your service provider (easiest)</p>
-      <a href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
+  <p class='modal_title'>Choose your service provider (easiest)</p>
+  <div class="row" id="pull-left">
+     <div class="large-2 columns">
 
-      <a onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %>
+        <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %></a>
+
+     </div>
+     <div class="large-1 columns">
+     <p> </p>
+     </div> 
+     <div class="large-2 columns">
+      <a class="logo_button" href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
+
+     </div> 
+     <div class="large-6 columns">
+     </div> 
+  </div>
 </a>
 
   <br><br>
-  Or type each one in individually<br> 
-  <div class="center"><input type="textarea" name="emails" id="emails"></div>
-  What email should I send your notification to?<br>
-   <div class="center"><input type="text" name="myEmail" id="my-email"></div>
-  <a class='button' id='send-emails-button'>Send Security Code</a>
-  <p>We believe in privacy. We won't spam your contacts.</p>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  <div class="white_background">
+    <p>Or type each one in individually - </p> 
+    <div class="row">
+    
+      <div class="center"><textarea name="emails" id="emails" placeholder="email, email, email ..."></textarea></div>
+    </div>
+    <br>
+    <div class="row" id="pull-left">
+      <div class="large-3 columns">
+       <input type="text" name="myEmail" id="my-email" placeholder="your email">
+      </div>
+      <div class="large-4 columns">
+        <a class='button tiny' id='send-emails-button'>Send Security Code</a>
+      </div>
+      <div class="large-5 columns">
+      </div>
+
+    </div>
+    <br>
+    <p>We believe in privacy. We won't spam your contacts.</p>
+
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
 </div>
 
  <script>

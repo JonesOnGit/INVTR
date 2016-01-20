@@ -52,7 +52,7 @@ body {
 .reveal-modal {
     overflow-y: none;
     border-radius: 10px;
-    background: #f2f2f2;
+    background: #f9f9f9;
 }
 
 .invite-image {
@@ -63,7 +63,7 @@ body {
     margin-left: 2%;
 }
 #send-emails-button {
-    border-radius: 5px !important;
+    margin-top: 0.5%;
 }
 
 #buttons {
@@ -165,13 +165,7 @@ input[type=checkbox]:checked + label {
 
 }
 
-#emails {
-    height: 120px;
-    width: 96%;
-    border-radius: 10px;
-    moz-border-radius: 10px;
-    border: solid;
-}
+
 
 #invite_description {
     height: 120px !important;
@@ -190,8 +184,8 @@ input[type=checkbox]:checked + label {
 #my-email {
     border-radius: 10px;
     moz-border-radius: 10px;
-    width: 25%;
     margin-left: 2%;
+    width: 100%;
 }
 
 select {
@@ -272,9 +266,6 @@ label.file_optional {
     .medium-12.columns select {
     font-size: 10px;
     }
-    #invite_start_date_2i, #invite_end_date_2i {
-        width: 20%!important;
-    }
     .date-range {
         padding-left: .25rem;
         padding-right: .25rem;
@@ -317,4 +308,41 @@ label.file_optional {
     background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
+}
+
+.details {
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+
+.modal_title {
+    font-size: 18px;
+}
+
+.logo_button {
+    padding: 12%;
+    padding-top: 45%;
+    padding-bottom: 45%;
+    border-radius: 10px;
+    background: white;
+}
+
+.white_background {
+    background: white;
+    padding-left: 2%;
+    border-radius: 10px;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+#pull-left {
+    margin-left: -2%;
+}
+
+#emails {
+    height: 120px;
+    width: 96%;
+    border-radius: 10px;
+    moz-border-radius: 10px;
 }
