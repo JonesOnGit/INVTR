@@ -27,9 +27,9 @@ body {
 }
 
 #inviter {
-    padding-bottom: 0.5%;
+    padding-bottom: 0.5em;
     border-radius: 0.8em;
-    margin-top: 1%;
+    margin-top: 1em;
     width: 32em;
     background: white;
 }
@@ -61,7 +61,7 @@ body {
 }
 
 #inviter {
-    margin-left: 2%;
+    margin-left: 2em;
 }
 #send-emails-button {
     margin-top: 0.5%;
@@ -364,8 +364,8 @@ label.file_optional {
        -ms-transform: rotate(-90deg);
         -o-transform: rotate(-90deg);
         transform: rotate(-90deg);
-    margin-top: 5%;
-    margin-left: -2.15%;
+    margin-top: 3em;
+    margin-left: -1.1em;
     position: absolute;
 }
 
