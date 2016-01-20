@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :invites
   devise_for :users
   resources :users
+  resources :ads, only: [:create, :update, :edit, :destroy]
 
   get 'authorize' => 'auth#gettoken'
   get 'authorize_session' => 'auth#getsession'

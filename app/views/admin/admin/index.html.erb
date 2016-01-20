@@ -1,62 +1,37 @@
-<h1>Admin Index</h1>
-
-<%= render 'reports_table_count', invite_count: @invite_count, accepted_count: @accepted_count, rejected_count: @rejected_count, report_count: @report_count, written_report_count: @written_report_count, deactivated_count: @deactivated_count  %>
-
-<%= render 'reports_table', sorted_reports: @sorted_reports %>
-
- <script src="http://maps.googleapis.com/maps/api/js"></script>
+<div class="row">
+	<div class="white_background">
+		<h1>Admin Index</h1>
 
 
- <div id="googleMap" style="width:500px;height:380px;"></div>
+		<ul class="tabs" data-tab>
+		  <li class="tab-title active"><a href="#panel1">Stats</a></li>
+		  <li class="tab-title"><a href="#panel2">Map</a></li>
+		  <li class="tab-title"><a href="#panel3">New Ad</a></li>
+		  <li class="tab-title"><a href="#panel4">Existing Ads</a></li>
+		</ul>
+		<div class="tabs-content">
+		  <div class="content active" id="panel1">
+		    <%= render 'reports_table_count', invite_count: @invite_count, accepted_count: @accepted_count, rejected_count: @rejected_count, report_count: @report_count, written_report_count: @written_report_count, deactivated_count: @deactivated_count  %>
 
-<script>
-function initialize() {
+		    <%= render 'reports_table', sorted_reports: @sorted_reports %>
+
+		  </div>
+		  <div class="content" id="panel2">
+		    
+
+		     <script src="http://maps.googleapis.com/maps/api/js"></script>
 
 
-  var mapProp = {
-    center:new google.maps.LatLng(0,0),
-    zoom:1,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-  var markers = [];
-  <% @logs.each do |log| %>
-      var lat = <%= log.coordinates[1] %> + (Math.random() / 1000);
-      var lng = <%= log.coordinates[0] %> + (Math.random() / 1000);
+		     <div id="googleMap" style="width:500px;height:380px;"></div>
 
-	  var myLatLng = {lat: lat, lng: lng};
-	  var icon = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-	  if ("<%= log.action %>" == "save") {
-	  	icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-	  }
-	  if ("<%= log.action %>" == "accept") {
-	  	icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-	  }
+		  </div>
+		  <div class="content" id="panel3">
+		    <%= render 'ad_form', ad: @ad, url: ads_path %>
 
-	  if ("<%= log.action %>" == "decline") {
-	  	icon = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
-	  }
-
-	  if ("<%= log.action %>" == "report") {
-	  	icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-	  }
-	  var marker = new google.maps.Marker({
-	    map: map,
-	    icon: icon,
-	    title: 'Hello World!'
-	  });
-	  marker.setPosition(myLatLng);
-	  var infowindow = new google.maps.InfoWindow({
-	      content: '<p>Type: <%= log.action %></p><p>View: <a href="/invites/<%= log.invite_id %>">Click here</a> '
-	    });
-	  google.maps.event.addListener(marker, 'click', function() {
-	      infowindow.open(map, this);
-	    });
-	  markers.push(marker);
-
-  <% end %>
-  var markerCluster = new MarkerClusterer(map, markers);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+		  </div>
+		  <div class="content active" id="panel4">
+		  	<%= render 'ad_table', contacts: @ads %>
+		  </div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,78 @@
+<%= simple_form_for ad, url: url do |f| %>
+<div id="inviter">
+ <div class="row">
+   <div id="image-section" class="center-cropped" style="overflow:hidden;">
+   </div>
+ </div>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :name, label: "", placeholder: "Ad name" %>
+   </div>
+ </div>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+   	 <%= f.input :desc, label: "", placeholder: "Ad description" %>
+   </div>
+ </div>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :start_date, as: :date %>
+   </div>
+ </div>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :end_date, as: :date %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :active, as: :boolean %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+
+     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+
+     <%= f.submit "Save Ad"%>
+   </div>
+ </div>
+</div>
+<% end %>
+
+ <script>
+ $("#ad_avatar").hide();
+
+ $("#ad_description").height("100px");
+  $("#ad_description").show();
+
+
+ $("#image-section").click(function() {
+  $("#ad_avatar").click();
+ })
+ $(function() {
+    $("input:file").change(function (){
+      var fileName = $(this).val();
+      // readURL(this);
+
+      var img = document.createElement("img");
+              var reader = new FileReader();
+              reader.onloadend = function() {
+                   img.src = reader.result;
+                   img.id = "test";
+              }
+              reader.readAsDataURL(this.files[0]);
+              $("#image-section").empty();
+              $("#image-section").append(img);
+      
+    });
+ });
+</script>
+

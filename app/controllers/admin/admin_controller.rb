@@ -3,6 +3,8 @@ module Admin
 		before_action :authenticate_user!
 		layout 'layouts/admin'
 		def index
+			@ad = Ad.new
+			@ads = Ad.all
 			@user = current_user
 			@invite_count = Invite.count
 			@accepted_count = Log.where(action: "accept").count

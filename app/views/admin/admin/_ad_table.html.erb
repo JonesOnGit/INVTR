@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Active</th>
+      <th>Photo</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% contacts.each do |ad| %>
+      <tr>
+        <td>
+        	<%= ad.name %> 
+        </td>
+        <td> 
+          <%= ad.desc %> 
+        </td>
+        <td>
+            <%= ad.start_date %>
+        </td>
+        <td> 
+          <%= ad.end_date %> 
+        </td>
+        <td>
+            <%= ad.active %>
+        </td>
+        <td> 
+            <img src="<%= ad.avatar %>" height="300px" width="300px"> 
+        <td>
+          <%= link_to "Edit", edit_ad_path(ad)%><br>
+          <%= link_to 'Delete', "/ads/#{ad.id}",  onclick: 'return confirm("Are you sure?")', method: :delete %>
+        </td>
+    <% end %>
+  </tbody>
+</table>
