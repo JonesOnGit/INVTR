@@ -236,6 +236,9 @@ var count = 0;
 var checked = 0;
 $('body').delegate('.emailCheckbox', 'click', function() {
     // add to cookie
+
+
+
     if(this.checked == true) {
       console.log("add");
       checked += 1;
@@ -264,13 +267,19 @@ $('body').delegate('.emailCheckbox', 'click', function() {
       console.log("plural")
 
       // $("#continue-button").text("Send to " + checked + " invites");
-      $("#submit_button").text("Send to " + checked + " invites");
-      $("#submit_button").addClass("form_submit");
-      $("#choose-contacts-button").removeAttr("data-reveal-id");
-
-
-
     }     
+    $("#submit_button").text("Send to " + checked + " invites");
+
+
+    if (checked == 0) {
+      $("#submit_button").hide();
+
+    } else {
+          $("#submit_button").addClass("form_submit");
+    $("#submit_button").removeAttr("data-reveal-id");
+    $("#submit_button").show();
+    }
+
 });
 
 $.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8c55-475d-b23b-e3c79c4cdef0", "scope": "https://outlook.office.com/Contacts.Read"}, function( data ) {
