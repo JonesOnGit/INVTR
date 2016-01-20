@@ -96,6 +96,7 @@ body {
 .button, .button:hover {
     border-radius: 10px !important;
     background: #94C6EA;
+    font-weight: bold;
 }
 
 
