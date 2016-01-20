@@ -54,6 +54,7 @@ body {
     overflow-y: none;
     border-radius: 0.8em;
     background: #f9f9f9;
+    width: 40em;
 }
 
 .invite-image {
