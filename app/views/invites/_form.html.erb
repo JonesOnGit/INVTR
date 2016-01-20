@@ -200,7 +200,7 @@ function delete_cookie( name ) {
     <p>Or type each one in individually - </p> 
     <div class="row">
     
-      <div class="center"><textarea name="emails" id="emails" placeholder="email, email, email ..."></textarea></div>
+      <textarea name="emails" id="emails" placeholder="email, email, email ..."></textarea>
     </div>
     <br>
     <div class="row" id="pull-left">
@@ -275,6 +275,10 @@ function delete_cookie( name ) {
  </script>
 
  <script>
+ $("#image-section").click(function() {
+  $(".file-upload").click();
+ })
+
  $("#submit_button").hide();
 
 </script>

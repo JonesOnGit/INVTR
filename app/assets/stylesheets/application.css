@@ -21,7 +21,7 @@ body {
     background-image: url('/assets/IMAGE_SP.jpg');
     background-color: white;
     width: 100%;
-    height: 100px;
+    height: 100%;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -137,11 +137,6 @@ textarea {
     width: 20px;
 }
 
-#invite_name {
-    font-size: 200%;
-    height: 200px;
-}
-
 input[type=textarea] {
     border: none;
 }
@@ -237,6 +232,7 @@ label.file_optional {
     text-decoration: underline;
     padding: 0;
     margin-bottom: 1%;
+    display: none;
 }
 
 
