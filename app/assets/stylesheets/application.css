@@ -160,7 +160,7 @@ input[type=checkbox]:checked + label {
     border-radius: 100%;
     moz-border-radius: 100%;
     background: url('/assets/blue-circle32.png') left top no-repeat;
-
+    background-size: 1.6em, 1.6em;
 }
 
 
