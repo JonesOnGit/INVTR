@@ -44,7 +44,7 @@ class AdsController < ApplicationController
 			begin
 				f = open(session[:image])
 			rescue
-				# f.open("'http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866'")
+				f.open("'http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866'")
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
 			return
