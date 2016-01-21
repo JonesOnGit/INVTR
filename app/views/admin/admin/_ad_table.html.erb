@@ -29,7 +29,7 @@
             <%= ad.active %>
         </td>
         <td class="table_img"> 
-            <img src="http://localhost:3000<%= ad.avatar %>" height="300px" width="300px"> 
+            <img src="<%= ad.avatar %>" height="300px" width="300px"> 
         <td>
           <%= link_to "Edit", edit_ad_path(ad)%><br>
           <%= link_to 'Delete', "/ads/#{ad.id}",  onclick: 'return confirm("Are you sure?")', method: :delete %>
