@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'authorize_noauth' => 'auth#noauth_session'
   post 'authorize_google' => 'auth#google_session'
 
+  get '/session_image' => 'ads#session_image'
+
 
   namespace :admin do
     root 'admin#index'
