@@ -4,6 +4,7 @@ class InvitesController < ApplicationController
 	before_action :authenticate_user!, only: [:deactivate]
 
 	def new
+		binding.pry
 		@invite = Invite.new
 		@login_url = login_url
 		@contacts = nil

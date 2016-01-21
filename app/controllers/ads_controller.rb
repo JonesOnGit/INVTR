@@ -39,7 +39,7 @@ class AdsController < ApplicationController
 		# set sesstion to expire in one hour
 		# log which add was used
 		if session[:image].nil?
-			ad = Ad.where(active: true).where({'start_date' => {'$lt' => DateTime.now}}).where({'end_date' => {'$gt' => DateTime.now}}).offset(rand(Ad.count)).first
+			ad = Ad.offset(rand(Ad.count)).first
 			session[:image] = ad.avatar.url
 			begin
 				f = open(session[:image])
