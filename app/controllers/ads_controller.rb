@@ -38,13 +38,17 @@ class AdsController < ApplicationController
 		# if not, load random image and save as session image
 		# set sesstion to expire in one hour
 		# log which add was used
-		if session[:image].nil?
-			ad = Ad.offset(rand(Ad.count)).first
-			session[:image] = ad.avatar.url
+		# session.clear
+		if session[:image].nil? or session[:image_date].nil? or session[:image_date] < DateTime.now - 1.day
+			@ad = Ad.offset(rand(Ad.count)).first
+			session[:image] = @ad.avatar.url
+			session[:image_time] = DateTime.now
 			begin
 				f = open(session[:image])
+				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, invite_id: @ad.id)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
+				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, invite_id: @ad.id)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
 			return
