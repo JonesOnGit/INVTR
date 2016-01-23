@@ -39,10 +39,11 @@ class AdsController < ApplicationController
 		# set sesstion to expire in one hour
 		# log which add was used
 		# session.clear
-		if session[:image].nil? or session[:image_date].nil? or session[:image_date] < DateTime.now - 1.day
+		if session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
+			session[:ad] = @ad
 			session[:image] = @ad.avatar.url
 			session[:image_time] = DateTime.now
 			begin
@@ -57,6 +58,7 @@ class AdsController < ApplicationController
 		else
 			f = open(session[:image])
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
+			Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id)
 			return
 		end
 	end

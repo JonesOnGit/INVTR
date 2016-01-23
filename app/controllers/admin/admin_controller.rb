@@ -17,7 +17,18 @@ module Admin
 		end
 		def stats
 			@ad = Ad.find(params[:id])
-			@stats = Log.find_by(ad_id: @ad.id)
+			stats = Log.where(ad_id: @ad.id)
+			stats_hash = {}
+			stats.each do |stat|
+				date = stat.created_at.to_s[0..9]
+				if stats_hash.key? date
+					stats_hash[date] += 1
+				else
+					stats_hash[date] = 1
+				end
+			end
+			@stats_hash = stats_hash
+
 			@user = current_user
 		end
 	end

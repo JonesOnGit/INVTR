@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Ads Served</th>
+      <th>Ads Clicked</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% stats.each do |stat| %>
+
+	  <tr>
+	    <td><%= stat[0] %></td>
+	    <td><%= stat[1] %></td>
+	    <td><%=  %></td>
+	  </tr>
+  <% end %>
+  </tbody>
+</table> 
