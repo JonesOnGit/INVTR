@@ -15,5 +15,10 @@ module Admin
 			@deactivated_count = Invite.where(active: false).count
 			@logs = Log.all
 		end
+		def stats
+			@ad = Ad.find(params[:id])
+			@stats = Log.find_by(ad_id: @ad.id)
+			@user = current_user
+		end
 	end
 end

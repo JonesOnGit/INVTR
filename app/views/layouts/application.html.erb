@@ -17,5 +17,14 @@
   <div id="logo">INVTR</div>
     <%= yield %>
   </body>
+  <script>
+  $(function () {
+    $('body').bind('click', function (evt) {
+      if(evt.target == $('body')[0]) {
+        console.log('body clicked');
+      }
+    });
+  });
+  </script>
 </html>
 

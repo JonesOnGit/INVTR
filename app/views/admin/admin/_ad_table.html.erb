@@ -5,7 +5,7 @@
       <th>Description</th>
       <th>Start Date</th>
       <th>End Date</th>
-      <th>Active</th>
+      <th>Redirect Url</th>
       <th>Photo</th>
       <th>Actions</th>
     </tr>
@@ -26,11 +26,12 @@
           <%= ad.end_date %> 
         </td>
         <td>
-            <%= ad.active %>
+            <%= ad.redirect_url %>
         </td>
         <td class="table_img"> 
             <img src="<%= ad.avatar %>" height="300px" width="300px"> 
         <td>
+          <%= link_to "Stats", admin_stats_path(ad) %><br>
           <%= link_to "Edit", edit_ad_path(ad)%><br>
           <%= link_to 'Delete', "/ads/#{ad.id}",  onclick: 'return confirm("Are you sure?")', method: :delete %>
         </td>

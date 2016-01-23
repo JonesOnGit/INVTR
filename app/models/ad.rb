@@ -10,9 +10,10 @@ class Ad
 	field :start_date, type: Date
 	field :end_date, type: Date
 	field :desc, type: String
-	field :active, type: Boolean
+	field :redirect_url, type: String
+	field :last_served, type: DateTime
 
-	validates_presence_of :name, :start_date, :end_date, :desc, :active
+	validates_presence_of :name, :start_date, :end_date, :desc, :redirect_url
 
 	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
@@ -21,5 +22,9 @@ class Ad
 		count = @ads.count
 		binding.pry
 		return @ads[rand(count)].avatar.url
+	end
+
+	def self.next
+		Ad.where({'end_date' => {'$gt' => DateTime.now}}).where({'start_date' => {'$lt' => DateTime.now}}).order_by( [[ :last_served, :asc ]]).first
 	end
 end

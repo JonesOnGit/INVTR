@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'admin#index'
+    get "/stats/:id" => "admin#stats", as: "stats"
   end
 
   get "/invites/:id/accept" => "invites#accept", as: :accept_invite_path

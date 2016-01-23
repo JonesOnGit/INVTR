@@ -40,15 +40,17 @@ class AdsController < ApplicationController
 		# log which add was used
 		# session.clear
 		if session[:image].nil? or session[:image_date].nil? or session[:image_date] < DateTime.now - 1.day
-			@ad = Ad.offset(rand(Ad.count)).first
+			@ad = Ad.next
+			@ad.last_served = DateTime.now
+			@ad.save
 			session[:image] = @ad.avatar.url
 			session[:image_time] = DateTime.now
 			begin
 				f = open(session[:image])
-				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, invite_id: @ad.id)
+				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
-				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, invite_id: @ad.id)
+				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, ad_id: @ad.id)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
 			return
@@ -61,7 +63,7 @@ class AdsController < ApplicationController
 
 	
 	def ad_params
-	    params.require(:ad).permit(:name,:start_date,:end_date,:desc,:active,:avatar)
+	    params.require(:ad).permit(:name,:start_date,:end_date,:desc,:redirect_url,:avatar)
 	end
 
 	def parse_params
