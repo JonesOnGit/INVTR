@@ -38,7 +38,7 @@ class AdsController < ApplicationController
 		# if not, load random image and save as session image
 		# set sesstion to expire in one hour
 		# log which add was used
-		# session.clear
+		session.clear
 		if session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
