@@ -9,29 +9,29 @@
  </div>
  <div class="margin-top row">
    <div class="medium-12 columns">
-     <%= f.input :name, label: "", placeholder: "Event name" %>
+     <%= f.input :name, label: "", input_html: { "data-error-message" => "Event name"}, placeholder: "Event name" %>
    </div>
  </div>
 
  <div class="row">
    <div class="medium-5 columns date-range">
 
-     <p><input type="text" id="datepicker" name="invite[invite_start_date]" placeholder="Start date"></p>
+     <p><input type="text" id="datepicker" data-error-message="Start date" name="invite[invite_start_date]" placeholder="Start date"></p>
 
    </div>
    <div class="medium-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_start_hour]" placeholder="Hour"></p>
+     <p><input type="text" name="invite[invite_start_hour]" data-error-message="Start hour" id="invite_start_hour" placeholder="Hour"></p>
 
    </div>
    <div class="medium-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_start_minute]" placeholder="Min"></p>
+     <p><input type="text" name="invite[invite_start_minute]" data-error-message="Start min" id="invite_start_minute" placeholder="Min"></p>
 
    </div>
    <div class="medium-2 columns">
 
-   <select id="title" name="invite[invite_start_am_pm]">
+   <select id="title" name="invite[invite_start_am_pm]" data-error-message="Start am/pm">
     <option value="am">am</option>
     <option value="pm" selected>pm</option>
    </select>
@@ -44,22 +44,22 @@
  <div class="row">
    <div class="medium-5 columns date-range">
 
-     <p><input type="text" id="end_datepicker" name="invite[invite_end_date]" placeholder="End date"></p>
+     <p><input type="text" id="end_datepicker" data-error-message="End date" name="invite[invite_end_date]" placeholder="End date"></p>
 
    </div>
    <div class="medium-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_end_hour]" placeholder="Hour"></p>
+     <p><input type="text" name="invite[invite_end_hour]" data-error-message="End hour" id="invite_end_hour" placeholder="Hour"></p>
 
    </div>
    <div class="medium-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_end_minute]" placeholder="Min"></p>
+     <p><input type="text" name="invite[invite_end_minute]" data-error-message="End min" id="invite_end_minute" placeholder="Min"></p>
 
    </div>
    <div class="medium-2 columns">
 
-   <select id="title" name="invite[invite_end_am_pm]">
+   <select id="title" name="invite[invite_end_am_pm]" data-error-message="End am/pm"> 
     <option value="am">am</option>
     <option value="pm" selected>pm</option>
    </select>
@@ -71,13 +71,13 @@
 
  <div class="row">
   <div class="medium-12 columns">
-    <%= f.input :address, html: { id: "pac-input" }, label: "", placeholder: "Location" %>
+    <%= f.input :address, html: { id: "pac-input" }, input_html: { "data-error-message" => "Location"}, label: "", placeholder: "Location" %>
   </div>
 </div>
 
   <div class="row">
    <div class="medium-12 columns">
-     <%= f.input :description, label: "", placeholder: "Tell them the details", label: "", as: :text %>
+     <%= f.input :description, input_html: { "data-error-message" => "Tell them the details"}, label: "", placeholder: "Tell them the details", label: "", as: :text %>
    </div>
  </div>
 
@@ -93,7 +93,7 @@
  <div class="margin-top row">
    <div class="medium-12 columns">
 
-     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
+     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload'}, label: "Select Event Image", input_html: { "data-error-message" => "Select Image"} %>
    </div>
  </div>
 
@@ -101,7 +101,7 @@
 
   <div class="row">
    <div class="medium-12 columns">
-     <%= f.input :allow_others, label: "Guests can invite friends", as: :boolean %>
+     <%= f.input :allow_others, label: "Guests can invite friends", as: :boolean, input_html: { "data-error-message" => "Allow others"} %>
    </div>
  </div>
 
@@ -320,27 +320,23 @@ $("#end_datepicker").click(function() {
 </script>
 
 <script>
+// form id button
 $("#choose_contacts_button").click(function() {
-  var errors = 0;
-  $("#new_invite :input").map(function(){
-       if( !$(this).val() ) {
-            console.log("bad")
-            console.log(this)
-            console.log($(this).val())
-            errors++;
-      } else if ($(this).val()) {
-            // console.log("good");
-            // console.log(this);
-            // console.log($(this).val())
-      }   
+  // form id
+  var id = "new_invite";
+  var errors_list = [];
+
+  $("#" + id + " :input").map(function(){
+      if( !$(this).val() ) {
+        errors_list.push($(this).attr("data-error-message"));
+      }
   });
-  if(errors > 0){
-      alert(errors + " errors");
-      return false;
+
+  if(errors_list.length > 0){
+      alert(errors_list.join(", "));
   } else {
+    // action to be performed if form is completely filled
     $('#myModal').foundation('reveal', 'open');
-
   }
-
 })
 </script>
