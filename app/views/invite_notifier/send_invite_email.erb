@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
   </head>
   <style>
   @charset "UTF-8";
@@ -3865,6 +3867,10 @@ table.hover tr:nth-of-type(even):hover {
     width: 48%;
 }
 
+.email_button {
+    width: 32.76%;
+}
+
 .button, .button:hover {
     border-radius: 0.8em !important;
     background: #94C6EA;
@@ -4139,7 +4145,7 @@ label.file_optional {
         -o-transform: rotate(-90deg);
         transform: rotate(-90deg);
     margin-top: 3em;
-    margin-left: -1em;
+    margin-left: -0.93em;
     position: absolute;
 }
 
@@ -4204,21 +4210,38 @@ body {
 }
 </style>
   <body>
+  <div id="logo">INVTR</div>
+  <div style='margin-left: 2em;'>
   <div class="inviter" style="padding-bottom: 0.5%;border-radius: 10px;margin-top: 1%;width: 500px; background-color: white;">
   <div class="row">
     <div id="image-section" class="center-cropped" style="overflow:hidden;">
+      <img src='<%= @invite.avatar.url %>'>
     </div>
   </div>
-    <h1>Thanks for signing up!</h1>
-    <p>Thanks for joining and have a great day! Now sign in and do awesome things!</p>
-	<p><a href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>">Accept</a></p>
-	<p><a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>">Decline</a></p>
-	<p><a href="<%= @current_url %>/invites/<%= @invite.id %>/report">Report</a></p>
+  <div class="details">
+    <p class="title"> Event Name: <%= @invite.name %> </p>
+    <p> Starting: <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <p> Ending: <%= @invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <p> Address: <%= @invite.address %> </p>
+    <div class="hide_scrollbar">
+      <div class="scroll">
+        <p> Details: <%= @invite.description %> </p>
+      </div>
+    </div>
+    <% if @invite.allow_others %>
+      <p> Guests may allow others </p>
+    <% else %>
+      <p> Invite-only event </p>
+    <% end %>
+  </div>
+  </div>
   </div>
   <div id="buttons">
-    <a href="#" class="button inviter_button" id="submit_button" data-reveal-id="myModal">SEND TO 2 INVITES</a>
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
 
-    <a href="#" class="button inviter_button" id="right_button" data-reveal-id="myModal">CHOOSE CONTACTS</a>
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
+
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/report" class="button email_button" id="right_button" data-reveal-id="myModal">REPORT</a>
   </div>
   </body>
 </html>

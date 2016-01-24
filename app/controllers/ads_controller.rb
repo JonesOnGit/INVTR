@@ -63,7 +63,6 @@ class AdsController < ApplicationController
 				Log.create(type: "Ad", action: "show_alternate", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"])
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
-			binding.pry
 			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"])
 			return
 		end
