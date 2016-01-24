@@ -209,6 +209,7 @@ function delete_cookie( name ) {
       </div>
       <div class="large-4 columns">
         <a class='button tiny' id='send-emails-button'>DONE</a>
+        <br><small id="error-message"></small>
       </div>
       <div class="large-5 columns">
       </div>
@@ -223,43 +224,36 @@ function delete_cookie( name ) {
 
  <script>
     $("#send-emails-button").click(function() {
-            var emails = $("#emails").val();
-            var myEmail = $("#my-email").val();
-            var incomplete = [];
-            if (emails == "") {
-              incomplete.push("emails");
-            }
-      
-            if (myEmail == "") {
-              incomplete.push("my email");
-           }
-      
-            if (incomplete.length > 0) {
-              console.log(incomplete);
-              $("#error-message").text("*Fill in both fields to proceed.")
-            } else {
-              var emailsString = $("#emails").val();
-              var invites = emailsString.match(/,/g) || [];
-              var len = invites.length + 1
-              if (len == 1) {
-                $("#submit_button").text("Send to 1 invite");
-              } else {
-                $("#submit_button").text("Send to " + len + " invites");
-              }
-              $("#submit_button").show()
-              $("#submit_button").addClass("form_submit");
-              var emails = emailsString.replace(/,/g, '');
-              document.cookie = "invited=" + emails;
-              document.cookie = "oauth_provider=none"
-              document.cookie = "ownerEmail=" + $("#my-email").val();
-              $('#myModal').foundation('reveal', 'close');
-            }
-      var emailsString = $("#emails").val();
-      var emails = emailsString.replace(/,/g, '');
-      document.cookie = "invited=" + emails;
-      document.cookie = "oauth_provider=none"
-      document.cookie = "ownerEmail=" + $("#my-email").val();
-      $('#myModal').foundation('reveal', 'close');
+      var emails = $("#emails").val();
+      var myEmail = $("#my-email").val();
+      var incomplete = [];
+      if (emails == "") {
+        incomplete.push("emails");
+      }
+
+      if (myEmail == "") {
+        incomplete.push("my email");
+     }
+
+      if (incomplete.length > 0) {
+        $("#error-message").text("*Fill in both fields to proceed.")
+      } else {
+        var emailsString = $("#emails").val();
+        var invites = emailsString.match(/,/g) || [];
+        var len = invites.length + 1
+        if (len == 1) {
+          $("#submit_button").text("Send to 1 invite");
+        } else {
+          $("#submit_button").text("Send to " + len + " invites");
+        }
+        $("#submit_button").show()
+        $("#submit_button").addClass("form_submit");
+        var emails = emailsString.replace(/,/g, '');
+        document.cookie = "invited=" + emails;
+        document.cookie = "oauth_provider=none"
+        document.cookie = "ownerEmail=" + $("#my-email").val();
+        $('#myModal').foundation('reveal', 'close');
+      }
     });
 
     $("#invite_avatar").hide();
@@ -281,7 +275,6 @@ function delete_cookie( name ) {
              };
              console.log(input.files[0]);
              reader.readAsDataURL(input.files[0]);
-             console.log("done");
          }
      }
 
