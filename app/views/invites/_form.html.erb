@@ -88,36 +88,7 @@
  </div>   -->
 
 
- <div class="row">
-     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
-     <div id="no-overflow">
-          <div class="large-3 columns">
-            Gmail <%= image_tag("gmail", size: "60x60") %>
-          </div>
-
-          <div class="large-9 columns">
-            <input type="text" name="search-autocomplete" id="search-autocomplete" placeholder="Search"><br>
-          </div>
-
-          <div class="large-12 columns" id="contacts-table">
-           <table id="myModal2-table">
-             <tbody id="myModal2-table-body">
-             </tbody>
-           </table>
-          </div>
-      </div>
-        <div class="large-9 columns">
-          <p>We believe in privacy. We won't spam your contacts.</p>
-        </div>
-
-        <div class="large-3 columns">
-          <a class='button' id='continue-button'>Done</a>
-        </div>
-
-    </div>
-
- </div>   
 
  <div class="margin-top row">
    <div class="medium-12 columns">
@@ -170,10 +141,41 @@ function delete_cookie( name ) {
 
 
 <% end %>
+
+<div class="row">
+    <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+    <div id="no-overflow">
+         <div class="large-3 columns">
+           Gmail <%= image_tag("gmail", size: "60x60") %>
+         </div>
+
+         <div class="large-9 columns">
+           <input type="text" name="search-autocomplete" id="search-autocomplete" placeholder="Search"><br>
+         </div>
+
+         <div class="large-12 columns" id="contacts-table">
+          <table id="myModal2-table">
+            <tbody id="myModal2-table-body">
+            </tbody>
+          </table>
+         </div>
+     </div>
+       <div class="large-9 columns">
+         <p>We believe in privacy. We won't spam your contacts.</p>
+       </div>
+
+       <div class="large-3 columns">
+         <a class='button' id='continue-button'>Done</a>
+       </div>
+
+   </div>
+
+</div>   
 <div id="buttons">
   <a href="#" class="button inviter_button" id="submit_button">SEND TO 0 INVITES</a>
 
-  <a href="#" class="button inviter_button" id="choose_contacts_button" data-reveal-id="myModal">CHOOSE CONTACTS</a>
+  <a href="#" class="button inviter_button" id="choose_contacts_button">CHOOSE CONTACTS</a>
 </div>
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <p class='modal_title'>Choose your service provider (easiest)</p>
@@ -315,4 +317,30 @@ $("#end_datepicker").click(function() {
 });
 
 
+</script>
+
+<script>
+$("#choose_contacts_button").click(function() {
+  var errors = 0;
+  $("#new_invite :input").map(function(){
+       if( !$(this).val() ) {
+            console.log("bad")
+            console.log(this)
+            console.log($(this).val())
+            errors++;
+      } else if ($(this).val()) {
+            // console.log("good");
+            // console.log(this);
+            // console.log($(this).val())
+      }   
+  });
+  if(errors > 0){
+      alert(errors + " errors");
+      return false;
+  } else {
+    $('#myModal').foundation('reveal', 'open');
+
+  }
+
+})
 </script>
