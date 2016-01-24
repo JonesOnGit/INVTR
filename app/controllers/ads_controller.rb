@@ -39,7 +39,7 @@ class AdsController < ApplicationController
 		# set sesstion to expire in one hour
 		# log which add was used
 		# session.cleare
-		if session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
+		if session[:ad].nil? session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
