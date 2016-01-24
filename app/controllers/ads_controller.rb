@@ -58,7 +58,7 @@ class AdsController < ApplicationController
 		else
 			f = open(session[:image])
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
-			Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id)
+			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["id"]["$oid"])
 			return
 		end
 	end

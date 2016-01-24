@@ -193,6 +193,10 @@ function loadContacts(tab) {
     $("#myModal2-table-body").append("</td>");
     $("#myModal2-table-body").append("<tr>");
   }
+
+  if (guests.length == 0) {
+    $("#myModal2-table-body").append("<p>No one in this list.</p>");
+  }
 }
 });
 </script>

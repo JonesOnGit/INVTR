@@ -57,6 +57,8 @@ class Invite
 			guests = invite.accepted
 		end
 		if to == "no-reply"
+			invite.accepted = [] if invite.accepted.nil?
+			invite.declined = [] if invite.declined.nil?
 			guests = invite.invited - invite.accepted - invite.declined
 		end
 		if to == "all"

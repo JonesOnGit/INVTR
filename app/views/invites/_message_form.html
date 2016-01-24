@@ -16,6 +16,7 @@
  <div class="row">
    <div class="large-12 columns">
      <%= f.button :submit, value: "Submit" %>
+     <br><small id="error-message"></small>
    </div>
  </div>
  <% end %>
@@ -24,16 +25,21 @@
 
 $( "form" ).submit(function( event ) {
   event.preventDefault();
-  console.log($('.edit_invite').serialize())
-  var formData = $('.edit_invite').serialize()
-  // console.log(this);
-  $.ajax({
-    type: "PATCH",
-    url: this.action,
-    data: formData,
-    success: success,
-    dataType: "json"
-  });
+  var sendTo = $("input:radio[name='r']:checked").val();
+  if (sendTo === undefined) {
+    $("#error-message").text("*Choose which group to send this message to.");
+  } else {
+    var formData = $('.edit_invite').serialize()
+    // console.log(this);
+    $.ajax({
+      type: "PATCH",
+      url: this.action,
+      data: formData,
+      success: success,
+      dataType: "json"
+    });
+  }
+  
 });
 
 function success(data) {
