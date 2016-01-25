@@ -8,6 +8,14 @@ class InviteNotifier < ActionMailer::Base
   		:subject => 'Thanks for signing up for our amazing app' )
 	end
 
+	def send_update_email(current_url = "http://localhost:3000/", email, invite)
+		@current_url = current_url
+		@invite = invite
+		@email = email
+  		mail( :to => @email,
+  		:subject => "Update for #{@invite.name}" )
+	end
+
 	def send_owner_invite(current_url = "http://localhost:3000/", email, invite)
 		@current_url = current_url
 		@invite = invite

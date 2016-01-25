@@ -40,8 +40,24 @@ class Invite
 	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	def send_invites(url)
 		self.invited.each do |invite_email|
-			InviteNotifier.send_invite_email(url, invite_email, self).deliver
+			InviteNotifier.send_update_email(url, invite_email, self).deliver
 		end
+	end
+
+	def send_updates(url)
+		
+		guests = nil
+		
+		if self.declined.nil?
+			guests = self.invited
+		else
+			guests = self.invited - self.declined
+		end
+
+		guests.each do |invite_email|
+			InviteNotifier.send_update_email(url, invite_email, self).deliver
+		end
+
 	end
 
 	def send_owner_invite(url)

@@ -34,6 +34,7 @@ class InvitesController < ApplicationController
 	end
 
 	def edit
+		cookies.delete(:invited)
 		@invite = Invite.find(params[:id])
 		unless @invite.owner == session[:user_email]
 			flash[:notice] = "You do not have permission to edit this Invitation."
@@ -74,7 +75,10 @@ class InvitesController < ApplicationController
 
 	def update
 		@invite = Invite.find(params[:id])
-
+		# new_invites = cookies["invited"].split(/ /)
+		# old_invites = @invite.invited
+		# invites = new_invites + old_invites
+		# @invite.invited = invites.uniq!
 		if params[:invite][:messages]
 			@invite.send_message(params[:message_group], params[:invite][:messages], @invite)
 			render json: {message: params[:invite][:messages], to: params['message_group']}, status: 200
@@ -87,6 +91,7 @@ class InvitesController < ApplicationController
 				Log.create(type: "Invite", action: "update", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 
 			    flash[:notice] = "Invite #{@invite.name} successfully updated."
+			    @invite.send_updates(request.base_url)
 			    redirect_to invite_path(@invite)
 			else
 			    flash[:alert] = "Invite #{@invite.name} not updated."

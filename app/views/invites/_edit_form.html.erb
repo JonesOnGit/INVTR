@@ -1,7 +1,9 @@
 <%= simple_form_for invite, url: url do |f| %>
+<div id="inviter">
 
  <div class="row">
    <div id="image-section">
+     <%= image_tag invite.avatar, class: "invite-image" %>
    </div>
  </div>
 <div class="medium-12 columns">
@@ -14,14 +16,62 @@
    </div>
  </div>
 
- <div class="margin-top row">
-   <div class="medium-12 columns date-range">
-     <%= f.input :start_date, as: :datetime, ampm: true, label: "" %>
-   </div>
-   <div class="medium-12 columns date-range">
-     <%= f.input :end_date, as: :datetime, ampm: true, label: "" %>
-   </div>
+  <div class="row">
+    <div class="medium-5 columns date-range">
+
+      <p><input type="text" id="datepicker" data-error-message="Start date" name="invite[invite_start_date]" placeholder="Start date" value="<%= invite.start_date.to_s[5..6] %>/<%= invite.start_date.to_s[8..9] %>/<%= invite.start_date.to_s[2..3] %>"></p>
+
+    </div>
+    <div class="medium-2 columns date-range">
+
+      <p><input type="text" name="invite[invite_start_hour]" data-error-message="Start hour" id="invite_start_hour" placeholder="Hour" value="<%= invite.start_date.to_s[11..12] %>"></p>
+
+    </div>
+    <div class="medium-2 columns date-range">
+
+      <p><input type="text" name="invite[invite_start_minute]" data-error-message="Start min" id="invite_start_minute" placeholder="Min" value="<%= invite.start_date.to_s[14..15] %>"></p>
+
+    </div>
+    <div class="medium-2 columns">
+
+    <select id="title" name="invite[invite_start_am_pm]" data-error-message="Start am/pm">
+     <option value="am">am</option>
+     <option value="pm" selected>pm</option>
+    </select>
+    </div>
+    <div class="medium-1 columns">
+    </div>
+
  </div>
+
+  <div class="row">
+    <div class="medium-5 columns date-range">
+
+      <p><input type="text" id="end_datepicker" data-error-message="End date" name="invite[invite_end_date]" placeholder="End date" value="<%= invite.end_date.to_s[5..6] %>/<%= invite.end_date.to_s[8..9] %>/<%= invite.end_date.to_s[2..3] %>"></p>
+
+    </div>
+    <div class="medium-2 columns date-range">
+
+      <p><input type="text" name="invite[invite_end_hour]" data-error-message="End hour" id="invite_end_hour" placeholder="Hour" value="<%= invite.end_date.to_s[11..12] %>"></p>
+
+    </div>
+    <div class="medium-2 columns date-range">
+
+      <p><input type="text" name="invite[invite_end_minute]" data-error-message="End min" id="invite_end_minute" placeholder="Min" value="<%= invite.end_date.to_s[14..15] %>"></p>
+
+    </div>
+    <div class="medium-2 columns">
+
+    <select id="title" name="invite[invite_end_am_pm]" data-error-message="End am/pm"> 
+     <option value="am">am</option>
+     <option value="pm" selected>pm</option>
+    </select>
+    </div>
+    <div class="medium-1 columns">
+    </div>
+
+ </div>
+
 
   <div class="row">
    <div class="medium-12 columns">
@@ -31,15 +81,14 @@
 
   <div class="row">
    <div class="medium-12 columns">
-     <%= f.input :address, html: { id: "pac-input" }, label: "" %>
-   </div>
+   <%= f.input :address, html: { id: "pac-input" }, input_html: { "data-error-message" => "Location"}, label: "", placeholder: "Location" %>   </div>
  </div>
 
 
  <div class="margin-top row">
    <div class="medium-12 columns">
 
-     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
+     <%= f.input :avatar, as: :file, input_html: {style: "display: none;"}, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
    </div>
  </div>
 <!-- <div class="row">
@@ -54,5 +103,454 @@
      <%= f.input :allow_others, label: "Guests can invite others", as: :boolean %>
    </div>
  </div>
+</div>
+<div id="buttons">
+<a href="#" class="button inviter_button" data-reveal-id="invite-list">ADD GUESTS</a>
 
+<a href="#" class="button inviter_button form_submit" id="submit_button" style="float:right;">UPDATE</a>
+</div>
+
+<script>
+$("#image-section").click(function() {
+ $(".file-upload").click();
+})
+
+$(function() {
+   $("input:file").change(function (){
+     var fileName = $(this).val();
+     // readURL(this);
+
+     var img = document.createElement("img");
+             var reader = new FileReader();
+             reader.onloadend = function() {
+                  img.src = reader.result;
+                  img.id = "test";
+             }
+             reader.readAsDataURL(this.files[0]);
+             $("#image-section").empty();
+             $("#image-section").append(img);
+             $("#image-section").css("overflow", "hidden");
+   });
+});
+
+$("#datepicker").click(function() {
+  $("#datepicker").fdatepicker('show')
+});
+
+$("#end_datepicker").click(function() {
+  $("#end_datepicker").fdatepicker('show')
+});
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
+    async defer></script>
+    <script src="https://apis.google.com/js/client.js"></script>
+        <script>
+    function initMap() {
+
+      var input = /** @type {!HTMLInputElement} */(
+          document.getElementById('invite_address'));
+
+      var types = document.getElementById('type-selector');
+      var autocomplete = new google.maps.places.Autocomplete(input);
+     
+
+      autocomplete.addListener('place_changed', function() {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete.getPlace();
+        alert(place);
+      });
+    }
+    $('body').delegate('.form_submit', 'click', function() {
+      $('form').submit();
+
+    });
+        </script>
 <% end %>
+
+
+<div id="invite-list" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<div id="no-overflow">
+<p class='modal_title'>Choose your service provider (easiest)</p>
+<div class="row" id="pull-left">
+   <div class="large-2 columns">
+
+      <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %></a>
+
+   </div>
+   <div class="large-1 columns">
+   <p> </p>
+   </div> 
+   <div class="large-2 columns">
+    <a class="logo_button" href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
+
+   </div> 
+   <div class="large-6 columns">
+   </div> 
+</div></a>
+
+  <br><br>
+  <div class="white_background">
+    <p>Type each new invite individually - </p> 
+    <div class="row">
+    
+      <textarea name="emails" id="emails" placeholder="email, email, email ..."><%= @invite.invited.join(", ") %></textarea>
+    </div>
+    <br>
+    <div class="row" id="pull-left">
+      <div class="large-3 columns">
+       <input type="text" name="myEmail" id="my-email" placeholder="your email" value="<%= @invite.owner %>" disabled>
+      </div>
+      <div class="large-4 columns">
+        <a class='button tiny' id='send-emails-button'>DONE</a>
+        <br><small id="error-message"></small>
+      </div>
+      <div class="large-5 columns">
+      </div>
+
+    </div>
+    <br>
+    <p>We believe in privacy. We won't spam your contacts.</p>
+
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+</div>
+
+<div class="row">
+    <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+    <div id="no-overflow">
+         <div class="large-3 columns">
+           Gmail <%= image_tag("gmail", size: "60x60") %>
+         </div>
+
+         <div class="large-9 columns">
+           <input type="text" name="search-autocomplete" id="search-autocomplete" placeholder="Search"><br>
+         </div>
+
+         <div class="large-12 columns" id="contacts-table">
+          <table id="myModal2-table">
+            <tbody id="myModal2-table-body">
+            </tbody>
+          </table>
+         </div>
+     </div>
+     <div class="large-9 columns">
+       <p>We believe in privacy. We won't spam your contacts.</p>
+     </div>
+
+     <div class="large-3 columns">
+       <a class='button' id='continue-button'>Done</a>
+     </div>
+
+   </div>
+
+</div>   
+<script>
+document.cookie = "invited=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
+function auth() {
+  var config = {
+    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
+    'scope': 'https://www.google.com/m8/feeds'
+  };
+  gapi.auth.authorize(config, function() {
+    var token = gapi.auth.getToken();
+    // console.log(token)
+    token['g-oauth-window'] = null;
+    fetchGoogleContacts(token);
+  });
+}
+
+var invites_array = '<%= @invite.invited.to_json %>';
+invites_array = invites_array.replace(/&quot;/g, '');
+invites_array = invites_array.replace('[', '');
+invites_array = invites_array.replace(']', '');
+invites_array = invites_array.split(",");
+
+console.log(invites_array);
+var contacts = "";
+function fetchGoogleContacts(token) {
+  $.ajax({
+    url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
+    dataType: 'jsonp',
+    data: token
+  }).done(function(data) {
+
+    populateContacts(data);
+  });
+}
+
+function populateContacts(data) {
+  // console.log(data);
+  var arr = new Array();
+  var nameArr = new Array();
+  var nameObj = {};
+
+  var d = data["feed"]["entry"];
+  contacts = d;
+  $.each(d, function(i, obj) {
+
+    try {
+      var email = obj["gd$email"][0]["address"].toLowerCase();
+      var name = obj["title"]["$t"];
+      var img = obj["link"][0]["href"];
+      // console.log(name);
+      arr.push(email);
+      if (name != "") {
+        console.log(name);
+        nameArr.push(name.toProperCase());
+        nameObj[name] = email;
+        nameObj[email] = img;
+      }
+      
+    } catch(err) {
+
+    }
+  });
+
+
+  arr.sort();
+  nameArr.sort()
+  // console.log(nameObj);
+  var count = 0;
+  // console.log(arr);
+  for (var i in arr) {
+    count++
+    if (count > -1) {
+      // console.log(nameObj[nameArr[i]]);
+      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
+        console.log("Start");
+        var imageUrl = nameObj[nameObj[nameArr[i]]];
+
+        var uri = '/assets/blank-avatar.gif';
+  
+        var elem = "#" + i
+
+        $("#myModal2-table-body").append("<tr>");
+
+        $("#myModal2-table-body").append("<td>");
+
+        if (invites_array.indexOf(nameObj[nameArr[i]]) != -1) {
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "' checked disabled/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        } else {
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        }
+
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<td>");
+
+        $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+        $("#myModal2-table-body").append("<br/>");
+
+        $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+      
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<tr>");
+        console.log("end");
+      }
+    }
+
+
+  
+  }
+}
+
+String.prototype.toProperCase = function(){
+    return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
+         function($1){
+            return $1.toUpperCase();
+        }
+    );
+};
+
+function populateSearch(d, guests) {
+  console.log("POPULATE SEARCH");
+  var arr = new Array();
+  var nameArr = new Array();
+  var nameObj = {};
+  var d = contacts;
+  count = 0;
+  $.each(d, function(i, obj) {
+
+    try {
+      var email = obj["gd$email"][0]["address"].toLowerCase();
+      var name = obj["title"]["$t"];
+      var img = obj["link"][0]["href"];
+      if (guests.indexOf(name) != -1){
+        count += 1;
+        arr.push(email);
+        if (name != "") {
+          nameArr.push(name.toProperCase());
+          nameObj[name] = email;
+          nameObj[email] = img;
+        }
+      }
+      
+    } catch(err) {
+
+    }
+  });
+  console.log(count);
+  nameArr.sort()
+  $("#myModal2-table-body").empty();
+
+  var count = 0;
+  for (var i in arr) {
+    count++
+    if (count > -1) {
+      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
+
+        var imageUrl = nameObj[nameObj[nameArr[i]]];
+
+        var uri = '/assets/blank-avatar.gif';
+  
+        var elem = "#" + i
+
+        $("#myModal2-table-body").append("<tr>");
+
+        $("#myModal2-table-body").append("<td>");
+
+        if (invites_array.indexOf(nameObj[nameArr[i]]) != -1) {
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "' checked disabled/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        } else {
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        }
+
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<td class='full-width'>");
+
+        $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+        $("#myModal2-table-body").append("<br/>");
+
+        $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+      
+        $("#myModal2-table-body").append("</td>");
+        $("#myModal2-table-body").append("<tr>");
+
+      }
+    }
+
+
+  
+  }
+
+
+}
+
+
+
+$(function() {
+  $('body').delegate('#search-autocomplete', 'keyup', function() {
+    var searchInput = $("#search-autocomplete").val();
+
+    // for each contact
+    // look in contact.title.$t
+    // if the first X characters in contact name = searchInput, add into a 'guests' array.
+    // populate table with that array
+    // console.log(contacts[10]["title"]["$t"]);
+    guests = [];
+    for (var i = 0; i < contacts.length; i++) {
+      if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
+        guests.push(contacts[i]["title"]["$t"]);
+      }
+    }
+    console.log(guests);
+    populateSearch(contacts, guests);
+  });
+});
+
+$('body').delegate('#continue-button', 'click', function() {
+    $('a.close-reveal-modal').trigger('click');
+    var invitedString = invited.toString().replace(/,/g, " ");
+    console.log(invitedString);
+    var newCookie = 'invited=' + invitedString + ';'
+    // console.log(newCookie);
+    document.cookie = newCookie;
+});
+
+var invited = [];
+var count = 0;
+
+var checked = 0;
+$('body').delegate('.emailCheckbox', 'click', function() {
+    // add to cookie
+
+
+
+    if(this.checked == true) {
+      console.log("add");
+      checked += 1;
+      if (invited.indexOf(this.name) == -1) {
+        invited.push(this.name)
+      }
+
+    } else {
+      console.log("subtract");
+      checked += -1;
+      if (invited.indexOf(this.name) != -1) {
+        invited.pop(this.name)
+      }
+
+    }
+    
+
+    if (checked == 1) {
+      console.log("singular")
+      $("#submit_button").text("Send to 1 invite");
+    } else if (checked == 0) {
+      console.log("none")
+
+      $("#submit_button").text("Send");
+    } else {
+      console.log("plural")
+
+      // $("#continue-button").text("Send to " + checked + " invites");
+    }     
+    $("#submit_button").text("Send to " + checked + " invites");
+
+
+    if (checked == 0) {
+      $("#submit_button").hide();
+
+    } else {
+          $("#submit_button").addClass("form_submit");
+    $("#submit_button").removeAttr("data-reveal-id");
+    $("#submit_button").show();
+    }
+
+});
+$("#send-emails-button").click(function() {
+  var emails = $("#emails").val();
+  var myEmail = $("#my-email").val();
+  var incomplete = [];
+  if (emails == "") {
+    incomplete.push("emails");
+  }
+
+  if (myEmail == "") {
+    incomplete.push("my email");
+ }
+
+  if (incomplete.length > 0) {
+    $("#error-message").text("*Fill in both fields to proceed.")
+  } else {
+    var emailsString = $("#emails").val();
+    var invites = emailsString.match(/,/g) || [];
+    var len = invites.length + 1
+    if (len == 1) {
+      $("#submit_button").text("Send to 1 invite");
+    } else {
+      $("#submit_button").text("Send to " + len + " invites");
+    }
+    $("#submit_button").show()
+    $("#submit_button").addClass("form_submit");
+    var emails = emailsString.replace(/,/g, '');
+    document.cookie = "invited=" + emails;
+    document.cookie = "oauth_provider=none"
+    document.cookie = "ownerEmail=" + $("#my-email").val();
+    $('#invite-list').foundation('reveal', 'close');
+  }
+});
+
+$("#invite_avatar").hide();
+</script>
