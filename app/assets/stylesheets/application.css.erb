@@ -61,6 +61,11 @@ body {
     width: 50%;
 }
 
+.modal-image {
+    width: 180px;
+    height: 120px;
+}
+
 .invite-image {
     max-height: 12.8em;
 }
@@ -267,6 +272,41 @@ label.file_optional {
 @media only screen and (max-width:25em) {
     #inviter, .invite_details {
         width: 100%;
+        margin-left: 0%;
+        margin-top: 80%;
+    }
+
+    .reveal-modal {
+        width: 100%;
+    }
+
+    #logo {
+        font-size: 2em;
+        max-height: 4em;
+        max-width: 8em;
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+           -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        margin-top: 1em !important;
+        margin-left: 82% !important;
+        position: absolute;
+        float: right !important;
+    }
+
+    .modal-image {
+        width: 10%;
+        height: 30px !important;
+        padding: 0% !important;
+        padding-top: 0% !important;
+        padding-bottom: 0% !important;
+    }
+
+    #buttons {
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 0.5%;
     }
     .invite_details {
         margin-left: 0%;
