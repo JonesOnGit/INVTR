@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
+  </head>
+  <body>
+  <div id="logo">INVTR</div>
+  <div style='margin-left: 2em;'>
+  <div class="inviter" style="padding-bottom: 0.5%;border-radius: 10px;margin-top: 1%;width: 500px; background-color: white;">
+  <div class="row">
+    <div id="image-section" class="center-cropped" style="overflow:hidden;">
+      <img src='<%= @invite.avatar.url %>'>
+    </div>
+  </div>
+  <div class="details">
+    <p class="title"> Event Name: <%= @invite.name %> </p>
+    <p> Starting: <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <p> Ending: <%= @invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <p> Address: <%= @invite.address %> </p>
+    <div class="hide_scrollbar">
+      <div class="scroll">
+        <p> Details: <%= @invite.description %> </p>
+      </div>
+    </div>
+    <% if @invite.allow_others %>
+      <p> Guests may allow others </p>
+    <% else %>
+      <p> Invite-only event </p>
+    <% end %>
+  </div>
+  </div>
+  </div>
+  <div id="buttons">
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
+
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
+
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/report" class="button email_button" id="right_button" data-reveal-id="myModal">REPORT</a>
+  </div>
+  </body>
+</html>
