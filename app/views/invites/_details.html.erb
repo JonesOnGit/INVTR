@@ -2,8 +2,10 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>  
 </div> -->
-<div id="image-section" class="center-cropped" style="overflow:hidden;">
-	<%= image_tag invite.avatar %>
+<div class="row">
+  <div id="image-section">
+    <%= image_tag invite.avatar, class: "invite-image" %>
+  </div>
 </div>
 <div class="details">
 	<p class="title"> Event Name: <%= invite.name %> </p>
