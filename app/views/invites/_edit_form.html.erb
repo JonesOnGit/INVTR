@@ -17,57 +17,57 @@
  </div>
 
   <div class="row">
-    <div class="medium-5 columns date-range">
+    <div class="medium-5 small-5 columns date-range">
 
       <p><input type="text" id="datepicker" data-error-message="Start date" name="invite[invite_start_date]" placeholder="Start date" value="<%= invite.start_date.to_s[5..6] %>/<%= invite.start_date.to_s[8..9] %>/<%= invite.start_date.to_s[2..3] %>"></p>
 
     </div>
-    <div class="medium-2 columns date-range">
+    <div class="medium-2 small-2 columns date-range">
 
       <p><input type="text" name="invite[invite_start_hour]" data-error-message="Start hour" id="invite_start_hour" placeholder="Hour" value="<%= invite.start_date.to_s[11..12] %>"></p>
 
     </div>
-    <div class="medium-2 columns date-range">
+    <div class="medium-2 small-2 columns date-range">
 
       <p><input type="text" name="invite[invite_start_minute]" data-error-message="Start min" id="invite_start_minute" placeholder="Min" value="<%= invite.start_date.to_s[14..15] %>"></p>
 
     </div>
-    <div class="medium-2 columns">
+    <div class="medium-2 small-3 columns">
 
     <select id="title" name="invite[invite_start_am_pm]" data-error-message="Start am/pm">
      <option value="am">am</option>
      <option value="pm" selected>pm</option>
     </select>
     </div>
-    <div class="medium-1 columns">
+    <div class="medium-1 small-0 columns">
     </div>
 
  </div>
 
   <div class="row">
-    <div class="medium-5 columns date-range">
+    <div class="medium-5 small-5 columns date-range">
 
       <p><input type="text" id="end_datepicker" data-error-message="End date" name="invite[invite_end_date]" placeholder="End date" value="<%= invite.end_date.to_s[5..6] %>/<%= invite.end_date.to_s[8..9] %>/<%= invite.end_date.to_s[2..3] %>"></p>
 
     </div>
-    <div class="medium-2 columns date-range">
+    <div class="medium-2 small-2 columns date-range">
 
       <p><input type="text" name="invite[invite_end_hour]" data-error-message="End hour" id="invite_end_hour" placeholder="Hour" value="<%= invite.end_date.to_s[11..12] %>"></p>
 
     </div>
-    <div class="medium-2 columns date-range">
+    <div class="medium-2 small-2 columns date-range">
 
       <p><input type="text" name="invite[invite_end_minute]" data-error-message="End min" id="invite_end_minute" placeholder="Min" value="<%= invite.end_date.to_s[14..15] %>"></p>
 
     </div>
-    <div class="medium-2 columns">
+    <div class="medium-2 small-3 columns">
 
     <select id="title" name="invite[invite_end_am_pm]" data-error-message="End am/pm"> 
      <option value="am">am</option>
      <option value="pm" selected>pm</option>
     </select>
     </div>
-    <div class="medium-1 columns">
+    <div class="medium-1 small-0 columns">
     </div>
 
  </div>
