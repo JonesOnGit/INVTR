@@ -41,16 +41,18 @@ class AdsController < ApplicationController
 		type = "desktop"
 		type = "mobile" if params[:type] == "mobile"
 		session[:type] = type
-		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.second
+		binding.pry
+		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
 			session[:ad] = @ad
-			
+			session[:desktop_image] = @ad.avatar.url
+			session[:mobile_image] = @ad.mobile.url
 			if type == "mobile"
-				session[:image] = @ad.avatar.url
-			else
 				session[:image] = @ad.mobile.url
+			else
+				session[:image] = @ad.avatar.url
 			end
 			session[:image_time] = DateTime.now
 			begin
@@ -65,9 +67,9 @@ class AdsController < ApplicationController
 		else
 			begin
 				if type == "mobile"
-					i = session[:ad].avatar.url
+					i = session[:mobile_image]
 				else
-					i = session[:ad].mobile.url
+					i = session[:desktop_image]
 				end
 				f = open(i)
 				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
