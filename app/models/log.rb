@@ -13,6 +13,7 @@ class Log
 	field :ip, type: String
 	field :invite_id, type: String
 	field :ad_id, type: String
+	field :ad_size, type: String
 
 	validates_presence_of :type, :action, :data
 

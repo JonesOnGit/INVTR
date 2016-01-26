@@ -38,32 +38,39 @@ class AdsController < ApplicationController
 		# if not, load random image and save as session image
 		# set sesstion to expire in one hour
 		# log which add was used
+		type = "desktop"
+		type = "mobile" if params[:type] == "mobile"
 		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
 			session[:ad] = @ad
-			session[:image] = @ad.avatar.url
+			
+			if type == "mobile"
+				session[:image] = @ad.avatar.url
+			else
+				session[:image] = @ad.mobile.url
+			end
 			session[:image_time] = DateTime.now
 			begin
 				f = open(session[:image])
-				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id)
+				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
-				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, ad_id: @ad.id)
+				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
 			return
 		else
 			begin
 				f = open(session[:image])
-				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"])
+				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
-				Log.create(type: "Ad", action: "show_alternate", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"])
+				Log.create(type: "Ad", action: "show_alternate", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
-			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"])
+			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
 			return
 		end
 	end

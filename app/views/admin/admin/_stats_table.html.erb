@@ -3,6 +3,8 @@
     <tr>
       <th>Date</th>
       <th>Ads Served</th>
+      <th>Mobile</th>
+      <th>Desktop</th>
       <th>Ads Clicked</th>
     </tr>
   </thead>
@@ -11,8 +13,9 @@
 
 	  <tr>
 	    <td><%= stat[0] %></td>
-	    <td><%= stat[1] %></td>
-	    <td><%=  %></td>
+	    <td><%= stat[1]["count"] %></td>
+      <td><%= stat[1]["mobile"] %></td>
+      <td><%= stat[1]["desktop"] %></td>
 	  </tr>
   <% end %>
   </tbody>

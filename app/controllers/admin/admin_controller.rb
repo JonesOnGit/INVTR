@@ -22,13 +22,17 @@ module Admin
 			stats.each do |stat|
 				date = stat.created_at.to_s[0..9]
 				if stats_hash.key? date
-					stats_hash[date] += 1
+					stats_hash[date]["count"] += 1
+					stats_hash[date][stat.ad_size] = 1
 				else
-					stats_hash[date] = 1
+					stats_hash[date] = {}
+					stats_hash[date]["count"] =  1
+					stats_hash[date]["mobile"] = 0
+					stats_hash[date]["desktop"] = 0
+					stats_hash[date][stat.ad_size] = 1
 				end
 			end
 			@stats_hash = stats_hash
-
 			@user = current_user
 		end
 	end
