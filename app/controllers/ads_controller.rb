@@ -64,6 +64,7 @@ class AdsController < ApplicationController
 			return
 		else
 			begin
+				
 				if type == "mobile"
 					i = session[:ad].avatar.url
 				else
