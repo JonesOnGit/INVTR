@@ -23,7 +23,7 @@ module Admin
 				date = stat.created_at.to_s[0..9]
 				if stats_hash.key? date
 					stats_hash[date]["count"] += 1
-					stats_hash[date][stat.ad_size] = 1
+					stats_hash[date][stat.ad_size] += 1
 				else
 					stats_hash[date] = {}
 					stats_hash[date]["count"] =  1
