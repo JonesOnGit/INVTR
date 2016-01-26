@@ -6,7 +6,8 @@
       <th>Start Date</th>
       <th>End Date</th>
       <th>Redirect Url</th>
-      <th>Photo</th>
+      <th>Desktop Photo</th>
+      <th>Mobile Photo</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -30,6 +31,10 @@
         </td>
         <td class="table_img"> 
             <img src="<%= ad.avatar %>" height="300px" width="300px"> 
+        </td>
+        <td class="table_img"> 
+            <img src="<%= ad.mobile %>" height="300px" width="300px"> 
+        </td>
         <td>
           <%= link_to "Stats", admin_stats_path(ad) %><br>
           <%= link_to "Edit", edit_ad_path(ad)%><br>

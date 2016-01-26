@@ -5,6 +5,7 @@ class Ad
 	include Mongoid::Paperclip
 
 	has_mongoid_attached_file :avatar
+	has_mongoid_attached_file :mobile
 
 	field :name, type: String
 	field :start_date, type: Date
@@ -16,6 +17,7 @@ class Ad
 	validates_presence_of :name, :start_date, :end_date, :desc, :redirect_url
 
 	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+	validates_attachment_content_type :mobile, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 	def self.random
 		@ads = Ad.where(active: true)

@@ -70,7 +70,7 @@ class AdsController < ApplicationController
 
 	
 	def ad_params
-	    params.require(:ad).permit(:name,:start_date,:end_date,:desc,:redirect_url,:avatar)
+	    params.require(:ad).permit(:name,:start_date,:end_date,:desc,:redirect_url,:avatar, :mobile)
 	end
 
 	def parse_params

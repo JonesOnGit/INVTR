@@ -30,6 +30,8 @@ gem 'faraday'
 
 gem 'signet'
 
+gem 'unicorn'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

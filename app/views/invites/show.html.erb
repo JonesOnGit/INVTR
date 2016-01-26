@@ -32,38 +32,6 @@
   <% end %>
 <% end %>
 
-<% if current_user %>
-  <p>Total reports: <%= @invite.report_count %></p>
-  <% if @invite.reports %>
-    <table>
-      <thead>
-        <tr>
-          <th>Reports</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @invite.reports.each do |report| %>
-        <tr>
-          <td><%= report %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  <% end %>
-
-  <%= simple_form_for @invite, url: "/invites/#{@invite.id}/deactivate" do |f| %>
-   <div class="margin-top row">
-     <div class="medium-12 columns">
-       <%= f.input :deactivation_reason %>
-     </div>
-   </div>
-   <div class="row">
-     <div class="large-12 columns">
-       <%= f.button :submit %>
-     </div>
-   </div>
-  <% end %>
-<% end %>
 </div>
 
 

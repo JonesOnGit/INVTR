@@ -1,7 +1,17 @@
 <%= simple_form_for ad, url: url do |f| %>
 <div id="inviter">
+<h3>Desktop Image</h3>
  <div class="row">
    <div id="image-section" class="center-cropped" style="overflow:hidden;">
+         <%= image_tag ad.avatar %>
+
+   </div>
+ </div>
+ <h3>Mobile Image</h3>
+ <div class="row">
+   <div id="mobile-image-section" class="center-cropped" style="overflow:hidden;">
+   <%= image_tag ad.mobile, class: "invite-image" %>
+
    </div>
  </div>
  <div class="margin-top row">
@@ -34,9 +44,18 @@
  <div class="margin-top row">
    <div class="medium-12 columns">
 
+     <%= f.input :mobile, as: :file, label: "Select Mobile Image" %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+
      <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
    </div>
  </div>
+
+
 
  <div class="margin-top row">
    <div class="medium-12 columns">
@@ -57,21 +76,29 @@
  $("#image-section").click(function() {
   $("#ad_avatar").click();
  })
+
+ $("#mobile-image-section").click(function() {
+  $("#ad_mobile").click();
+ })
  $(function() {
     $("input:file").change(function (){
       var fileName = $(this).val();
       // readURL(this);
 
       var img = document.createElement("img");
-              var reader = new FileReader();
-              reader.onloadend = function() {
-                   img.src = reader.result;
-                   img.id = "test";
-              }
-              reader.readAsDataURL(this.files[0]);
-              $("#image-section").empty();
-              $("#image-section").append(img);
-      
+      var reader = new FileReader();
+      reader.onloadend = function() {
+           img.src = reader.result;
+           img.id = "test";
+      }
+      reader.readAsDataURL(this.files[0]);
+      if (this.id == "ad_mobile" ) {
+        $("#mobile-image-section").empty();
+        $("#mobile-image-section").append(img);
+      } else {
+        $("#image-section").empty();
+        $("#image-section").append(img);
+      }      
     });
  });
 </script>
