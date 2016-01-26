@@ -22,6 +22,10 @@
     $('body').bind('click', function (evt) {
       if(evt.target == $('body')[0]) {
         console.log('body clicked');
+        <% if session[:ad] %>
+        var redirectWindow = window.open("<%= session[:ad]['redirect_url'] %>", '_blank');
+            redirectWindow.location;
+        <% end %>
       }
     });
   });
