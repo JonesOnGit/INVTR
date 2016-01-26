@@ -40,6 +40,7 @@ class AdsController < ApplicationController
 		# log which add was used
 		type = "desktop"
 		type = "mobile" if params[:type] == "mobile"
+		session[:type] = type
 		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
@@ -63,7 +64,11 @@ class AdsController < ApplicationController
 			return
 		else
 			begin
-				f = open(session[:image])
+				if session[:type] == "mobile"
+					session[:image] = @ad.avatar.url
+				else
+					session[:image] = @ad.mobile.url
+				end
 				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
