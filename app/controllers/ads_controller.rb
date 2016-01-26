@@ -40,7 +40,7 @@ class AdsController < ApplicationController
 		# log which add was used
 		type = "desktop"
 		type = "mobile" if params[:type] == "mobile"
-		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.second
+		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
