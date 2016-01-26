@@ -41,7 +41,7 @@ class AdsController < ApplicationController
 		type = "desktop"
 		type = "mobile" if params[:type] == "mobile"
 		session[:type] = type
-		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.day
+		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.second
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
@@ -64,7 +64,6 @@ class AdsController < ApplicationController
 			return
 		else
 			begin
-				
 				if type == "mobile"
 					i = session[:ad].avatar.url
 				else
