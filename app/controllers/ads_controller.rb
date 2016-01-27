@@ -65,7 +65,7 @@ class AdsController < ApplicationController
 				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
-				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
+				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
 			return
@@ -80,7 +80,7 @@ class AdsController < ApplicationController
 				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
 			rescue
 				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56a1/03e2/dfee/1b00/0300/0000/original/IMAGE_SP.jpg?1453392866")
-				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
+				Log.create(type: "Ad", action: "show_alternate", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
 			return
