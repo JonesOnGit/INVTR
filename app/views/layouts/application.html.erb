@@ -23,7 +23,7 @@
   }
 
   function error(data){
-    console.log("error");
+    console.log(data);
   }
   $(function () {
     $('body').bind('click', function (evt) {
@@ -33,7 +33,7 @@
 
         $.ajax({
           type: "POST",
-          url: "http://invtr-staging.herokuapp.com/ad/click",
+          url: "/ad/click",
           data: "",
           success: success,
           error: error,
