@@ -2,6 +2,7 @@ class AdsController < ApplicationController
 	before_action :authenticate_user!, except: [:session_image, :click]
 
 	def click
+		raise "1"
 		Log.create(type: "Ad", action: "click", data: session[:ad].to_json, ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: session[:type])
 		render status: 200, json: @controller.to_json
 	end
@@ -46,7 +47,7 @@ class AdsController < ApplicationController
 		type = "desktop"
 		type = "mobile" if params[:type] == "mobile"
 		session[:type] = type
-		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.second
+		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.hour
 			@ad = Ad.next
 			@ad.last_served = DateTime.now
 			@ad.save
