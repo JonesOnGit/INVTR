@@ -18,13 +18,31 @@
     <%= yield %>
   </body>
   <script>
+  function success(data) {
+
+  }
+
+  function error(data){
+    console.log("error");
+  }
   $(function () {
     $('body').bind('click', function (evt) {
       if(evt.target == $('body')[0]) {
         console.log('body clicked');
         <% if session[:ad] %>
+
+        $.ajax({
+          type: "POST",
+          url: "/ad/click",
+          data: "",
+          success: success,
+          error: error,
+          dataType: "json"
+        });
+        console.log("ee");  
+
         var redirectWindow = window.open("<%= session[:ad]['redirect_url'] %>", '_blank');
-            redirectWindow.location;
+            redirectWindow.location;  
         <% end %>
       }
     });

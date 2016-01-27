@@ -6,6 +6,8 @@
       <th>Mobile</th>
       <th>Desktop</th>
       <th>Ads Clicked</th>
+      <th>Mobile clicked</th>
+      <th>Desktop clicked</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +18,16 @@
 	    <td><%= stat[1]["count"] %></td>
       <td><%= stat[1]["mobile"] %></td>
       <td><%= stat[1]["desktop"] %></td>
+      <% if clicks[stat[0]] %>
+        <td><%= clicks[stat[0]]["count"] %></td>
+        <td><%= clicks[stat[0]]["mobile"] %></td>
+        <td><%= clicks[stat[0]]["desktop"] %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+        <td></td>
+      <% end %>
 	  </tr>
   <% end %>
   </tbody>
-</table> 
+</table>

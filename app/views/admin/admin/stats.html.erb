@@ -4,6 +4,6 @@
 		<p>Name: <%= @ad.name %></p>
 		<p>Description: <%= @ad.desc %></p>
 		<p>Redirect Url: <%= @ad.redirect_url %></p>
-		<%= render 'stats_table', stats: @stats_hash %> 
+		<%= render 'stats_table', stats: @stats_hash, clicks: @clicks_hash %> 
 	</div>
 </div>

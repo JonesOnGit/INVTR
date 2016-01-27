@@ -17,7 +17,8 @@ module Admin
 		end
 		def stats
 			@ad = Ad.find(params[:id])
-			stats = Log.where(ad_id: @ad.id)
+			stats = Log.where(ad_id: @ad.id, action: "show")
+			clicks = Log.where(ad_id: @ad.id, action: "click")
 			stats_hash = {}
 			stats.each do |stat|
 				date = stat.created_at.to_s[0..9]
@@ -33,6 +34,23 @@ module Admin
 				end
 			end
 			@stats_hash = stats_hash
+
+
+			clicks_hash = {}
+			clicks.each do |click|
+				date = click.created_at.to_s[0..9]
+				if clicks_hash.key? date
+					clicks_hash[date]["count"] += 1
+					clicks_hash[date][click.ad_size] += 1
+				else
+					clicks_hash[date] = {}
+					clicks_hash[date]["count"] =  1
+					clicks_hash[date]["mobile"] = 0
+					clicks_hash[date]["desktop"] = 0
+					clicks_hash[date][click.ad_size] = 1
+				end
+			end
+			@clicks_hash = clicks_hash
 			@user = current_user
 		end
 	end

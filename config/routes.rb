@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get "/stats/:id" => "admin#stats", as: "stats"
   end
 
+  post "/ad/click" => "ads#click", as: "ad_click"
+
   get "/invites/:id/accept" => "invites#accept", as: :accept_invite_path
   get "/invites/:id/decline" => "invites#decline", as: :decline_invite_path
   get "/invites/:id/report" => "invites#report", as: :report_invite_path
