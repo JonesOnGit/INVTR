@@ -162,11 +162,12 @@ function delete_cookie( name ) {
           </table>
          </div>
      </div>
-       <div class="large-9 columns">
-         <p>We believe in privacy. We won't spam your contacts.</p>
+     <br><br>
+       <div class="large-9 columns move_down">
+         <p><small>We believe in privacy. We won't spam your contacts.</small></p>
        </div>
 
-       <div class="large-3 columns">
+       <div class="large-3 columns move_down">
          <a class='button' id='continue-button'>Done</a>
        </div>
 
@@ -219,7 +220,7 @@ function delete_cookie( name ) {
 
     </div>
     <br>
-    <p>We believe in privacy. We won't spam your contacts.</p>
+    <p><small>We believe in privacy. We won't spam your contacts.</small></p>
 
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   </div>
@@ -324,20 +325,20 @@ $("#end_datepicker").click(function() {
 // form id button
 $("#choose_contacts_button").click(function() {
   // form id
-  var id = "new_invite";
-  var errors_list = [];
+  // var id = "new_invite";
+  // var errors_list = [];
 
-  $("#" + id + " :input").map(function(){
-      if( !$(this).val() ) {
-        errors_list.push($(this).attr("data-error-message"));
-      }
-  });
+  // $("#" + id + " :input").map(function(){
+  //     if( !$(this).val() ) {
+  //       errors_list.push($(this).attr("data-error-message"));
+  //     }
+  // });
 
-  if(errors_list.length > 0){
-      alert(errors_list.join(", "));
-  } else {
+  // if(errors_list.length > 0){
+  //     alert(errors_list.join(", "));
+  // } else {
     // action to be performed if form is completely filled
     $('#myModal').foundation('reveal', 'open');
-  }
+  // }
 })
 </script>
