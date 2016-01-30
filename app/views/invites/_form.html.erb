@@ -21,12 +21,12 @@
    </div>
    <div class="medium-2 small-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_start_hour]" data-error-message="Start hour" id="invite_start_hour" placeholder="Hour"></p>
+     <p><input type="text" name="invite[invite_start_hour]" data-error-message="Start hour" id="invite_start_hour" placeholder="Hour" class="integers"></p>
 
    </div>
    <div class="medium-2 small-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_start_minute]" data-error-message="Start min" id="invite_start_minute" placeholder="Min"></p>
+     <p><input type="text" name="invite[invite_start_minute]" data-error-message="Start min" id="invite_start_minute" placeholder="Min" value="00"></p>
 
    </div>
    <div class="medium-2 small-3 columns">
@@ -49,12 +49,12 @@
    </div>
    <div class="medium-2 small-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_end_hour]" data-error-message="End hour" id="invite_end_hour" placeholder="Hour"></p>
+     <p><input type="text" name="invite[invite_end_hour]" data-error-message="End hour" id="invite_end_hour" placeholder="Hour" class="integers"></p>
 
    </div>
    <div class="medium-2 small-2 columns date-range">
 
-     <p><input type="text" name="invite[invite_end_minute]" data-error-message="End min" id="invite_end_minute" placeholder="Min"></p>
+     <p><input type="text" name="invite[invite_end_minute]" data-error-message="End min" id="invite_end_minute" placeholder="Min"  value="00"></p>
 
    </div>
    <div class="medium-2 small-3 columns">
@@ -119,13 +119,14 @@
  <script>
  document.cookie = "oauth_provider=hotmail";
 
- $("#myModal2").click(function() {
-   document.cookie = "oauth_provider=google";
-   });
  $("#hotmailLogin").click(function() {
    document.cookie = "oauth_provider=hotmail";
  });
-
+$(function() {
+   $("#googleLogin").click(function() {
+     document.cookie = "oauth_provider=google";
+   });
+});
  function addCookie(cname, value) {
   document.cookie= cname + "=" + value;
 
@@ -182,7 +183,7 @@ function delete_cookie( name ) {
   <div class="row">
      <div class="large-2 small-6 columns">
 
-        <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", class: "modal-image") %></a>
+        <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", class: "modal-image", id: "googleLogin") %></a>
 
      </div>
      <div class="large-1 small-0 columns">

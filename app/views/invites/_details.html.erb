@@ -7,8 +7,8 @@
 </div>
 <div class="details">
 	<p class="title"> Event Name: <%= invite.name %> </p>
-	<p> Starting: <%= invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
-	<p> Ending: <%= invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+	<p> Starting: <%= invite.start_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %> </p>
+	<p> Ending: <%= invite.end_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %></p>
 	<p> Address: <%= invite.address %> </p>
 	<div class="hide_scrollbar">
 		<div class="scroll">

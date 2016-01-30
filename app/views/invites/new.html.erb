@@ -49,13 +49,16 @@ function auth() {
 }
 
 var contacts = "";
+var owner = "";
 function fetchGoogleContacts(token) {
   $.ajax({
     url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
     dataType: 'jsonp',
     data: token
   }).done(function(data) {
-
+    console.log(data);
+    owner = data["feed"]["author"][0]["email"]["$t"];
+    console.log(owner);
     populateContacts(data);
   });
 }
@@ -221,8 +224,10 @@ $('body').delegate('#continue-button', 'click', function() {
     var invitedString = invited.toString().replace(/,/g, " ");
     console.log(invitedString);
     var newCookie = 'invited=' + invitedString + ';'
+    var ownerCookie = "ownerEmail=" + owner;
     // console.log(newCookie);
     document.cookie = newCookie;
+    document.cookie = ownerCookie;
 });
 
 $('body').delegate('.form_submit', 'click', function() {
@@ -329,5 +334,4 @@ console.log("here");
   $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
 }
   </script> 
-
 <% end %>

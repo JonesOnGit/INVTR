@@ -43,7 +43,6 @@ class InvitesController < ApplicationController
 	end
 
 	def create
-		# binding.pry
 		@invite = Invite.new(parse_params) 
 
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
@@ -175,7 +174,6 @@ class InvitesController < ApplicationController
 	    	
 	    	ip["start_date"] = start_date
 	    	ip["end_date"] = end_date
-	    	
 	    	return ip
 	    end
 
@@ -183,11 +181,9 @@ class InvitesController < ApplicationController
 	    	ip.delete("invite_start_date")
 	    	ip.delete("invite_start_minute")
 	    	ip.delete("invite_start_hour")
-	    	ip.delete("invite_start_am_pm")
 	    	ip.delete("invite_end_date")
 	    	ip.delete("invite_end_minute")
 	    	ip.delete("invite_end_hour")
-	    	ip.delete("invite_end_am_pm")
 	    	return ip
 	    end
 

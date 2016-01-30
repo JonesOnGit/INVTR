@@ -29,7 +29,8 @@ class Invite
 	field :oauth_provider, type: String
 	field :noauth_password, type: String
 	field :messages, type: String
-	field :am_pm, type: String
+	field :invite_start_am_pm, type: String
+	field :invite_end_am_pm, type: String
 
 
 	validates :name, length: { maximum: 150 }
