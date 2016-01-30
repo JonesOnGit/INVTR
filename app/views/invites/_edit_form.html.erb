@@ -171,23 +171,26 @@ $("#end_datepicker").click(function() {
 
 <div id="invite-list" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 <div id="no-overflow">
+<% if @invite.oauth_provider == "google" or @invite.oauth_provider == "hotmail" %>
 <p class='modal_title'>Choose your service provider (easiest)</p>
 <div class="row" id="pull-left">
    <div class="large-2 columns">
+   <% if @invite.oauth_provider == "google" %>
 
       <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %></a>
 
-   </div>
-   <div class="large-1 columns">
-   <p> </p>
-   </div> 
-   <div class="large-2 columns">
-    <a class="logo_button" href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
 
-   </div> 
-   <div class="large-6 columns">
-   </div> 
-</div></a>
+  <% end %>
+
+
+  <% if @invite.oauth_provider == "hotmail" %>
+  <a class="logo_button" href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
+  <% end %>
+
+   </div>
+
+</div>
+<% end %>
 
   <br><br>
   <div class="white_background">

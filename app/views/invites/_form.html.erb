@@ -322,6 +322,51 @@ $("#end_datepicker").click(function() {
 </script>
 
 <script>
+var lastStartHour = "";
+$('#invite_start_hour').on('input',function(e){
+    if ($("#invite_start_hour").val() == "") {
+      $("invite_start_hour").val("")
+      lastStartHour = "";
+
+    } else {
+      try {
+        var value = $("#invite_start_hour").val().replace(/\D/g, '' )
+
+        var startInt = parseInt(value);
+        if (startInt <= 13) {
+          lastStartHour = value;
+          $("#invite_start_hour").val(lastStartHour);
+        } else {
+          $("#invite_start_hour").val(lastStartHour);
+        }
+      } catch(err) {
+        $("#invite_start_hour").val(lastStartHour);
+      }
+    }
+ });
+
+var lastStartHour = "";
+$('#invite_end_hour').on('input',function(e){
+    if ($("#invite_end_hour").val() == "") {
+      $("invite_end_hour").val("")
+      lastStartHour = "";
+
+    } else {
+      try {
+        var value = $("#invite_end_hour").val().replace(/\D/g, '' )
+
+        var startInt = parseInt(value);
+        if (startInt <= 13) {
+          lastStartHour = value;
+          $("#invite_end_hour").val(lastStartHour);
+        } else {
+          $("#invite_end_hour").val(lastStartHour);
+        }
+      } catch(err) {
+        $("#invite_end_hour").val(lastStartHour);
+      }
+    }
+ });
 // form id button
 $("#choose_contacts_button").click(function() {
   // form id

@@ -107,17 +107,32 @@ function populateContacts(data) {
 
         $("#myModal2-table-body").append("<td>");
 
-        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
-        $("#myModal2-table-body").append("</td>");
-        $("#myModal2-table-body").append("<td>");
+        if ($.inArray(nameObj[nameArr[i]], invited) > -1) {
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "' checked/><label for='" + nameObj[nameArr[i]] + "'></label>");
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<td>");
 
-        $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
-        $("#myModal2-table-body").append("<br/>");
+          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+          $("#myModal2-table-body").append("<br/>");
 
-        $("#myModal2-table-body").append(nameObj[nameArr[i]]);
-      
-        $("#myModal2-table-body").append("</td>");
-        $("#myModal2-table-body").append("<tr>");
+          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+          
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<tr>");
+        } else {
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<td>");
+
+          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+          $("#myModal2-table-body").append("<br/>");
+
+          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+          
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<tr>");
+        }
+
 
       }
     }
@@ -174,7 +189,12 @@ function populateSearch(d, guests) {
 
         $("#myModal2-table-body").append("<td>");
 
-         $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+        if ($.inArray(nameObj[nameArr[i]], invited) > -1) {
+
+         $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "' checked/><label for='" + nameObj[nameArr[i]] + "'></label>");
+       } else {
+        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+       }
         $("#myModal2-table-body").append("</td>");
         $("#myModal2-table-body").append("<td class='full-width'>");
 
