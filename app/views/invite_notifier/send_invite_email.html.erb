@@ -459,12 +459,12 @@ body {
   </div>
   </div>
   </div>
-  <div id="buttons" style="width: 32em;margin-left: 2%;margin-top: 0.5%;">
-    <a href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
+  <div id="buttons" style="width: 32em;margin-left: 2em;margin-top: 0.5%;">
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal" style="width: 33%">ACCEPT</a>
 
-    <a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal" style="width: 33%">DECLINE</a>
 
-    <a href="<%= @current_url %>/invites/<%= @invite.id %>/report" class="button email_button" id="right_button" data-reveal-id="myModal">REPORT</a>
+    <a href="<%= @current_url %>/invites/<%= @invite.id %>/report" class="button email_button" id="right_button" data-reveal-id="myModal" style="width: 33%">REPORT</a>
   </div>
   </body>
 </html>
