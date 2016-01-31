@@ -5,7 +5,8 @@ class Ad
 	include Mongoid::Paperclip
 
 	has_mongoid_attached_file :avatar, styles: {
-		half: '500x500>'
+		half: '500x500>',
+		small: '100x100'
 	}
 	has_mongoid_attached_file :mobile
 

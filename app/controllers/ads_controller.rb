@@ -52,7 +52,7 @@ class AdsController < ApplicationController
 			@ad.last_served = DateTime.now
 			@ad.save
 			session[:ad] = @ad
-			session[:desktop_image] = @ad.avatar.url(:half)
+			session[:desktop_image] = @ad.avatar.url(:small)
 			session[:mobile_image] = @ad.mobile.url
 			if type == "mobile"
 				session[:image] = @ad.mobile.url
