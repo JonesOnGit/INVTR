@@ -32,6 +32,29 @@
   <% end %>
 <% end %>
 
+<% if @invite.owner == @email and @invite.email_validated == false %>
+
+<div id="check-email" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <p>Check your email!</p>
+  <br>
+  <p>To ensure you're a real person, we need to confirm via email. Then we'll send your invites out straight away!</p>
+  <div class="large-9 columns move_down">
+  </div>
+
+  <div class="large-3 columns move_down">
+    <a class='button' id='close-button'>Done</a>
+  </div>
+</div>
+<script>
+  $('#check-email').foundation('reveal','open');
+  $("#close-button").click(function() {
+    $('#check-email').foundation('reveal','close');
+
+  })
+</script>
+
+<% end %>
+
 </div>
 
 
