@@ -35,6 +35,7 @@ class Invite
 	field :email_validated, type: Boolean, default: false
 
 
+
 	validates :name, length: { maximum: 150 }
 	validates :description, length: { maximum: 1000 }
 
@@ -130,13 +131,11 @@ class Invite
 	end
 
 	def get_timezone
-		# proxy = ENV['HTTP_PROXY']
-		# client = HTTPClient.new(proxy)
-		# target = "https://maps.googleapis.com/maps/api/timezone/json?location=#{self.coordinates[1]},#{self.coordinates[0]}&timestamp=1"
-		# result = client.get_content(target)
-		# parsed = JSON.parse(result)
-		# self.timezone = parsed["timeZoneId"]
-		self.timezone = "EST"
-
+		proxy = ENV['HTTP_PROXY']
+		client = HTTPClient.new(proxy)
+		target = "https://maps.googleapis.com/maps/api/timezone/json?location=#{self.coordinates[1]},#{self.coordinates[0]}&timestamp=1"
+		result = client.get_content(target)
+		parsed = JSON.parse(result)
+		self.timezone = parsed["timeZoneId"]
 	end
 end
