@@ -4,7 +4,7 @@ class Ad
 	include Geocoder::Model::Mongoid
 	include Mongoid::Paperclip
 
-	has_mongoid_attached_file :avatar, styles : {
+	has_mongoid_attached_file :avatar, styles: {
 		half: '500x500>'
 	}
 	has_mongoid_attached_file :mobile
