@@ -65,6 +65,8 @@ class InvitesController < ApplicationController
 			else
 				@invite.send_invites(request.base_url)
 				@invite.send_owner_invite(request.base_url)
+				@invite.email_validated = true
+				@invite.save
 			end
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)

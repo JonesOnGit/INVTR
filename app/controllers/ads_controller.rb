@@ -64,7 +64,7 @@ class AdsController < ApplicationController
 				f = open(session[:image])
 				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
 			rescue
-				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56ad/6d85/1bcc/9800/0900/0000/small/IMAGE_SP.jpg?1454206340")
+				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56ad/6d85/1bcc/9800/0900/0000/original/IMAGE_SP.jpg?1454206340")
 				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
 			end
 			send_file f, :type => 'image/jpeg', :disposition => 'inline'
