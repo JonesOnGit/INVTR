@@ -147,11 +147,11 @@ function delete_cookie( name ) {
     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
     <div id="no-overflow">
-         <div class="large-3 columns">
+         <div class="large-3 small-6 columns">
            Gmail <%= image_tag("gmail", size: "60x60") %>
          </div>
 
-         <div class="large-9 columns">
+         <div class="large-9 small-6 columns">
            <input type="text" name="search-autocomplete" id="search-autocomplete" placeholder="Search"><br>
          </div>
 
@@ -187,11 +187,15 @@ function delete_cookie( name ) {
         <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", class: "modal-image", id: "googleLogin") %></a>
 
      </div>
-     <div class="large-1 small-0 columns">
+     <div class="large-4 small-0 columns">
+     </div>
+
+     <div class="large-2 small-6 columns left-margin">
+     <a class="logo_button" href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", class: "modal-image") %></a>
      <p> </p>
      </div> 
 
-     <div class="large-6 small-0 columns">
+     <div class="large-4 small-0 columns">
      </div> 
   </div>
 </a>
