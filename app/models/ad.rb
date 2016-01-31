@@ -4,7 +4,9 @@ class Ad
 	include Geocoder::Model::Mongoid
 	include Mongoid::Paperclip
 
-	has_mongoid_attached_file :avatar
+	has_mongoid_attached_file :avatar, styles : {
+		half: '500x500>'
+	}
 	has_mongoid_attached_file :mobile
 
 	field :name, type: String
@@ -22,11 +24,10 @@ class Ad
 	def self.random
 		@ads = Ad.where(active: true)
 		count = @ads.count
-		binding.pry
 		return @ads[rand(count)].avatar.url
 	end
 
 	def self.next
-		Ad.where({'end_date' => {'$gt' => DateTime.now}}).where({'start_date' => {'$lt' => DateTime.now}}).order_by( [[ :last_served, :asc ]]).first
+		Ad.where({'end_date' => {'$gte' => DateTime.now}}).where({'start_date' => {'$lte' => DateTime.now}}).order_by( [[ :last_served, :asc ]]).first
 	end
 end
