@@ -4,11 +4,11 @@
     <%= render 'details', invite: @invite %>
 </div>
 <div id="buttons">
-<% if @invite.owner == @email %>
+<% if @invite.owner == @email and @invite.email_validated %>
   <a class="button inviter_button" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
   <%= link_to 'Edit', edit_invite_path(@invite), class: "button inviter_button", id: "right_button" %>
 
-<% else %>
+<% elsif @invite.email_validated %>
   <% if @invite.oauth_provider == "none" %>
     <a href="#" data-reveal-id="myModal" id="right_button" class="button inviter_button">Enter Password</a>
 

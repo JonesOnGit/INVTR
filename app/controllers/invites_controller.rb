@@ -50,10 +50,7 @@ class InvitesController < ApplicationController
 		if cookies[:oauth_provider] == "none"
 			@invite.noauth_password = Digest::SHA1.hexdigest(@invite.to_s)[0..5]
 		end
-		# @invite.invited = cookies["invited"].split(/ /)
 		@invite.owner = session[:user_email] || cookies[:ownerEmail]
-		# binding.pry
-		# binding.pry
 		if @invite.save
 			session[:user_email] = @invite.owner
 			begin
