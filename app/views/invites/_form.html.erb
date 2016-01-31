@@ -224,6 +224,18 @@ function delete_cookie( name ) {
 
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   </div>
+
+  <div id="validation-errors" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <p class="lead">Missing Info</p>
+    <p id='reveal-errors'>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+    <div class="large-9 columns move_down">
+      <p><small></small></p>
+    </div>
+
+    <div class="large-3 columns move_down">
+      <a class='button' id='continue-button'>Ok</a>
+    </div>
+  </div>
 </div>
 
  <script>
@@ -368,22 +380,25 @@ $('#invite_end_hour').on('input',function(e){
     }
  });
 // form id button
+
 $("#choose_contacts_button").click(function() {
   // form id
-  // var id = "new_invite";
-  // var errors_list = [];
+  var id = "new_invite";
+  var errors_list = [];
 
-  // $("#" + id + " :input").map(function(){
-  //     if( !$(this).val() ) {
-  //       errors_list.push($(this).attr("data-error-message"));
-  //     }
-  // });
+  $("#" + id + " :input").map(function(){
+      if( !$(this).val() ) {
+        errors_list.push($(this).attr("data-error-message"));
+      }
+  });
 
-  // if(errors_list.length > 0){
-  //     alert(errors_list.join(", "));
-  // } else {
+  if(errors_list.length > 0){
+      $("#reveal-errors").text(errors_list.join(", "));
+      $('#validation-errors').foundation('reveal', 'open');
+
+  } else {
     // action to be performed if form is completely filled
     $('#myModal').foundation('reveal', 'open');
-  // }
+  }
 })
 </script>

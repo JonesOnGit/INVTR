@@ -28,9 +28,11 @@ class Invite
 	field :owner, type: String
 	field :oauth_provider, type: String
 	field :noauth_password, type: String
+	field :noauth_token, type: String
 	field :messages, type: String
 	field :invite_start_am_pm, type: String
 	field :invite_end_am_pm, type: String
+	field :email_validated, type: Boolean, default: false
 
 
 	validates :name, length: { maximum: 150 }
@@ -43,6 +45,15 @@ class Invite
 		self.invited.each do |invite_email|
 			InviteNotifier.send_invite_email(url, invite_email, self).deliver
 		end
+	end
+
+	def send_noauth_validation(url)
+		InviteNotifier.send_noauth_validation(url, self).deliver
+	end
+
+	def generate_token
+		self.noauth_token = SecureRandom.uuid
+		self.save
 	end
 
 	def send_updates(url)

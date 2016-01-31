@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get '/session_image' => 'ads#session_image'
 
+  get '/invites/:noauth_token/validate' => 'invites#validate'
+
 
   namespace :admin do
     root 'admin#index'

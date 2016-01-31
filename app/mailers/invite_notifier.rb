@@ -31,4 +31,11 @@ class InviteNotifier < ActionMailer::Base
 		mail(:to => to,
 			:subject => @invite.name)
 	end
+
+	def send_noauth_validation(current_url = "http://localhost:3000/", invite)
+		@current_url = current_url
+		@invite = invite
+  		mail( :to => @invite.owner,
+  		:subject => 'Please validate' )
+	end
 end

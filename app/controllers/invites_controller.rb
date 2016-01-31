@@ -62,8 +62,13 @@ class InvitesController < ApplicationController
 			end
 			session[:contacts] = nil
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
-			@invite.send_invites(request.base_url)
-			@invite.send_owner_invite(request.base_url)
+			if @invite.oauth_provider == "none"
+				@invite.generate_token
+				@invite.send_noauth_validation(request.base_url)
+			else
+				@invite.send_invites(request.base_url)
+				@invite.send_owner_invite(request.base_url)
+			end
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else
@@ -107,6 +112,16 @@ class InvitesController < ApplicationController
         #TODO set a better redirect
         redirect_to new_invite_path
         # redirect_to root_path
+	end
+
+	def validate
+		@invite = Invite.find_by(noauth_token: params[:noauth_token])
+		@invite.email_validated = true
+		@invite.save
+		@invite.send_invites(request.base_url)
+		@invite.send_owner_invite(request.base_url)
+		session[:user_email] = @invite.owner
+		redirect_to invite_path(@invite)
 	end
 
 	def accept
