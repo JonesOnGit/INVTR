@@ -6,7 +6,7 @@
 
   </head>
  
-  <body font-family: 'Montserrat', sans-serif;>
+  <body>
   <style> 
   body {
     font-family: 'Montserrat';
@@ -20,7 +20,7 @@
   }
 
   </style>
-  <div id="logo" style="font-size: 2em;">INVTR</div>
+  <div id="logo" style="font-size: 2em; margin-left:1em;">INVTR</div>
   <div style='margin-left: 2em;'>
   <div class="inviter" style="padding-bottom: 0.5%;border-radius: 10px;margin-top: 1%;width: 500px; background-color: white; border: solid;">
   <div class="row">
@@ -48,12 +48,12 @@
   </div>
   </div>
   </div>
-  <div id="buttons" style="width: 32em;margin-left: 2em;margin-top: 0.5%;">
-    <a style="font-family:sans-serif;font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:275px;margin:12px auto;border-radius:4px;text-align:center;color:white;text-decoration:none;padding:12px 5px 11px;font-weight:700;display:block;text-transform:uppercase;letter-spacing:0.075em" href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal" style="width: 33%">ACCEPT</a>
+  <div id="buttons" style="width: 32em;margin-left: 2em;margin-top: 1%;">
+    <a style="display:inline;font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:166px !important;margin:12px auto;border-radius:4px;text-align:center;color:white;text-decoration:none;padding:12px 5px 11px;font-weight:700;text-transform:uppercase;letter-spacing:0.075em;" href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
 
-    <a style="font-family:sans-serif;font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:275px;margin:12px auto;border-radius:4px;text-align:center;color:white;text-decoration:none;padding:12px 5px 11px;font-weight:700;display:block;text-transform:uppercase;letter-spacing:0.075em" href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal" style="width: 33%">DECLINE</a>
+    <a style="display: inline;font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:166px !important;margin:12px auto;border-radius:4px;text-align:center;color:white;text-decoration:none;padding:12px 5px 11px;font-weight:700;text-transform:uppercase;letter-spacing:0.075em;" href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
 
-    <a style="font-family:sans-serif;font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:275px;margin:12px auto;border-radius:4px;text-align:center;color:white;text-decoration:none;padding:12px 5px 11px;font-weight:700;display:block;text-transform:uppercase;letter-spacing:0.075em" href="<%= @current_url %>/invites/<%= @invite.id %>/report" class="button email_button" id="right_button" data-reveal-id="myModal" style="width: 33%">REPORT</a>
+    <a style="display:inline;font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:166px !important;margin:12px auto;border-radius:4px;text-align:center;color:white;text-decoration:none;padding:12px 5px 11px;font-weight:700;text-transform:uppercase;letter-spacing:0.075em;" href="<%= @current_url %>/invites/<%= @invite.id %>/report" class="button email_button" id="right_button" data-reveal-id="myModal">REPORT</a>
   </div>
   </body>
 </html>
