@@ -11,7 +11,7 @@ module ApplicationHelper
 		end
 		if session[:image] and session[:image_time] > DateTime.now - 1.second
 			@image = session[:image]
-			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: "desktop")
+			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: session[:type])
 		else
 			@ad = Ad.next
 			session[:ad] = @ad
@@ -25,7 +25,7 @@ module ApplicationHelper
 			end
 
 			session[:image_time] = now
-			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: "desktop")
+			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: session[:type])
 
 			@image = session[:image]
 		end
