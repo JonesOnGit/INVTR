@@ -1,5 +1,10 @@
 <div id="inviter">
 	<%= render 'details', invite: @invite %>
-	<p>This invite has been marked as reported. If you would like to leave an explanation, please do so below</p>
+	<div class="row">
+		<div class="medium-12 columns">
+
+			<p>This invite has been marked as reported. If you would like to leave an explanation, please do so below</p>
+		</div>
+	</div>
 	<%= render 'report_form', invite: @invite, url: "/invites/#{@invite.id}/report" %>
 </div>

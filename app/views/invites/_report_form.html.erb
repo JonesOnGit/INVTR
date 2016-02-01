@@ -1,13 +1,13 @@
 <%= simple_form_for invite, url: url do |f| %>
  <div class="margin-top row">
    <div class="medium-12 columns">
-     <%= f.input :reports, input_html: { value: '' } %>
+     <%= f.input :reports, label: "Enter report below", input_html: { value: '' } %>
    </div>
  </div>
-
+<br>
  <div class="row">
    <div class="large-12 columns">
-     <%= f.button :submit %>
+     <%= f.button :submit, "Submit Report" %>
    </div>
  </div>
 <% end %>
