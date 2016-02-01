@@ -308,6 +308,7 @@ function delete_cookie( name ) {
               }
               reader.readAsDataURL(this.files[0]);
               $("#image-section").empty();
+              $("#image-section").css("background", "white");
               $("#image-section").append(img);
       
     });
