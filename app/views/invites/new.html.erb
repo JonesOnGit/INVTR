@@ -66,7 +66,8 @@ function populateContacts(data) {
   var arr = new Array();
   var nameArr = new Array();
   var nameObj = {};
-
+  var errCount = 0;
+  var errArr = [];
   var d = data["feed"]["entry"];
   contacts = d;
   $.each(d, function(i, obj) {
@@ -74,23 +75,27 @@ function populateContacts(data) {
     try {
       var email = obj["gd$email"][0]["address"].toLowerCase();
       var name = obj["title"]["$t"];
-      var img = obj["link"][0]["href"];
 
       arr.push(email);
       if (name != "") {
         nameArr.push(name.toProperCase());
         nameObj[name] = email;
-        nameObj[email] = img;
       }
       
     } catch(err) {
-
+      if ($.inArray(err.message, errArr) == -1)  {
+        errArr.push(err.message)
+      } 
+      errCount += 1;
     }
   });
   console.log("total length");
   console.log(data["feed"]["entry"].length  )
   console.log("array length");
   console.log(arr.length);
+  console.log("ec: " + errCount);
+  console.log("ea: " + errArr.length);
+  console.log(errArr);
   arr.sort();
   nameArr.sort()
   var count = 0;
@@ -154,14 +159,12 @@ function populateSearch(d, guests) {
     try {
       var email = obj["gd$email"][0]["address"].toLowerCase();
       var name = obj["title"]["$t"];
-      var img = obj["link"][0]["href"];
       if (guests.indexOf(name) != -1){
         count += 1;
         arr.push(email);
         if (name != "") {
           nameArr.push(name.toProperCase());
           nameObj[name] = email;
-          nameObj[email] = img;
         }
       }
       

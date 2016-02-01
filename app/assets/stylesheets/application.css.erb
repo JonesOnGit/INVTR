@@ -34,7 +34,7 @@ body {
     margin-top: 0.75em;
     width: 32em;
     background: white;
-    box-shadow: 0em 0em 1em .2em #cccccc;
+    box-shadow: 0em 0em 1em .2em #a6a6a6;
 
 }
 
@@ -63,7 +63,7 @@ body {
 
 .modal-image {
     width: 200px !important;
-    height: 120px;
+    height: 122px;
 }
 
 .invite-image {
@@ -108,8 +108,14 @@ body {
     border-radius: 0.8em !important;
     background: #94C6EA;
     font-weight: bold;
-    letter-spacing: 0.06em;
-    box-shadow: 0em 0em 1em .2em #cccccc;
+    letter-spacing: 0.1em;
+    box-shadow: 0em 0em 1em .2em #a6a6a6;
+    text-indent: -0.4em !important;
+    text-align: center;
+}
+
+.lower {
+    margin-top: 2em !important;
 }
 
 .tall {
@@ -145,6 +151,16 @@ textarea {
     resize: none;
     border: none;
     margin-bottom: -1%;
+}
+
+.make_event_below {
+    text-align: center;
+    font-size: 250%;
+    color: gray;
+}
+
+.make_event_div {
+    display: none;
 }
 
 
@@ -379,7 +395,18 @@ label.file_optional {
     .left-margin {
         margin-top: -1em !important;
     }
+    .inviter_button {
+        width: 100%;
+    }
+    #submit_button, .see_stats {
+        margin-bottom: 0.1em !important;
+    }
+
+    .make_event_div {
+        display: block;
+    }
 }
+
 
 .left-margin {
     margin-left: 4em;
@@ -542,6 +569,6 @@ small {
     background: #94C6EA !important;
     font-weight: bold !important;
     letter-spacing: 0.06em !important;
-    box-shadow: 0em 0em 1em .2em #cccccc !important;
+    box-shadow: 0em 0em 1em .2em #a6a6a6 !important;
     color: white;
 }

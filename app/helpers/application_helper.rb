@@ -9,6 +9,7 @@ module ApplicationHelper
 		if request.env['HTTP_USER_AGENT'].include? "Android" or request.env['HTTP_USER_AGENT'].include? "iPhone"
 			session[:type] = "mobile"
 		end
+		session[:type] = "mobile"
 		if session[:image] and session[:image_time] > DateTime.now - 1.second
 			@image = session[:image]
 			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: session[:type])

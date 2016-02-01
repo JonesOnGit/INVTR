@@ -5,7 +5,7 @@
 </div>
 <div id="buttons">
 <% if @invite.owner == @email and @invite.email_validated %>
-  <a class="button inviter_button" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
+  <a class="button inviter_button see_stats" onclick="loadContacts();" data-reveal-id="myModal2">See Stats</a>
   <%= link_to 'Edit', edit_invite_path(@invite), class: "button inviter_button", id: "right_button" %>
 
 <% elsif @invite.email_validated %>

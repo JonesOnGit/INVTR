@@ -2,7 +2,9 @@
 <div id="inviter">
 
 <%= simple_form_for invite, url: url do |f| %>
-
+<div class="make_event_div">
+<p class="make_event_below">Make Event Below</p>
+</div>
  <div class="row">
    <div id="image-section" class="center-cropped" style="overflow:hidden;">
    </div>
@@ -101,7 +103,7 @@
 
   <div class="row">
    <div class="medium-12 columns">
-     <%= f.input :allow_others, label: "Guests can invite friends", as: :boolean, input_html: { "data-error-message" => "Allow others"} %>
+     <%= f.input :allow_others, label: "Guests can invite friends", as: :boolean, input_html: { "data-error-message" => "Allow others", class: "lower"} %>
    </div>
  </div>
 
@@ -259,9 +261,9 @@ function delete_cookie( name ) {
         var invites = emailsString.match(/,/g) || [];
         var len = invites.length + 1
         if (len == 1) {
-          $("#submit_button").text("Send to 1 invite");
+          $("#submit_button").text("SEND TO 1 INVITE");
         } else {
-          $("#submit_button").text("Send to " + len + " invites");
+          $("#submit_button").text("SEND TO " + len + " INVITES");
         }
         $("#submit_button").show()
         $("#submit_button").addClass("form_submit");
