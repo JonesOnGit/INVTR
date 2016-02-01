@@ -42,7 +42,6 @@ function auth() {
   };
   gapi.auth.authorize(config, function() {
     var token = gapi.auth.getToken();
-    // console.log(token)
     token['g-oauth-window'] = null;
     fetchGoogleContacts(token);
   });
@@ -88,14 +87,16 @@ function populateContacts(data) {
 
     }
   });
-
+  console.log("total length");
+  console.log(data["feed"]["entry"].length  )
+  console.log("array length");
+  console.log(arr.length);
   arr.sort();
   nameArr.sort()
   var count = 0;
   for (var i in arr) {
     count++
     if (count > -1) {
-      console.log(name)
       if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
         var imageUrl = nameObj[nameObj[nameArr[i]]];
 
@@ -143,7 +144,6 @@ function populateContacts(data) {
 }
 
 function populateSearch(d, guests) {
-  console.log("POPULATE SEARCH");
   var arr = new Array();
   var nameArr = new Array();
   var nameObj = {};
@@ -169,7 +169,6 @@ function populateSearch(d, guests) {
 
     }
   });
-  console.log(count);
   nameArr.sort()
   $("#myModal2-table-body").empty();
 
@@ -226,14 +225,12 @@ $(function() {
     // look in contact.title.$t
     // if the first X characters in contact name = searchInput, add into a 'guests' array.
     // populate table with that array
-    // console.log(contacts[10]["title"]["$t"]);
     guests = [];
     for (var i = 0; i < contacts.length; i++) {
       if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
         guests.push(contacts[i]["title"]["$t"]);
       }
     }
-    console.log(guests);
     populateSearch(contacts, guests);
   });
 });
@@ -242,10 +239,8 @@ $(function() {
 $('body').delegate('#continue-button', 'click', function() {
     $('a.close-reveal-modal').trigger('click');
     var invitedString = invited.toString().replace(/,/g, " ");
-    console.log(invitedString);
     var newCookie = 'invited=' + invitedString + ';'
     var ownerCookie = "ownerEmail=" + owner;
-    // console.log(newCookie);
     document.cookie = newCookie;
     document.cookie = ownerCookie;
 });
@@ -266,14 +261,12 @@ $('body').delegate('.emailCheckbox', 'click', function() {
 
 
     if(this.checked == true) {
-      console.log("add");
       checked += 1;
       if (invited.indexOf(this.name) == -1) {
         invited.push(this.name)
       }
 
     } else {
-      console.log("subtract");
       checked += -1;
       if (invited.indexOf(this.name) != -1) {
         invited.pop(this.name)
@@ -283,14 +276,11 @@ $('body').delegate('.emailCheckbox', 'click', function() {
     
 
     if (checked == 1) {
-      console.log("singular")
       $("#submit_button").text("Send to 1 invite");
     } else if (checked == 0) {
-      console.log("none")
 
       $("#submit_button").text("Send");
     } else {
-      console.log("plural")
 
       // $("#continue-button").text("Send to " + checked + " invites");
     }     
@@ -309,15 +299,12 @@ $('body').delegate('.emailCheckbox', 'click', function() {
 });
 
 $.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8c55-475d-b23b-e3c79c4cdef0", "scope": "https://outlook.office.com/Contacts.Read"}, function( data ) {
-  console.log("get");
-  console.log(data);
 });
 
 </script>
 
 <script>
 $('#myModal').foundation('reveal','open');
-console.log("hh");
 </script> 
 
 <script>
@@ -337,9 +324,7 @@ function getURLParameter(name) {
 }
 
 if (getURLParameter("show_modal") != null) {
-  console.log(getURLParameter("show_modal"))
 
-console.log("here");
   <% @contacts.each do |contact| %>
   $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + '<%=contact["EmailAddresses"][0]["Name"] %>' + "'>");
     $("#myModal").append('<%=contact["EmailAddresses"][0]["Name"] %>  ');
@@ -349,7 +334,6 @@ console.log("here");
     $("#myModal").append("<br>");
 
   <% end %>
-  console.log("2");
   $('#myModal').foundation('reveal','open');
   $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
 }
