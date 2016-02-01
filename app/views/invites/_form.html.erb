@@ -3,7 +3,7 @@
 
 <%= simple_form_for invite, url: url do |f| %>
 <div class="make_event_div">
-<p class="make_event_below">Make Event Below</p>
+  <p class="make_event_below">Make Event Below</p>
 </div>
  <div class="row">
    <div id="image-section" class="center-cropped" style="overflow:hidden;">
@@ -384,22 +384,22 @@ $('#invite_end_hour').on('input',function(e){
 
 $("#choose_contacts_button").click(function() {
   // form id
-  // var id = "new_invite";
-  // var errors_list = [];
+  var id = "new_invite";
+  var errors_list = [];
 
-  // $("#" + id + " :input").map(function(){
-  //     if( !$(this).val() ) {
-  //       errors_list.push($(this).attr("data-error-message"));
-  //     }
-  // });
+  $("#" + id + " :input").map(function(){
+      if( !$(this).val() ) {
+        errors_list.push($(this).attr("data-error-message"));
+      }
+  });
 
-  // if(errors_list.length > 0){
-  //     $("#reveal-errors").text(errors_list.join(", "));
-  //     $('#validation-errors').foundation('reveal', 'open');
+  if(errors_list.length > 0){
+      $("#reveal-errors").text(errors_list.join(", "));
+      $('#validation-errors').foundation('reveal', 'open');
 
-  // } else {
+  } else {
     // action to be performed if form is completely filled
     $('#myModal').foundation('reveal', 'open');
-  // }
+  }
 })
 </script>
