@@ -39,57 +39,8 @@ class AdsController < ApplicationController
 		redirect_to admin_root_path
 	end
 
-	def session_image
-		# check if session image exists
-		# if not, load random image and save as session image
-		# set sesstion to expire in one hour
-		# log which add was used
-		type = "desktop"
-		type = "mobile" if params[:type] == "mobile"
-		session[:type] = type
-		if session[:ad].nil? or session[:image].nil? or session[:image_time].nil? or session[:image_time] < DateTime.now - 1.hour
-			@ad = Ad.next
-			@ad.last_served = DateTime.now
-			@ad.save
-			session[:ad] = @ad
-			session[:desktop_image] = @ad.avatar.url
-			session[:mobile_image] = @ad.mobile.url
-			if type == "mobile"
-				session[:image] = @ad.mobile.url
-			else
-				session[:image] = @ad.avatar.url
-			end
-			session[:image_time] = DateTime.now
-			begin
-				f = open(session[:image])
-				Log.create(type: "Ad", action: "show", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
-			rescue
-				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56ad/6d85/1bcc/9800/0900/0000/original/IMAGE_SP.jpg?1454206340")
-				Log.create(type: "Ad", action: "show_alternate", data: @ad.to_json, ip: request.ip, ad_id: @ad.id, ad_size: type)
-			end
-			send_file f, :type => 'image/jpeg', :disposition => 'inline'
-			return
-		else
-			begin
-				if type == "mobile"
-					session[:image] = session[:mobile_image]
-				else
-					session[:image] = session[:desktop_image]
-				end
-				f = open(session[:image])
-				Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
-			rescue
-				f = open("http://s3.amazonaws.com/invtr/ads/avatars/56ad/6d85/1bcc/9800/0900/0000/original/IMAGE_SP.jpg?1454206340")
-				Log.create(type: "Ad", action: "show_alternate", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: type)
-			end
-			send_file f, :type => 'image/jpeg', :disposition => 'inline'
-			return
-		end
-	end
-
-	
 	def ad_params
-	    params.require(:ad).permit(:name,:start_date,:end_date,:desc,:redirect_url,:avatar, :mobile)
+	    params.require(:ad).permit(:name,:start_date,:end_date,:desc,:redirect_url,:desktop_location, :mobile_location)
 	end
 
 	def parse_params

@@ -1,15 +1,5 @@
 <%= simple_form_for ad, url: url do |f| %>
 <div id="inviter">
-<h3>Desktop Image</h3>
- <div class="row">
-   <div id="image-section" class="center-cropped" style="overflow:hidden;">
-   </div>
- </div>
- <h3>Mobile Image</h3>
- <div class="row">
-   <div id="mobile-image-section" class="center-cropped" style="overflow:hidden;">
-   </div>
- </div>
  <div class="margin-top row">
    <div class="medium-12 columns">
      <%= f.input :name, label: "", placeholder: "Ad name" %>
@@ -30,26 +20,23 @@
      <%= f.input :end_date, as: :date %>
    </div>
  </div>
-
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :mobile_location, label: "", placeholder: "mobile location" %>
+   </div>
+ </div>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :desktop_location, label: "", placeholder: "desktop location" %>
+   </div>
+ </div>
  <div class="margin-top row">
    <div class="medium-12 columns">
      <%= f.input :redirect_url %>
    </div>
  </div>
 
- <div class="margin-top row">
-   <div class="medium-12 columns">
 
-     <%= f.input :mobile, as: :file, label: "Select Mobile Image" %>
-   </div>
- </div>
-
- <div class="margin-top row">
-   <div class="medium-12 columns">
-
-     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload' }, label: "Select Event Image" %>
-   </div>
- </div>
 
 
 
