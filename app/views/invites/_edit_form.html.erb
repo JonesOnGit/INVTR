@@ -1,6 +1,8 @@
 <%= simple_form_for invite, url: url do |f| %>
 <div id="inviter">
-
+<div class="make_event_div">
+  <p class="make_event_below">Edit Event Below</p>
+</div>
  <div class="row">
    <div id="image-section" style="overflow: hidden;">
      <%= image_tag invite.avatar %>
@@ -105,7 +107,7 @@
  </div>
 </div>
 <div id="buttons">
-<a href="#" class="button inviter_button" data-reveal-id="invite-list">ADD GUESTS</a>
+<a href="#" class="button inviter_button mobile_less_bottom_margin" data-reveal-id="invite-list">ADD GUESTS</a>
 
 <a href="#" class="button inviter_button form_submit" id="submit_button" style="float:right;">UPDATE</a>
 </div>

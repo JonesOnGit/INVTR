@@ -240,7 +240,7 @@ $(function() {
 
 
 $('body').delegate('#continue-button', 'click', function() {
-    $('a.close-reveal-modal').trigger('click');
+    $('#myModal').foundation('reveal', 'close');
     var invitedString = invited.toString().replace(/,/g, " ");
     var newCookie = 'invited=' + invitedString + ';'
     var ownerCookie = "ownerEmail=" + owner;
