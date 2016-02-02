@@ -127,6 +127,7 @@ class InvitesController < ApplicationController
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
 		@invite.accept(@email)
+		binding.pry
 		Log.create(type: "Invite", action: "accept", data: {id: @invite.id}, ip: request.ip, invite_id: @invite.id)
 	end
 

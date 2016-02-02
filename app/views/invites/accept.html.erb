@@ -17,6 +17,8 @@
       </div>
     </div>
   </div>
+  <%= @invite.to_ics %>
+  <%= link_to @invite.id, :controller => 'invites', :action => :show, :format => :ics %>
 
 <script type="text/javascript">(function () {
         if (window.addtocalendar)if(typeof window.addtocalendar.start == "function")return;

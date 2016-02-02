@@ -27,35 +27,37 @@
     <div id="image-section" class="center-cropped" style="overflow:hidden;border-radius: 10px; background-size:cover; height: 20em;background-image:url('<%= @invite.avatar.url %>')">
     </div>
   </div>
-  <div class="details" style="margin-left: 1em; margin-right: 1em;">
-    <p class="title"> Event Name: <%= @invite.name %> </p>
-    <p> Starting: <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
-    <p> Ending: <%= @invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
-    <p> Address: <%= @invite.address %> </p>
+  <div class="details" style="margin-left: 2em; margin-right: 2em;">
+    <p class="title" style="font-family: Verdana; color: #737373;"><b> <%= @invite.name %> </b></p>
+    <p style="font-family: Verdana; color: #737373;"> <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <p style="font-family: Verdana; color: #737373;"> <%= @invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <p style="font-family: Verdana; color: #737373;"> <%= @invite.address %> </p>
     <div class="hide_scrollbar">
       <div class="scroll">
-        <p> Details: <%= @invite.description %> </p>
+        <p style="font-family: Verdana; color: #737373;"> <%= @invite.description %> </p>
       </div>
     </div>
     <% if @invite.allow_others %>
-      <p> Guests may allow others </p>
+      <p style="font-family: Verdana; color: #737373;"> Guests may allow others </p>
     <% else %>
-      <p> Invite-only event </p>
+      <p style="font-family: Verdana; color: #737373;"> Invite-only event </p>
     <% end %>
   </div>
   </div>
   </div>
   <br>
+  <br>
   <div id="buttons" style="width: 520px;margin-left:2em;margin-top: 1%;">
-    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:500px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 76px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;" href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
+    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:500px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 76px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;font-family: Verdana;" href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
 
-    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:500px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 76px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;" href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
+    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:500px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 76px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;font-family: Verdana;" href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
   </div>
   <br>
+  <br>
   <div style="margin-left: 2.5em;">
-    <p>INVITE from INVTR</p>
-    <p><a href="http://invtr.co/about">About</a> | This is not a subscription | <a href="http://invtr.co/terms-of-service">Terms of Use</a> | <a href="http://invtr.co/privacy-policy">Privacy</a> | <a href="<%= @current_url %>/invites/<%= @invite.id %>/report?email=<%= @email %>">Report</a></p>
-    <p>HERENOW INC. All rights reserved.</p>
+    <p style="font-family: Verdana; color: #737373;">INVITE from INVTR</p>
+    <p style="font-family: Verdana; color: #737373;"><a href="http://invtr.co/about">About</a> | This is not a subscription | <a href="http://invtr.co/terms-of-service">Terms of Use</a> | <a href="http://invtr.co/privacy-policy">Privacy</a> | <a href="<%= @current_url %>/invites/<%= @invite.id %>/report?email=<%= @email %>">Report</a></p>
+    <p style="font-family: Verdana; color: #737373;">HERENOW INC. All rights reserved.</p>
   </div>
   </body>
 </html>

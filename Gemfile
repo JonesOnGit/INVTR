@@ -32,6 +32,8 @@ gem 'signet'
 
 gem 'unicorn'
 
+gem 'icalendar'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

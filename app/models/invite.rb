@@ -42,6 +42,18 @@ class Invite
 	validates_presence_of :name, :start_date, :end_date, :description, :address, :allow_others
 
 	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+	def to_ics
+	  event = Icalendar::Event.new
+	  event.dtstart = self.start_date.strftime("%Y%m%dT%H%M%S")
+	  event.dtend = self.end_date.strftime("%Y%m%dT%H%M%S")
+	  event.summary = self.name
+	  event.description = self.description
+	  event.location = self.address
+	  event.ip_class = "PRIVATE"
+	  event
+	end
+
 	def send_invites(url)
 		self.invited.each do |invite_email|
 			InviteNotifier.send_invite_email(url, invite_email, self).deliver
