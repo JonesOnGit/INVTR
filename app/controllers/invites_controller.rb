@@ -126,9 +126,10 @@ class InvitesController < ApplicationController
 	def accept
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
+		# test if already accepted
 		@invite.accept(@email)
-		binding.pry
 		Log.create(type: "Invite", action: "accept", data: {id: @invite.id}, ip: request.ip, invite_id: @invite.id)
+
 	end
 
 	def decline

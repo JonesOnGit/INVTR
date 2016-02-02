@@ -4,7 +4,9 @@ class Invite
 	include Geocoder::Model::Mongoid
 	include Mongoid::Paperclip
 
-	has_mongoid_attached_file :avatar
+	has_mongoid_attached_file :avatar, styles: {
+		email: '500x240>'
+	}
 	
 	geocoded_by :address
 	after_validation :geocode
