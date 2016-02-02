@@ -1,3 +1,7 @@
+  <div>
+    <p class="response">You ACCEPTED this invite.</p>
+  </div>
+
   <div id="inviter">
   	<%= render 'details', invite: @invite %>
   </div>
@@ -17,8 +21,6 @@
       </div>
     </div>
   </div>
-  <%= link_to @invite.id, :controller => 'invites', :action => :show, :format => :ics %>
-
 <script type="text/javascript">(function () {
         if (window.addtocalendar)if(typeof window.addtocalendar.start == "function")return;
         if (window.ifaddtocalendar == undefined) { window.ifaddtocalendar = 1;
@@ -26,6 +28,4 @@
             s.type = 'text/javascript';s.charset = 'UTF-8';s.async = true;
             s.src = ('https:' == window.location.protocol ? 'https' : 'http')+'://addtocalendar.com/atc/1.5/atc.min.js';
             var h = d[g]('body')[0];h.appendChild(s); }})();
-
 </script>
-
