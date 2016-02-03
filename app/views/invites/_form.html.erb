@@ -136,20 +136,21 @@
      }, 1000);
  };
  document.cookie = "oauth_provider=hotmail";
-$(function() {
+// $(function() {
 
-   $("#hotmailLogin").click(function() {
-     document.cookie = "oauth_provider=hotmail";
-     $.oauthpopup({
-         path: "<%= login_url %>",
-         callback: function()
-         {
-             log('callback');
-             //do callback stuff
-         }
-     });
-   });
-});
+//    $("#hotmailLogin").click(function() {
+//      document.cookie = "oauth_provider=hotmail";
+//      $.oauthpopup({
+//          path: "<%= login_url.html_safe %>",
+//          callback: function()
+//          {
+//              log('callback');
+//              // respond from auth with data
+//              //do callback stuff
+//          }
+//      });
+//    });
+// });
 $(function() {
    $("#googleLogin").click(function() {
      document.cookie = "oauth_provider=google";
@@ -219,7 +220,7 @@ function delete_cookie( name ) {
      </div>
 
      <div class="large-2 small-6 columns left-margin">
-     <a class="logo_button hotmail_button" href="#"><%= image_tag("hotmail", class: "modal-image", id: "hotmailLogin") %></a>
+     <a class="logo_button hotmail_button" href="<%= login_url.html_safe %>"><%= image_tag("hotmail", class: "modal-image", id: "hotmailLogin") %></a>
      <p> </p>
      </div> 
 

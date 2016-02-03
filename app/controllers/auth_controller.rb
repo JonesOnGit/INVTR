@@ -32,6 +32,7 @@ class AuthController < ApplicationController
 	  email = get_email_from_id_token token.params['id_token']
 	  session[:azure_access_token] = token.token
 	  bearer_token = session[:azure_access_token]
+	  binding.pry
 
 	  session[:user_email] = email
 	  if bearer_token
@@ -61,8 +62,8 @@ class AuthController < ApplicationController
 	       # can sign in.
 	       redirect_to root_url
 	     end
-
-	  redirect_to root_path show_modal: true
+	  binding.pry
+	  respond_with(@contacts, :include => :status)
 	end
 
 	def getsession

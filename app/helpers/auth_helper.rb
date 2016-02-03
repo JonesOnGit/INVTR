@@ -32,7 +32,9 @@ module AuthHelper
 	                              CLIENT_SECRET,
 	                              :site => 'https://login.microsoftonline.com',
 	                              :authorize_url => '/common/oauth2/v2.0/authorize',
-	                              :token_url => '/common/oauth2/v2.0/token')
+	                              :token_url => '/common/oauth2/v2.0/token',
+	  							  :scope => SCOPES.join(' '))
+
 	                              
 	  login_url = client.auth_code.authorize_url(:redirect_uri => authorize_url, :scope => SCOPES.join(' '))
 	end
