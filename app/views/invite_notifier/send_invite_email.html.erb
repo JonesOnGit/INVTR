@@ -20,12 +20,12 @@
   <div style='margin-left: 2em;'>
   <div class="row">
     <p style="font-family: Verdana; color: #737373;font-size: 1.5em;">You invited <%= @invite.invited.length %> guests to:</p>
-    <br><br>
+    <br>
   </div>
   <div class="inviter" style="padding-bottom: 0.5%;border-radius: 10px;margin-top: 1%;width: 500px; background-color: white; border-style: solid;border-width:0.05em;">
 
   <div class="row">
-    <div id="image-section" class="center-cropped" style="overflow:hidden;border-radius: 10px; background-size:cover !important; height: 20em;background-repeat: no-repeat;background-image:url('<%= @invite.avatar.url(:email) %>')">
+    <div id="image-section" class="center-cropped" style="overflow:hidden;border-radius: 10px; background-size:100% 100% !important; height: 20em;background-image:url('<%= @invite.avatar.url(:email) %>')">
     </div>
   </div>
   <div class="details" style="margin-left: 2em; margin-right: 2em;">
