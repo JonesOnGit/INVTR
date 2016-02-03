@@ -15,20 +15,19 @@
     src: local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v6/  zhcz-_WihjSQC0oHJ9TCYPk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
   }
 
-
   </style>
-  <div id="logo" style="font-size: 2em; margin-left:1em;">INVTR</div>
+  <div id="logo" style="font-size: 2em; margin-left:1em;"><img style='width:100px;' src="http://invtr.co/assets/horizontal_logo.png" alt="Hotmail">
+</div>
+  <div style='margin-left: 2em;'>
   <div class="row">
-    <p style="font-family: Verdana; color: #737373;font-size: 1.5em;"><%= @invite.owner %> invites you to:</p>
+    <p style="font-family: Verdana; color: #737373;font-size: 1.5em;">You invited <%= @invite.invited.length %> guests to:</p>
     <br>
   </div>
-  <% if @noauth_password %>
-  <p>My password is <%= @noauth_password %></p>
-  <% end %>
-  <div style='margin-left: 2em;'>
-  <div class="inviter" style="padding-bottom: 0.5%;border-radius: 10px;margin-top: 1%;width: 500px; background-color: white; border-style: solid;border-width:0.05em;">
+  <div class="inviter" style="padding-bottom: 0.5%;border-radius: 10px;margin-top: 1%;width: 465px; background-color: white; border-style: solid;border-width:0.05em;">
+
   <div class="row">
-    <div id="image-section" class="center-cropped" style="overflow:hidden;border-radius: 10px; background-size:cover !important; height: 20em;background-image:url('<%= @invite.avatar.url(:email) %>')">
+    <div id="image-section" class="center-cropped" style="overflow:hidden; border-radius: 10px; background-size:465px 240px !important; max-height: 16.9em;">
+    <img style='width:465px;' src="<%= @invite.avatar.url %>" alt="Hotmail">
     </div>
   </div>
   <div class="details" style="margin-left: 2em; margin-right: 2em;">
@@ -51,10 +50,10 @@
   </div>
   <br>
   <br>
-  <div id="buttons" style="width: 520px;margin-left:2em;margin-top: 1%;">
-    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:500px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 76px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;font-family: Verdana;" href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
+  <div id="buttons" style="width: 520px;margin-left:1.7em;margin-top: 1%;">
+    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:465px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 70px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;font-family: Verdana;" href="<%= @current_url %>/invites/<%= @invite.id %>/accept?email=<%= @email %>" class="button email_button" id="submit_button" data-reveal-id="myModal">ACCEPT</a>
 
-    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:500px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 76px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;font-family: Verdana;" href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
+    <a style="font-size:18px;background-color:#94C6EA;border-top:1px solid #94C6EA;border-bottom:2px solid #94C6EA;width:465px;margin:5px;border-radius:10px;text-align:center;color:white;text-decoration:none;padding:11px 64px 11px;font-weight:700;display:inline;text-transform:uppercase;letter-spacing:0.075em;font-family: Verdana;" href="<%= @current_url %>/invites/<%= @invite.id %>/decline?email=<%= @email %>" class="button email_button" data-reveal-id="myModal">DECLINE</a>
   </div>
   <br>
   <br>
@@ -65,4 +64,3 @@
   </div>
   </body>
 </html>
-
