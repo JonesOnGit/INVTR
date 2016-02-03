@@ -26,7 +26,7 @@
 
   <div class="row">
     <div id="image-section" class="center-cropped" style="overflow:hidden;border-radius: 10px; background-size:500px 240px !important; height: 20em;">
-    <img style='width:500px' src="http://s3.amazonaws.com/invtr/invites/avatars/56b1/80e3/9b46/b600/0600/0000/original/hotmail.jpeg?1454473443" alt="Hotmail">
+    <img style='width:500px' src="url('<%= @invite.avatar.url(:email) %>'" alt="Hotmail">
     </div>
   </div>
   <div class="details" style="margin-left: 2em; margin-right: 2em;">
