@@ -119,11 +119,37 @@
  </script>
 
  <script>
+ //Authorization popup window code
+ $.oauthpopup = function(options)
+ {
+     options.windowName = options.windowName ||  'ConnectWithOAuth'; // should not include space for IE
+     options.windowOptions = options.windowOptions || 'location=0,status=0,width=800,height=400';
+     options.callback = options.callback || function(){ window.location.reload(); };
+     var that = this;
+     console.log(options.path);
+     that._oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
+     that._oauthInterval = window.setInterval(function(){
+         if (that._oauthWindow.closed) {
+             window.clearInterval(that._oauthInterval);
+             options.callback();
+         }
+     }, 1000);
+ };
  document.cookie = "oauth_provider=hotmail";
+$(function() {
 
- $("#hotmailLogin").click(function() {
-   document.cookie = "oauth_provider=hotmail";
- });
+   $("#hotmailLogin").click(function() {
+     document.cookie = "oauth_provider=hotmail";
+     $.oauthpopup({
+         path: "<%= login_url %>",
+         callback: function()
+         {
+             log('callback');
+             //do callback stuff
+         }
+     });
+   });
+});
 $(function() {
    $("#googleLogin").click(function() {
      document.cookie = "oauth_provider=google";
@@ -193,7 +219,7 @@ function delete_cookie( name ) {
      </div>
 
      <div class="large-2 small-6 columns left-margin">
-     <a class="logo_button hotmail_button" href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", class: "modal-image") %></a>
+     <a class="logo_button hotmail_button" href="#"><%= image_tag("hotmail", class: "modal-image", id: "hotmailLogin") %></a>
      <p> </p>
      </div> 
 
@@ -385,22 +411,22 @@ $('#invite_end_hour').on('input',function(e){
 
 $("#choose_contacts_button").click(function() {
   // form id
-  var id = "new_invite";
-  var errors_list = [];
+  // var id = "new_invite";
+  // var errors_list = [];
 
-  $("#" + id + " :input").map(function(){
-      if( !$(this).val() ) {
-        errors_list.push($(this).attr("data-error-message"));
-      }
-  });
+  // $("#" + id + " :input").map(function(){
+  //     if( !$(this).val() ) {
+  //       errors_list.push($(this).attr("data-error-message"));
+  //     }
+  // });
 
-  if(errors_list.length > 0){
-      $("#reveal-errors").text(errors_list.join(", "));
-      $('#validation-errors').foundation('reveal', 'open');
+  // if(errors_list.length > 0){
+  //     $("#reveal-errors").text(errors_list.join(", "));
+  //     $('#validation-errors').foundation('reveal', 'open');
 
-  } else {
+  // } else {
     // action to be performed if form is completely filled
     $('#myModal').foundation('reveal', 'open');
-  }
+  // }
 })
 </script>

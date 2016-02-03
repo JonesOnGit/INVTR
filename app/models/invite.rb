@@ -28,6 +28,7 @@ class Invite
 	field :active, type: Boolean, default: true
 	field :deactivation_reason, type: String
 	field :owner, type: String
+	field :owner_name, type: String
 	field :oauth_provider, type: String
 	field :noauth_password, type: String
 	field :noauth_token, type: String

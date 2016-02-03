@@ -49,6 +49,7 @@ function auth() {
 
 var contacts = "";
 var owner = "";
+var ownerName = "";
 function fetchGoogleContacts(token) {
   $.ajax({
     url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
@@ -57,6 +58,7 @@ function fetchGoogleContacts(token) {
   }).done(function(data) {
     console.log(data);
     owner = data["feed"]["author"][0]["email"]["$t"];
+    ownerName = data["feed"]["author"][0]["name"]["$t"];
     console.log(owner);
     populateContacts(data);
   });
@@ -244,8 +246,10 @@ $('body').delegate('#continue-button', 'click', function() {
     var invitedString = invited.toString().replace(/,/g, " ");
     var newCookie = 'invited=' + invitedString + ';'
     var ownerCookie = "ownerEmail=" + owner;
+    var ownerNameCookie = "ownerName=" + ownerName;
     document.cookie = newCookie;
     document.cookie = ownerCookie;
+    document.cookie = ownerEmail;
 });
 
 $('body').delegate('.form_submit', 'click', function() {
