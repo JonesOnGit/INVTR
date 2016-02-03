@@ -21,6 +21,15 @@ class InvitesController < ApplicationController
 	def show
 		@session_url = session_url
 		@invite = Invite.find(params[:id])
+		@accepted_count = 0
+		@declined_count = 0
+		if @invite.accepted
+			@accepted_count = @invite.accepted.count
+		end
+
+		if @invite.declined
+			@declined_count = @invite.declined.count
+		end
 		unless session[:user_email] == @invite.owner
 			session.clear
 		end

@@ -61,9 +61,9 @@
 <div class="row">
     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <ul class="tabs" data-tab>
-      <li class="tab-title active" id="accepted-tab"><a href="#panel1">Going</a></li>
-      <li class="tab-title" id="declined-tab"><a href="#panel2">Can't Go</a></li>
-      <li class="tab-title" id="invited-tab"><a href="#panel3">Invited</a></li>
+      <li class="tab-title active" id="accepted-tab"><a href="#panel1"><%= @accepted_count %> Going</a></li>
+      <li class="tab-title" id="declined-tab"><a href="#panel2"><%= @declined_count %> Can't Go</a></li>
+      <li class="tab-title" id="invited-tab"><a href="#panel3"><%= @invite.invited.length %> Invited</a></li>
     </ul>
     <br>
 
@@ -190,4 +190,6 @@ function loadContacts(tab) {
   }
 }
 });
+
+$("#image-section").css("background", "none");
 </script>
