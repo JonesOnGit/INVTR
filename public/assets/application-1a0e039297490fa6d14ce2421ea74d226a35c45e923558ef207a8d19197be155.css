@@ -1,4 +1,4 @@
-/*
+f/*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -451,7 +451,6 @@ label.file_optional {
 
     #image-section {
         background-image: url("/assets/image_section_mobile.png");
-        background-size: cover;
         background-position: center !important;
     }
 }
@@ -468,7 +467,6 @@ label.file_optional {
 #image-section, #mobile-image-section {
     background:#f2f2f2;
     background-image: url("/assets/image_section_desktop.png");
-    background-size: cover;
     height: 15em;
     border-top-left-radius: 0.8em;
     border-top-right-radius: 0.8em;
