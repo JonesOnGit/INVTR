@@ -26,7 +26,7 @@
 
   <div class="row">
     <div id="image-section" class="center-cropped" style="overflow:hidden;border-radius: 10px; background-size:500px 240px !important; height: 20em;">
-    <img style='width:500px' src="url('<%= @invite.avatar.url(:email) %>'" alt="Hotmail">
+    <img style='width:500px' src="<%= @invite.avatar.url(:email) %>" alt="Hotmail">
     </div>
   </div>
   <div class="details" style="margin-left: 2em; margin-right: 2em;">
