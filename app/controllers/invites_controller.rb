@@ -127,6 +127,7 @@ class InvitesController < ApplicationController
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
 		# test if already accepted
+		@change_url = "/invites/#{@invite.id}/decline?email=#{@email}"
 		@invite.accept(@email)
 		Log.create(type: "Invite", action: "accept", data: {id: @invite.id}, ip: request.ip, invite_id: @invite.id)
 
@@ -135,6 +136,7 @@ class InvitesController < ApplicationController
 	def decline
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
+		@change_url = "/invites/#{@invite.id}/accept?email=#{@email}"
 		@invite.decline(@email)
 		Log.create(type: "Invite", action: "decline", data: {id: @invite.id}, ip: request.ip, invite_id: @invite.id)
 	end

@@ -1,0 +1,23 @@
+<!-- <div class="medium-12 columns">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>  
+</div> -->
+<div id="image-section" class="center-cropped" style="overflow:hidden;">
+	<%= image_tag invite.avatar %>
+</div>
+<div class="details">
+	<p class="title"> <%= invite.name %> </p>
+	<p> <%= invite.start_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %> </p>
+	<p> <%= invite.end_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %></p>
+	<p> <%= invite.address %> </p>
+	<div class="hide_scrollbar">
+		<div class="scroll">
+			<p> <%= invite.description %> </p>
+		</div>
+	</div>
+	<% if invite.allow_others %>
+		<span> Guests may allow others </span><span class="right"><a href='<%= @change_url %>' class="black"><u>Change Attending Status</u></a></span>
+	<% else %>
+		<span> Invite-only event </span><span class="right"><a href='<%= @change_url %>' class="black"><u>Change Attending Status</u></a></span>
+	<% end %>
+</div>
