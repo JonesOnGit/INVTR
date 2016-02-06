@@ -13,25 +13,38 @@
     <!-- <link href="http://addtocalendar.com/atc/1.5/atc-style-blue.css" rel="stylesheet" type="text/css"> -->
     <style>
     body {
-      background-image: url("<%= get_bg_image %>");
+      <% if @static_page %>
+        background-image: url('/assets/static-bg.jpg');
+        background-size: 100% 700%;
+      <% elsif @about_page %>
+        background-image: url('/assets/about-bg.png');
+        background-size: contain;
+      <% else %>
+        background-image: url("<%= get_bg_image %>");
+      <% end %>
     }
     </style>
   </head>
 
   <body>
-  <div id="logo">INVTR</div>
+  <% if @static_page.nil? and @about_page.nil? %>
+
+    <div id="logo">INVTR</div>
+  <% end %>
     <%= yield %>
   </body>
+  <% if @about_page %>
   <script>
+  $(function () {
+    $('body').bind('click', function (evt) {
+      window.location = "http://invtr.co/";
+        });
+      });
+  </script>
+  <% end %>
 
-
-  function success(data) {
-    console.log("success");
-  }
-
-  function error(data){
-    console.log(data);
-  }
+  <% if @static_page.nil? and @about_page.nil? %>
+  <script>
   $(function () {
     $('body').bind('click', function (evt) {
       if(evt.target == $('body')[0]) {
@@ -46,7 +59,6 @@
           error: error,
           dataType: "json"
         });
-        console.log("ee");  
 
         var redirectWindow = window.open("<%= session[:ad]['redirect_url'] %>", '_blank');
             redirectWindow.location;  
@@ -55,5 +67,6 @@
     });
   });
   </script>
+  <% end %>
 </html>
 

@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   get "/terms-of-service" => "static_pages#terms_of_service", as: "terms_of_service" 
   get "/privacy-policy" => "static_pages#privacy_policy", as: "privacy_policy" 
+  get "/about" => "static_pages#about", as: "about" 
+
 end
 
 # ================================= Routes, Raked ======================================== #
