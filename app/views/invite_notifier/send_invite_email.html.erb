@@ -32,8 +32,11 @@
   </div>
   <div class="details" style="margin-left: 4em; margin-right: 2em;">
     <p class="title" style="font-family: Verdana; color: #737373;"><b> <%= @invite.name %> </b></p>
-    <p style="font-family: Verdana; color: #737373;"> <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
-    <p style="font-family: Verdana; color: #737373;"> <%= @invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <% if @invite.start_date.strftime("%m/%d/%y") == @invite.end_date.strftime("%m/%d/%y") %>
+    <p style="font-family: Verdana; color: #737373;"> <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> to <%= @invite.end_date.strftime("%I:%M %p") %> </p>
+    <% else %>
+    <p style="font-family: Verdana; color: #737373;"> <%= @invite.start_date.strftime("%m/%d/%y %I:%M %p") %> to <%= @invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+    <% end %>
     <p style="font-family: Verdana; color: #737373;"> <%= @invite.address %> </p>
     <div class="hide_scrollbar">
       <div class="scroll">
