@@ -5,7 +5,9 @@ FactoryGirl.define do
   	address Faker::Address.street_address
   	end_date Faker::Date.forward(24)
   	description Faker::Lorem.sentence
-  	allow_others false                                     	
+  	allow_others false       
+  	invited []
+  	accepted []
+  	declined []                              	
   end
 end
-  

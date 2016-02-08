@@ -2,7 +2,6 @@ class AdsController < ApplicationController
 	before_action :authenticate_user!, except: [:session_image, :click]
 
 	def click
-		# puts session[:ad].to_json.to_s
 		Log.create(type: "Ad", action: "click", data: session[:ad].to_json, ip: request.ip, ad_id: session[:ad]["_id"]["$oid"], ad_size: session[:type])
 		render status: 200, json: @controller.to_json
 	end

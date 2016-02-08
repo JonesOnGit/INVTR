@@ -56,18 +56,16 @@ class InvitesController < ApplicationController
 
 		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 		@invite.oauth_provider = session[:oauth_provider] || cookies[:oauth_provider]
+		@invite.owner = session[:user_email] || cookies[:ownerEmail]
+
 		if cookies[:oauth_provider] == "none"
 			@invite.noauth_password = Digest::SHA1.hexdigest(@invite.to_s)[0..5]
 		end
-		@invite.owner = session[:user_email] || cookies[:ownerEmail]
-		# @invite.ownerName = cookies[:ownerName]
+
 		if @invite.save
 			session[:user_email] = @invite.owner
-			begin
-				AddressCache.find_by(session_id: session.id).destroy
-			rescue
-			end
 			session[:contacts] = nil
+			
 			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 			if @invite.oauth_provider == "none"
 				@invite.generate_token
@@ -78,6 +76,7 @@ class InvitesController < ApplicationController
 				@invite.email_validated = true
 				@invite.save
 			end
+		    
 		    flash[:notice] = "Invite #{@invite.name} saved."
 		 	redirect_to invite_path(@invite)
 		else
@@ -117,10 +116,7 @@ class InvitesController < ApplicationController
 		@invite = Invite.find(params[:id])
         @invite.destroy
         flash[:alert] = "Invite Deleted" 
-
-        #TODO set a better redirect
         redirect_to new_invite_path
-        # redirect_to root_path
 	end
 
 	def validate
@@ -136,7 +132,6 @@ class InvitesController < ApplicationController
 	def accept
 		@email = params[:email]
 		@invite = Invite.find(params[:id])
-		# test if already accepted
 		@change_url = "/invites/#{@invite.id}/decline?email=#{@email}"
 		@invite.accept(@email)
 		Log.create(type: "Invite", action: "accept", data: {id: @invite.id}, ip: request.ip, invite_id: @invite.id)
