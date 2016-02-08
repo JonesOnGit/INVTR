@@ -143,6 +143,16 @@ body {
 input[type=text] {
     border: none;
     border-radius: 0.8em;
+    color: gray;
+
+}
+
+.no-decoration {
+    color: black;
+}
+
+.no-decoration:hover {
+    color: black;
 }
 
 input {
@@ -157,7 +167,7 @@ textarea {
 
 .make_event_below {
     text-align: center;
-    font-size: 250%;
+    font-size: 210%;
     color: gray;
 }
 
@@ -333,18 +343,7 @@ label.file_optional {
     }
 
     #logo {
-        font-size: 2em;
-        max-height: 4em;
-        max-width: 8em;
-          -webkit-transform: rotate(-90deg);
-          -moz-transform: rotate(-90deg);
-           -ms-transform: rotate(-90deg);
-            -o-transform: rotate(-90deg);
-            transform: rotate(-90deg);
-        margin-top: 1em !important;
-        margin-left: 82% !important;
-        position: absolute;
-        float: right !important;
+        display: none;
     }
 
     .modal-image {
@@ -400,6 +399,9 @@ label.file_optional {
         width: 93%;
     }
 
+    .response {
+        display:none;
+    }
     .logo_button {
         padding: 12% !important;
         padding-top: 35% !important;
@@ -594,6 +596,8 @@ select {
 label {
     color: gray;
 }
+
+
 
 small {
     color: gray;

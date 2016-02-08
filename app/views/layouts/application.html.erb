@@ -18,7 +18,7 @@
         background-size: 100% 700%;
       <% elsif @about_page %>
         background-image: url('/assets/about-bg.png');
-        background-size: contain;
+        background-size: 100% 100%;
       <% else %>
         background-image: url("<%= get_bg_image %>");
       <% end %>
@@ -29,7 +29,7 @@
   <body>
   <% if @static_page.nil? and @about_page.nil? %>
 
-    <div id="logo">INVTR</div>
+    <div id="logo"><a class='no-decoration' href="/about">INVTR</a></div>
   <% end %>
     <%= yield %>
   </body>
