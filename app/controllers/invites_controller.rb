@@ -7,13 +7,7 @@ class InvitesController < ApplicationController
 		@invite = Invite.new
 		@contacts = nil
 		@google_login = google_login
-		begin
-			if session.id
-				@contacts = AddressCache.find_by(session_id: session.id)
-				@contacts = @contacts.contacts if @contacts
-			end
-		rescue
-		end
+
 		
 	end 
 

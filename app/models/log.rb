@@ -20,5 +20,4 @@ class Log
 	def self.add_log type, action, data
 		Log.create(type: type, action: action, data: data)
 	end
-
 end
