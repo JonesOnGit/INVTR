@@ -1,3 +1,6 @@
+var invited = [];
+
+
 String.prototype.toProperCase = function(){
     return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
          function($1){
@@ -5,8 +8,6 @@ String.prototype.toProperCase = function(){
         }
     );
 };
-
-     var invited = [];
 
 function auth() {
   var config = {
@@ -29,10 +30,8 @@ function fetchGoogleContacts(token) {
     dataType: 'jsonp',
     data: token
   }).done(function(data) {
-    console.log(data);
     owner = data["feed"]["author"][0]["email"]["$t"];
     ownerName = data["feed"]["author"][0]["name"]["$t"];
-    console.log(owner);
     populateContacts(data);
   });
 }
@@ -64,13 +63,6 @@ function populateContacts(data) {
       errCount += 1;
     }
   });
-  console.log("total length");
-  console.log(data["feed"]["entry"].length  )
-  console.log("array length");
-  console.log(arr.length);
-  console.log("ec: " + errCount);
-  console.log("ea: " + errArr.length);
-  console.log(errArr);
   arr.sort();
   nameArr.sort()
   var count = 0;
@@ -198,13 +190,11 @@ function populateSearch(d, guests) {
              var reader = new FileReader();
 
              reader.onload = function (e) {
-              console.log(e.target.result);
                  $('image-section')
                      .attr('src', e.target.result)
                      .width(150)
                      .height(200);
              };
-             console.log(input.files[0]);
              reader.readAsDataURL(input.files[0]);
          }
      }
@@ -265,7 +255,6 @@ function populateSearch(d, guests) {
          options.windowOptions = options.windowOptions || 'location=0,status=0,width=800,height=400';
          options.callback = options.callback || function(){ window.location.reload(); };
          var that = this;
-         console.log(options.path);
          that._oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
          that._oauthInterval = window.setInterval(function(){
              if (that._oauthWindow.closed) {
