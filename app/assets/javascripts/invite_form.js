@@ -1,242 +1,4 @@
-var invited = [];
-
-
-String.prototype.toProperCase = function(){
-    return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
-         function($1){
-            return $1.toUpperCase();
-        }
-    );
-};
-
-function auth() {
-  var config = {
-    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
-    'scope': 'https://www.google.com/m8/feeds'
-  };
-  gapi.auth.authorize(config, function() {
-    var token = gapi.auth.getToken();
-    token['g-oauth-window'] = null;
-    fetchGoogleContacts(token);
-  });
-}
-
-var contacts = "";
-var owner = "";
-var ownerName = "";
-function fetchGoogleContacts(token) {
-  $.ajax({
-    url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
-    dataType: 'jsonp',
-    data: token
-  }).done(function(data) {
-    owner = data["feed"]["author"][0]["email"]["$t"];
-    ownerName = data["feed"]["author"][0]["name"]["$t"];
-    populateContacts(data);
-  });
-}
-
-function populateContacts(data) {
-  var arr = new Array();
-  var nameArr = new Array();
-  var nameObj = {};
-  var errCount = 0;
-  var errArr = [];
-  var d = data["feed"]["entry"];
-  contacts = d;
-  $.each(d, function(i, obj) {
-
-    try {
-      var email = obj["gd$email"][0]["address"].toLowerCase();
-      var name = obj["title"]["$t"];
-
-      arr.push(email);
-      if (name != "") {
-        nameArr.push(name.toProperCase());
-        nameObj[name] = email;
-      }
-      
-    } catch(err) {
-      if ($.inArray(err.message, errArr) == -1)  {
-        errArr.push(err.message)
-      } 
-      errCount += 1;
-    }
-  });
-  arr.sort();
-  nameArr.sort()
-  var count = 0;
-  for (var i in arr) {
-    count++
-    if (count > -1) {
-      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
-        var imageUrl = nameObj[nameObj[nameArr[i]]];
-
-        var uri = '/assets/blank-avatar.gif';
-  
-        var elem = "#" + i
-
-        $("#myModal2-table-body").append("<tr>");
-
-        $("#myModal2-table-body").append("<td>");
-
-        if ($.inArray(nameObj[nameArr[i]], invited) > -1) {
-          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "' checked/><label class='emailCheckboxLabel' for='" + nameObj[nameArr[i]] + "'></label>");
-          $("#myModal2-table-body").append("</td>");
-          $("#myModal2-table-body").append("<td>");
-
-          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
-          $("#myModal2-table-body").append("<br/>");
-
-          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
-          
-          $("#myModal2-table-body").append("</td>");
-          $("#myModal2-table-body").append("</tr>");
-        } else {
-          $("#myModal2-table-body").append("<br class='half-line'/><input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label class='emailCheckboxLabel' for='" + nameObj[nameArr[i]] + "'></label>");
-          $("#myModal2-table-body").append("</td>");
-          $("#myModal2-table-body").append("<td class='lower'>");
-
-          $("#myModal2-table-body").append("<b style='margin-top: 100em;'>" + nameArr[i] + "<b> ");
-          $("#myModal2-table-body").append("<br/>");
-
-          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
-          
-          $("#myModal2-table-body").append("</td>");
-          $("#myModal2-table-body").append("</tr>");
-        }
-
-
-      }
-    }
-
-
-  
-  }
-}
-
-function populateSearch(d, guests) {
-  var arr = new Array();
-  var nameArr = new Array();
-  var nameObj = {};
-  var d = contacts;
-  count = 0;
-  $.each(d, function(i, obj) {
-
-    try {
-      var email = obj["gd$email"][0]["address"].toLowerCase();
-      var name = obj["title"]["$t"];
-      if (guests.indexOf(name) != -1){
-        count += 1;
-        arr.push(email);
-        if (name != "") {
-          nameArr.push(name.toProperCase());
-          nameObj[name] = email;
-        }
-      }
-      
-    } catch(err) {
-
-    }
-  });
-  nameArr.sort()
-  $("#myModal2-table-body").empty();
-
-  var count = 0;
-  for (var i in arr) {
-    count++
-    if (count > -1) {
-      if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
-
-        var imageUrl = nameObj[nameObj[nameArr[i]]];
-
-        var uri = '/assets/blank-avatar.gif';
-  
-        var elem = "#" + i
-
-        $("#myModal2-table-body").append("<tr>");
-
-        $("#myModal2-table-body").append("<td>");
-
-        if ($.inArray(nameObj[nameArr[i]], invited) > -1) {
-
-         $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "' checked/><label for='" + nameObj[nameArr[i]] + "'></label>");
-       } else {
-        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "' value='" + nameArr[i] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
-       }
-        $("#myModal2-table-body").append("</td>");
-        $("#myModal2-table-body").append("<td class='full-width'>");
-
-        $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
-        $("#myModal2-table-body").append("<br/>");
-
-        $("#myModal2-table-body").append(nameObj[nameArr[i]]);
-      
-        $("#myModal2-table-body").append("</td>");
-        $("#myModal2-table-body").append("<tr>");
-
-      }
-    }
-
-
-  
-  }
-
-
-}
-
- function readURL(input) {
-         if (input.files && input.files[0]) {
-             var reader = new FileReader();
-
-             reader.onload = function (e) {
-                 $('image-section')
-                     .attr('src', e.target.result)
-                     .width(150)
-                     .height(200);
-             };
-             reader.readAsDataURL(input.files[0]);
-         }
-     }
-
-     function initMap() {
-
-       var input = /** @type {!HTMLInputElement} */(
-           document.getElementById('invite_address'));
-
-       var types = document.getElementById('type-selector');
-       var autocomplete = new google.maps.places.Autocomplete(input);
-      
-
-       autocomplete.addListener('place_changed', function() {
-         infowindow.close();
-         marker.setVisible(false);
-         var place = autocomplete.getPlace();
-         alert(place);
-       });
-     }
-
  $(function() {
-    $("input:file").change(function (){
-      var fileName = $(this).val();
-      // readURL(this);
-
-      var img = document.createElement("img");
-              var reader = new FileReader();
-              reader.onloadend = function() {
-                   img.src = reader.result;
-                   img.id = "test";
-              }
-              reader.readAsDataURL(this.files[0]);
-              $("#image-section").empty();
-              $("#image-section").css("background", "white");
-              $("#image-section").append(img);
-      
-    });
-
-    $("#image-section").click(function() {
-     $(".file-upload").click();
-    })
 
     $("#submit_button").hide();
 
@@ -249,25 +11,7 @@ function populateSearch(d, guests) {
     });
 
      //Authorization popup window code
-     $.oauthpopup = function(options)
-     {
-         options.windowName = options.windowName ||  'ConnectWithOAuth'; // should not include space for IE
-         options.windowOptions = options.windowOptions || 'location=0,status=0,width=800,height=400';
-         options.callback = options.callback || function(){ window.location.reload(); };
-         var that = this;
-         that._oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
-         that._oauthInterval = window.setInterval(function(){
-             if (that._oauthWindow.closed) {
-                 window.clearInterval(that._oauthInterval);
-                 options.callback();
-             }
-         }, 1000);
-     };
-    $(function() {
-       $("#googleLogin").click(function() {
-         document.cookie = "oauth_provider=google";
-       });
-    });
+
      function addCookie(cname, value) {
       document.cookie= cname + "=" + value;
 
@@ -279,23 +23,23 @@ function populateSearch(d, guests) {
 
      $("#choose_contacts_button").click(function() {
        // form id
-       // var id = "new_invite";
-       // var errors_list = [];
+       var id = "new_invite";
+       var errors_list = [];
 
-       // $("#" + id + " :input").map(function(){
-       //     if( !$(this).val() ) {
-       //       errors_list.push($(this).attr("data-error-message"));
-       //     }
-       // });
+       $("#" + id + " :input").map(function(){
+           if( !$(this).val() ) {
+             errors_list.push($(this).attr("data-error-message"));
+           }
+       });
 
-       // if(errors_list.length > 0){
-       //     $("#reveal-errors").text(errors_list.join(", "));
-       //     $('#validation-errors').foundation('reveal', 'open');
+       if(errors_list.length > 0){
+           $("#reveal-errors").text(errors_list.join(", "));
+           $('#validation-errors').foundation('reveal', 'open');
 
-       // } else {
+       } else {
          // action to be performed if form is completely filled
          $('#myModal').foundation('reveal', 'open');
-       // }
+       }
      })
 
      var lastStartHour = "";
@@ -376,26 +120,7 @@ function populateSearch(d, guests) {
        }
      });
 
-     $("#invite_avatar").hide();
 
-
-     
-
-       $('body').delegate('#search-autocomplete', 'keyup', function() {
-         var searchInput = $("#search-autocomplete").val();
-
-         // for each contact
-         // look in contact.title.$t
-         // if the first X characters in contact name = searchInput, add into a 'guests' array.
-         // populate table with that array
-         guests = [];
-         for (var i = 0; i < contacts.length; i++) {
-           if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
-             guests.push(contacts[i]["title"]["$t"]);
-           }
-         }
-         populateSearch(contacts, guests);
-       });
 
 
      $('body').delegate('#continue-button', 'click', function() {
