@@ -5,7 +5,6 @@ class InvitesController < ApplicationController
 
 	def new
 		@invite = Invite.new
-		@login_url = login_url
 		@contacts = nil
 		@google_login = google_login
 		begin
@@ -19,7 +18,6 @@ class InvitesController < ApplicationController
 	end 
 
 	def show
-		@session_url = session_url
 		@invite = Invite.find(params[:id])
 		@accepted_count = 0
 		@declined_count = 0

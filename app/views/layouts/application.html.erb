@@ -4,12 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
     <title><%= content_for?(:title) ? yield(:title) : "INVTR" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
+            async defer></script>
+    <script src="https://apis.google.com/js/client.js"></script>
+
     <!-- <link href="http://addtocalendar.com/atc/1.5/atc-style-blue.css" rel="stylesheet" type="text/css"> -->
     <style>
     body {
@@ -27,24 +32,16 @@
   </head>
 
   <body>
-  <% if @static_page.nil? and @about_page.nil? %>
+    <% if @static_page.nil? and @about_page.nil? %>
+      <div id="logo"><a class='no-decoration' href="/about">INVTR</a></div>
+    <% end %>
 
-    <div id="logo"><a class='no-decoration' href="/about">INVTR</a></div>
-  <% end %>
     <%= yield %>
   </body>
-  <% if @about_page %>
-  <script>
-  $(function () {
-    $('body').bind('click', function (evt) {
-      window.location = "http://invtr.co/";
-        });
-      });
-  </script>
-  <% end %>
 
   <% if @static_page.nil? and @about_page.nil? %>
   <script>
+
   $(function () {
     $('body').bind('click', function (evt) {
       if(evt.target == $('body')[0]) {
@@ -55,8 +52,6 @@
           type: "POST",
           url: "/ad/click",
           data: "",
-          success: success,
-          error: error,
           dataType: "json"
         });
 

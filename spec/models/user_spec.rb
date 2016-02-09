@@ -11,15 +11,3 @@ RSpec.describe User, type: :model do
   it { should validate_length_of(:country) }
 
 end
-
-
-#======= From User.rb ==============#
-
-  # validates :fullname, length: { maximum: 200 }
-  # validates :role, length: { maximum: 30 }
-  # validates :city, length: { maximum: 100 }
-  # validates :state_or_region, length: { maximum: 100 }
-  # validates :country, length: { maximum: 100 }
-
-  # # Only validating presence of role as other attributes 'not required'
-  # validates_presence_of :role 
