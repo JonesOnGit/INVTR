@@ -472,5 +472,9 @@ function populateSearch(d, guests) {
          }
 
      });
+$('#check-email').foundation('reveal','open');
+$("#close-button").click(function() {
+  $('#check-email').foundation('reveal','close');
 
+})
  });

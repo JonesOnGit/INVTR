@@ -46,11 +46,7 @@
   </div>
 </div>
 <script>
-  $('#check-email').foundation('reveal','open');
-  $("#close-button").click(function() {
-    $('#check-email').foundation('reveal','close');
 
-  })
 </script>
 
 <% end %>
@@ -89,49 +85,7 @@
       <%= render 'message_form', invite: @invite, url: @invite.id.present? ? invite_path(@invite.id) : invites_path %>
 
 </div>
-<script src="https://apis.google.com/js/client.js"></script>
 
-<script>
-function auth() {
-  var config = {
-    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
-    'scope': 'https://www.google.com/m8/feeds'
-  };
-  gapi.auth.authorize(config, function() {
-    var token = gapi.auth.getToken();
-    // console.log(token)
-    token['g-oauth-window'] = null;
-    fetchGoogleContacts(token);
-  });
-}
-
-function fetchGoogleContacts(token) {
-  $.ajax({
-    url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
-    dataType: 'jsonp',
-    data: token
-  }).done(function(data) {
-    
-    console.log("here");
-    data["feed"]["id"]["$t"];
-    // run a post call here
-    $.post("/authorize_google",
-        {
-            email: data["feed"]["id"]["$t"],
-            invite_id: "<%= @invite.id %>"
-        }
-        ,
-        function(data, status){
-            console.log(status);
-            if (status == "success") {
-              location.reload();
-            } else {
-
-            }
-        })
-  });
-}
-</script>
 
 <script>
 $(function() {

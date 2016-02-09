@@ -109,65 +109,9 @@
 <div id="buttons">
 <a href="#" class="button inviter_button mobile_less_bottom_margin" data-reveal-id="invite-list">ADD GUESTS</a>
 
-<a href="#" class="button inviter_button form_submit" id="submit_button" style="float:right;">UPDATE</a>
+<a href="#" class="button inviter_button form_submit" style="float:right; display:inline !important;">UPDATE</a>
 </div>
 
-<script>
-$("#image-section").click(function() {
- $(".file-upload").click();
-})
-
-$(function() {
-   $("input:file").change(function (){
-     var fileName = $(this).val();
-     // readURL(this);
-
-     var img = document.createElement("img");
-             var reader = new FileReader();
-             reader.onloadend = function() {
-                  img.src = reader.result;
-                  img.id = "test";
-             }
-             reader.readAsDataURL(this.files[0]);
-             $("#image-section").empty();
-             $("#image-section").append(img);
-             $("#image-section").css("overflow", "hidden");
-   });
-});
-
-$("#datepicker").click(function() {
-  $("#datepicker").fdatepicker('show')
-});
-
-$("#end_datepicker").click(function() {
-  $("#end_datepicker").fdatepicker('show')
-});
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
-    async defer></script>
-    <script src="https://apis.google.com/js/client.js"></script>
-        <script>
-    function initMap() {
-
-      var input = /** @type {!HTMLInputElement} */(
-          document.getElementById('invite_address'));
-
-      var types = document.getElementById('type-selector');
-      var autocomplete = new google.maps.places.Autocomplete(input);
-     
-
-      autocomplete.addListener('place_changed', function() {
-        infowindow.close();
-        marker.setVisible(false);
-        var place = autocomplete.getPlace();
-        alert(place);
-      });
-    }
-    $('body').delegate('.form_submit', 'click', function() {
-      $('form').submit();
-
-    });
-        </script>
 <% end %>
 
 
@@ -252,19 +196,6 @@ $("#end_datepicker").click(function() {
 
 </div>   
 <script>
-document.cookie = "invited=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
-function auth() {
-  var config = {
-    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
-    'scope': 'https://www.google.com/m8/feeds'
-  };
-  gapi.auth.authorize(config, function() {
-    var token = gapi.auth.getToken();
-    // console.log(token)
-    token['g-oauth-window'] = null;
-    fetchGoogleContacts(token);
-  });
-}
 
 var invites_array = '<%= @invite.invited.to_json %>';
 invites_array = invites_array.replace(/&quot;/g, '');
@@ -369,7 +300,6 @@ String.prototype.toProperCase = function(){
 };
 
 function populateSearch(d, guests) {
-  console.log("POPULATE SEARCH");
   var arr = new Array();
   var nameArr = new Array();
   var nameObj = {};
@@ -434,25 +364,12 @@ function populateSearch(d, guests) {
 
       }
     }
-
-
-  
   }
-
-
 }
-
-
 
 $(function() {
   $('body').delegate('#search-autocomplete', 'keyup', function() {
     var searchInput = $("#search-autocomplete").val();
-
-    // for each contact
-    // look in contact.title.$t
-    // if the first X characters in contact name = searchInput, add into a 'guests' array.
-    // populate table with that array
-    // console.log(contacts[10]["title"]["$t"]);
     guests = [];
     for (var i = 0; i < contacts.length; i++) {
       if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
@@ -557,5 +474,4 @@ $("#send-emails-button").click(function() {
   }
 });
 
-$("#invite_avatar").hide();
 </script>
