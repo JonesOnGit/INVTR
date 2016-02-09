@@ -3,8 +3,7 @@
 </div>
 <div class="details">
 	<p class="title"> <%= invite.name %> </p>
-	<p> <%= invite.start_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %> </p>
-	<p> <%= invite.end_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %></p>
+	<p> <%= invite.start_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %> to <%= invite.end_date.strftime("%m/%d/%y %I:%M") %> <%= invite.invite_start_am_pm %></p>
 	<p> <%= invite.address %> </p>
 	<div class="hide_scrollbar">
 		<div class="scroll">

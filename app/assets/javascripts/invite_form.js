@@ -118,9 +118,9 @@ function delete_cookie( name ) {
        var invites = emailsString.match(/,/g) || [];
        var len = invites.length + 1
        if (len == 1) {
-         $("#submit_button").text("SEND TO 1 INVITE");
+         $("#submit_button").text("SEND TO 1 CONTACT");
        } else {
-         $("#submit_button").text("SEND TO " + len + " INVITES");
+         $("#submit_button").text("SEND TO " + len + " CONTACTS");
        }
        $("#submit_button").show()
        $("#submit_button").addClass("form_submit");
