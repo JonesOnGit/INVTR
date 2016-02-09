@@ -1,5 +1,3 @@
-
-
 var invited = [];
 
 function populateContacts(data) {
@@ -151,24 +149,7 @@ $(function() {
 	$('body').delegate('#search-autocomplete', 'keyup', function() {
 	 var searchInput = $("#search-autocomplete").val();
 
-	 // for each contact
-	 // look in contact.title.$t
-	 // if the first X characters in contact name = searchInput, add into a 'guests' array.
-	 // populate table with that array
-	 guests = [];
-	 for (var i = 0; i < contacts.length; i++) {
-	   if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
-	     guests.push(contacts[i]["title"]["$t"]);
-	   }
-	 }
-	 populateSearch(contacts, guests);
-	});       $('body').delegate('#search-autocomplete', 'keyup', function() {
-	 var searchInput = $("#search-autocomplete").val();
 
-	 // for each contact
-	 // look in contact.title.$t
-	 // if the first X characters in contact name = searchInput, add into a 'guests' array.
-	 // populate table with that array
 	 guests = [];
 	 for (var i = 0; i < contacts.length; i++) {
 	   if (contacts[i]["title"]["$t"].toLowerCase().indexOf(searchInput.toLowerCase()) == 0) {
@@ -176,5 +157,6 @@ $(function() {
 	   }
 	 }
 	 populateSearch(contacts, guests);
+
 	});
 });
