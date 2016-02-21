@@ -79,14 +79,14 @@
 
   <div class="row">
    <div class="medium-12 columns">
-     <%= f.input :description, input_html: { "data-error-message" => "Tell them the details"}, label: "", placeholder: "Tell them the details", label: "", as: :text %>
+     <%= f.input :description, input_html: { "data-error-message" => "Event details"}, label: "", placeholder: "Tell them the details", label: "", as: :text %>
    </div>
  </div>
 
  <div class="margin-top row">
    <div class="medium-12 columns">
 
-     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload'}, label: "Select Event Image", input_html: { "data-error-message" => "Select Image"} %>
+     <%= f.input :avatar, as: :file, label_html: { class: 'file-upload'}, label: "Select Event Image", input_html: { "data-error-message" => "Image"} %>
    </div>
  </div>
 
@@ -188,14 +188,14 @@
   </div>
 
   <div id="validation-errors" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-    <p class="lead">Missing Info</p>
-    <p id='reveal-errors'>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+    <p class="lead">Missing info:</p>
+    <p id='reveal-errors' style="font-size:14px;text-align:justify">I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
     <div class="large-9 columns move_down">
       <p><small></small></p>
     </div>
 
-    <div class="large-3 columns move_down">
-      <a class='button' id='continue-button'>Ok</a>
+    <div class="large-3 columns" style="margin-right:-15px">
+      <a class='button' id='continue-button'>OK</a>
     </div>
   </div>
 </div>

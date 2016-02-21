@@ -14,19 +14,6 @@ module ApplicationHelper
 			@image = session[:image]
 			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: session[:type])
 		else
-			@ad = Ad.next
-			session[:ad] = @ad
-			now = DateTime.now
-			@ad.last_served = now
-			@ad.save
-			if session[:type] == "mobile"
-				session[:image] = @ad.mobile_location
-			else
-				session[:image] = @ad.desktop_location
-			end
-
-			session[:image_time] = now
-			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: session[:type])
 
 			@image = session[:image]
 		end
