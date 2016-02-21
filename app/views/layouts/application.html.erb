@@ -22,8 +22,9 @@
         background-color: #fff;
         background-size: 100% 700%;
       <% elsif @about_page %>
-        background-image: url('/assets/about-bg.png');
-        background-size: 100% 100%;
+        background-image: url('/assets/about-bg-2.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
       <% else %>
         background-image: url("<%= get_bg_image %>");
       <% end %>
