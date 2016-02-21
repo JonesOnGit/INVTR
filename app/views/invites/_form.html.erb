@@ -143,48 +143,32 @@
   <a href="#" class="button inviter_button" id="choose_contacts_button">CHOOSE CONTACTS</a>
 </div>
 <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <p class='modal_title'>Choose your service provider (easiest)</p>
+  <p class='modal_title'></p>
   <div class="row">
-     <div class="large-2 small-6 columns">
+     <div class="white-background-gmail">
 
-        <a class="logo_button" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", class: "modal-image", id: "googleLogin") %></a>
+        <a class="" onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail-connect", class: "", id: "googleLogin") %></a>
 
-     </div>
-     <div class="large-4 small-0 columns">
-     </div>
-
-     <div class="large-2 small-6 columns left-margin">
-     
-     <p> </p>
-     </div> 
-
-     <div class="large-4 small-0 columns">
-     </div> 
   </div>
 </a>
 
-  <br><br>
   <div class="white_background">
-    <p>Or type each one in individually - </p> 
     <div class="row">
     
-      <textarea name="emails" id="emails" placeholder="email, email, email ..."></textarea>
+      <textarea name="emails" id="emails" placeholder="You can also type a list of emails here"></textarea>
     </div>
     <br>
     <div class="row" id="pull-left">
-      <div class="large-3 columns">
-       <input type="text" name="myEmail" id="my-email" placeholder="your email">
+      <div class="large-9 columns">
+       <input type="text" name="myEmail" id="my-email" placeholder="Your email address">
       </div>
-      <div class="large-4 columns">
+      <div class="large-3 columns">
         <a class='button tiny' id='send-emails-button'>DONE</a>
         <br><small id="error-message"></small>
       </div>
-      <div class="large-5 columns">
-      </div>
 
     </div>
-    <br>
-    <p><small>We believe in privacy. We won't spam your contacts.</small></p>
+    <p><small><center>We won't spam your contacts.</small></center></p>
   </div>
 
   <div id="validation-errors" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
