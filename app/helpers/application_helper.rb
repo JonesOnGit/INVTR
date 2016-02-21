@@ -10,7 +10,7 @@ module ApplicationHelper
 			session[:type] = "mobile"
 		end
 		session[:type] = "mobile"
-		if session[:image] and session[:image_time] > DateTime.now - 1.second
+		if session[:image] and session[:image_time] > DateTime.now - 1.hour
 			@image = session[:image]
 			Log.create(type: "Ad", action: "show", data: session[:ad], ip: request.ip, ad_id: session[:ad]["_id"], ad_size: session[:type])
 		else
