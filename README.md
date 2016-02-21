@@ -2,16 +2,15 @@
 CircleCi Test Status: Tests: [![Circle CI](https://circleci.com/gh/aarontitus/crisiscleanup.svg?style=svg)](https://circleci.com/gh/aarontitus/crisiscleanup)
 
 #Installing invtr on Mac OS X 10.11
+`cd ~/invtr && git clone git@github.com:andygimma/invtr.git`
+`bundle install`
+`bundle exec rake db:setup`
+`port selfupdate`
+`sudo port install mongodb`
+`mkdir -p /data/db`
+`mongod`
+`rails s`
 
-```cd ~/invtr && git clone git@github.com:andygimma/invtr.git
-bundle install
-bundle exec rake db:setup
-port selfupdate
-sudo port install mongodb
-mkdir -p /data/db
-mongod
-rails s
-```
 
 #Models
 ##Ad
