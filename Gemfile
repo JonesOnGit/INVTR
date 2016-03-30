@@ -23,6 +23,7 @@ gem 'capybara'
 gem 'selenium-webdriver'
 gem 'simple_form'
 gem 'foundation-rails'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'aws-sdk', '~> 1.3.4'
@@ -35,7 +36,7 @@ gem 'timezone'
 gem "httpclient"
 
 group :development do
-  gem "letter_opener"
+  # gem "letter_opener"
 end
 
 group :development, :test do
