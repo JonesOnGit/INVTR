@@ -89,60 +89,62 @@
 
 <script>
 $(function() {
+  loadContacts("accepted-tab");
+  $(".tab-title").click(function() {
+    loadContacts(this.id);
+  });
 
-loadContacts("accepted-tab");
-$(".tab-title").click(function() {
-  loadContacts(this.id);
-});
+  function loadContacts(tab) {
 
-function loadContacts(tab) {
-
-  console.log('<%= @invite.invited %>'); 
-  var invited = JSON.parse('<%= @invite.invited.to_json %>'.replace(/&quot;/g,'"'));
-  var accepted = JSON.parse('<%= @invite.accepted.to_json %>'.replace(/&quot;/g,'"'));
-  var declined = JSON.parse('<%= @invite.declined.to_json %>'.replace(/&quot;/g,'"'));
-  var guests = [];
-  if (tab == "invited-tab") {
-    guests = invited;
-  } else if (tab == "accepted-tab") {
-    guests = accepted;
-  } else if (tab == "declined-tab") {
-    guests = declined;
-  }
-
-  if (guests === null) {
-    guests = [];
-  }
-  $("#myModal2-table-body").empty();
-  
-  for (var i = 0; i < guests.length; i++) {
-
-    $("#myModal2-table-body").append("<tr>");
-
-    $("#myModal2-table-body").append("<td>");
-
-    if ($.inArray(guests[i], accepted)) {
-      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + guests[i] + "'' id='" + guests[i] + "' disabled /><label for='" + guests[i] + "'></label>");
-    } else {
-      $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + guests[i] + "'' id='" + guests[i] + "' disabled checked/><label for='" + guests[i] + "'></label>");
+    var invited = JSON.parse('<%= @invite.invited.to_json %>'.replace(/&quot;/g,'"'));
+    var accepted = JSON.parse('<%= @invite.accepted.to_json %>'.replace(/&quot;/g,'"'));
+    var declined = JSON.parse('<%= @invite.declined.to_json %>'.replace(/&quot;/g,'"'));
+    var guests = [];
+    if (tab == "invited-tab") {
+      guests = invited;
+    } else if (tab == "accepted-tab") {
+      guests = accepted;
+    } else if (tab == "declined-tab") {
+      guests = declined;
     }
-    
-    $("#myModal2-table-body").append("</td>");
-    $("#myModal2-table-body").append("<td>");
 
-    $("#myModal2-table-body").append("  <b>" + guests[i] + "<b>  ");
-    $("#myModal2-table-body").append("<br/>");
-
-    $("#myModal2-table-body").append(guests[i]);
+    if (guests === null) {
+      guests = [];
+    }
+    $("#myModal2-table-body").empty();
     
-    $("#myModal2-table-body").append("</td>");
-    $("#myModal2-table-body").append("<tr>");
+    for (var i = 0; i < guests.length; i++) {
+
+      $("#myModal2-table-body").append("<tr>");
+
+      $("#myModal2-table-body").append("<td>");
+
+      if ($.inArray(guests[i], accepted)) {
+        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + guests[i] + "'' id='" + guests[i] + "' disabled /><label for='" + guests[i] + "'></label>");
+      } else {
+        $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + guests[i] + "'' id='" + guests[i] + "' disabled checked/><label for='" + guests[i] + "'></label>");
+      }
+      
+      $("#myModal2-table-body").append("</td>");
+      $("#myModal2-table-body").append("<td>");
+
+      $("#myModal2-table-body").append("  <b>" + guests[i] + "<b>  ");
+      $("#myModal2-table-body").append("<br/>");
+
+      $("#myModal2-table-body").append(guests[i]);
+      
+      $("#myModal2-table-body").append("</td>");
+      $("#myModal2-table-body").append("<tr>");
+    }
+
+    if (guests.length == 0) {
+      $("#myModal2-table-body").append("<p>No one in this list.</p>");
+    }
+  }
+  if (window.location.search.match(/trackInvites/)) { 
+    $('#myModal2').foundation('reveal', 'open')
   }
 
-  if (guests.length == 0) {
-    $("#myModal2-table-body").append("<p>No one in this list.</p>");
-  }
-}
 });
 
 $("#image-section").css("background", "none");
