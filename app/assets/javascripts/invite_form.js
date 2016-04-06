@@ -6,9 +6,7 @@ function addCookie(cname, value) {
 function delete_cookie( name ) {
   document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
-
  $(function() {
-
     $("#submit_button").hide();
 
     // Show datepickers on click
@@ -143,14 +141,9 @@ function delete_cookie( name ) {
        var ownerNameCookie = "ownerName=" + ownerName;
        document.cookie = newCookie;
        document.cookie = ownerCookie;
-       document.cookie = ownerEmail;
+       // document.cookie = ownerEmail;
    });
 
-   $('body').delegate('.form_submit', 'click', function() {
-     $('#myModal').foundation('reveal', 'close');
-     $('form').submit();
-
-   });
 
    // keeps track of how many users have been checked
    var checked = 0;

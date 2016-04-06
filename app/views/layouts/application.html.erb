@@ -11,8 +11,7 @@
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
-            async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
     <script src="https://apis.google.com/js/client.js"></script>
 
     <!-- <link href="http://addtocalendar.com/atc/1.5/atc-style-blue.css" rel="stylesheet" type="text/css"> -->
@@ -63,5 +62,14 @@
   });
   </script>
   <% end %>
+
+  <script>
+    $('document').ready( function () {
+      $('.form_submit').click(function() { 
+        $('#myModal').foundation('reveal', 'close');
+        $('form').submit() 
+      });
+    });
+  </script>
 </html>
 
