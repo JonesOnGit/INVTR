@@ -5,7 +5,7 @@ class InviteNotifier < ActionMailer::Base
 		@invite = invite
 		@email = email
   		mail( :to => @email,
-  		:subject => 'Thanks for signing up for our amazing app' )
+  		:subject => "#{@invite.name} - Invite")
 	end
 
 	def send_update_email(current_url = "http://localhost:3000/", email, invite)
@@ -13,7 +13,7 @@ class InviteNotifier < ActionMailer::Base
 		@invite = invite
 		@email = email
   		mail( :to => @email,
-  		:subject => "Update for #{@invite.name}" )
+  		:subject => "Update to: #{@invite.name}" )
 	end
 
 	def send_owner_invite(current_url = "http://localhost:3000/", email, invite)
@@ -22,7 +22,7 @@ class InviteNotifier < ActionMailer::Base
 		@email = email
 		@noauth_password = invite.noauth_password
 		mail( :to => @email,
-		:subject => @invite.name )
+		:subject => 'Your invite is being sent!' )
 	end
 
 	def send_message(to, message, invite)
