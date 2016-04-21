@@ -46,8 +46,7 @@ class InvitesController < ApplicationController
 	def create
 		@invite = Invite.new(parse_params) 
 
-		# @invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
-    @invite.invited = ["jd@startuplandia.io"]
+		@invite.invited = ["andy.n.gimma@gmail.com", "jessica@herenow.nyc"]
 		@invite.oauth_provider = session[:oauth_provider] || cookies[:oauth_provider]
 		@invite.owner = session[:user_email] || cookies[:ownerEmail]
 
