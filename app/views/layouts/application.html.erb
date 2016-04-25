@@ -42,25 +42,25 @@
   <% if @static_page.nil? and @about_page.nil? %>
   <script>
 
-  $(function () {
-    $('body').bind('click', function (evt) {
-      if(evt.target == $('body')[0]) {
-        console.log('body clicked');
-        <% if session[:ad] %>
+  <%# $(function () { %>
+  <%#   $('body').bind('click', function (evt) { %>
+  <%#     if(evt.target == $('body')[0]) { %>
+  <%#       console.log('body clicked'); %>
+  <%#       <% if session[:ad] %1> %>
 
-        $.ajax({
-          type: "POST",
-          url: "/ad/click",
-          data: "",
-          dataType: "json"
-        });
+  <%#       $.ajax({ %>
+  <%#         type: "POST", %>
+  <%#         url: "/ad/click", %>
+  <%#         data: "", %>
+  <%#         dataType: "json" %>
+  <%#       }); %>
 
-        var redirectWindow = window.open("<%= session[:ad]['redirect_url'] %>", '_blank');
-            redirectWindow.location;  
-        <% end %>
-      }
-    });
-  });
+  <%#       var redirectWindow = window.open("<%= session[:ad]['redirect_url'] %1>", '_blank'); %>
+  <%#           redirectWindow.location; %>  
+  <%#       <% end %1> %>
+  <%#     } %>
+  <%#   }); %>
+  <%# }); %>
   </script>
   <% end %>
 

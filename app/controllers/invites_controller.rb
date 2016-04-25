@@ -58,7 +58,7 @@ class InvitesController < ApplicationController
 			session[:user_email] = @invite.owner
 			session[:contacts] = nil
 			
-			Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
+			# Log.create(type: "Invite", action: "save", data: @invite.to_json, ip: request.ip, invite_id: @invite.id)
 			if @invite.oauth_provider == "none"
 				@invite.generate_token
 				@invite.send_noauth_validation(request.base_url)
